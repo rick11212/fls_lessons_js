@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-4</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 4</h1>
+			<h3>Дано довжину у сантиметрах. Визначати скільки це метрів і кілометрів.</h3>
+			<div>Km = <span id="km"></span></div>
+
+			<h4>Введенные данные:</h4>
+			<div>Длинна = <span id="sm"></span></div>
+
+		</div>
+		<script src="js/script4.js"></script>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		ul li {
+			list-style: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		table,tr,td{
+			border: 1px solid #fff;
+			padding:  10px;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>
