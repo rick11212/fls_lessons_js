@@ -1,19 +1,32 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>FLS_JS</title>
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-2</title>
 	</head>
 	<body>
 		<div class="rootpage">
-			<h1>Выполненные домашние задания:</h1>
-			<ol class="rootpage__list">
-				<li><a target="_blank" href="lesson_2/index.html">Домашнее задание №2</a></li>
-				<li><a target="_blank" href="lesson_3/index.html">Домашнее задание №3 (Алгоритмы с разветвлением)</a></li>
-				<li><a target="_blank" href="lesson_5/index.html">Домашнее задание №5 (Циклы)</a></li>
-			</ol>
+			<h1>Задача 2</h1>
+			<h3> Вивести таблицю з одним рядком і 7 стовпцями.</h3>
+
+			<div class="resolt">Ответ = <span id="resolt"></span></div>
+
 		</div>
+		<script>
+			let columnNumber = 0
+			document.write(`<table>`)
+			for (let i = 0; i < 7; i++) {
+				columnNumber ++
+				document.write(`<td>${columnNumber}</td>`)
+			}
+			document.write(`</table>`)
+
+		</script>
 	</body>
 	<style>
 		@charset "UTF-8";
@@ -56,6 +69,28 @@
 		img {
 			vertical-align: top;
 		}
+		table{
+			width: 200px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		.write{
+			width: 500px;
+			margin: 0 auto;
+			color: #c0858f;
+			display: flex;
+			justify-content:center;align-items: center;
+		}
+		.write input{
+			padding:  4px 5px;
+		}
+		table, tr, td{
+			border: 1px solid #000;
+		}
 		.wrapper {
 			width: 100%;
 			min-height: 100%;
@@ -66,6 +101,12 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
 		}
 		@media (max-width: 767px) {
 			.rootpage{
@@ -85,7 +126,11 @@
 		}
 
 		.rootpage__list{
-			margin: 0px 0px 2.25rem 1.25rem;
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
 		}
 		.rootpage__list li:not(:last-child){
 			margin: 0px 0px 15px 0px;

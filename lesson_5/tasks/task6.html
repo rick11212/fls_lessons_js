@@ -12,43 +12,31 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 6</h1>
-			<h3>З клавіатури вводиться номер місяця. Вивести до якої пори він відноситься</h3>
+			<h3> Вивести на екран N абзаців (N вводиться користувачем) за зразком</h3>
+
 			<div class="resolt">Ответ = <span id="resolt"></span></div>
-			<h4>Введенные данные:</h4>
-			<div>Введите номер Месяца = <span id="mounthNumber"></span></div>
 
 		</div>
 		<script>
-			const mounthNumber = parseInt(prompt('Введите номер месяца (1-12)'))
+			let quantityParagraphs = parseInt(prompt('Введите количество абзацев'))
+			let title = 0, section = 0
 
-			let resolt
+			document.write(`<div class = 'column'>`)
 
-			switch (mounthNumber) {
-				case 1:
-				case 2: resolt = 'Зима'
-					break;
-				case 3: 
-				case 4: 
-				case 5: resolt = 'Весна'
-					break;
-				case 6: 
-				case 7:
-				case 8: resolt = 'Лето'
-					break;
-				case 9:
-				case 10: 
-				case 11: resolt = 'Осень'
-					break;
-				case 12: resolt = 'Зима'
-					break;
-				default: resolt = 'Не правильное значение'
-					break;
+			for (let j = 0; j < quantityParagraphs; j++) {
+				title++
+				section++
+
+				for (let e = 1; e <= quantityParagraphs; e++) {
+					document.write(`
+					<h4>Заголовок ${title}</h4>
+					<p>Раздел ${section}, параграф ${e}</p>
+					`)
+				}
+		
 			}
-
-			document.getElementById('resolt').innerHTML = resolt;
 			
-
-			document.getElementById('mounthNumber').innerHTML = mounthNumber;
+			document.write(`</div'>`)
 		</script>
 	</body>
 	<style>
@@ -92,9 +80,36 @@
 		img {
 			vertical-align: top;
 		}
+		table{
+			width: 200px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		.column{
+			width: 200px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			color: #c0858f;
+		}
+
 		p{
-			font-size: 1rem;
-			color: black;
+			font-size: 1.1rem;
+			color: #fff;
+		}
+		.write{
+			width: 500px;
+			margin: 0 auto;
+			color: #c0858f;
+			display: flex;
+			justify-content:center;align-items: center;
+		}
+		.write input{
+			padding:  4px 5px;
+		}
+		table, tr, td{
+			border: 1px solid #000;
 		}
 		.wrapper {
 			width: 100%;
