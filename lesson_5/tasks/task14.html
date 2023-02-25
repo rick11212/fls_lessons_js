@@ -7,28 +7,34 @@
 		<link rel="stylesheet" href="css/fonts.css">
 		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
 		<link rel="stylesheet" href="css/style.css">
-		<title>Task-13</title>
+		<title>Task-14</title>
 	</head>
 	<body>
 		<div class="rootpage">
-			<h1>Задача 13</h1>
-			<h3>Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу повідомляють, яку ще суму потрібно ввести).
+			<h1>Задача 14</h1>
+			<h3>Користувача поступово вводить показники температури протягом року. Знайти середню температуру.
 			</h3>
+			<div class="resolt">Ответ: Средняя температура = <span id="resolt"></span></div>
 		</div>
-		<script>	
-			let amountForPayment = parseFloat(prompt('Введите сумму для оплаты'))
+		<script>
+			let nomberMonth = 0
+			let sumTemperatureMonth = 0
 
 			document.write(`<div class='column'>`)
 
-				while (amountForPayment > 0) {
-					const userPay= parseFloat(prompt('Введите сумму платежа'))
-					amountForPayment -= userPay
+				for (let i = 0; i < 12; i++) {
+					nomberMonth +=1
 
-					if (amountForPayment > 0) alert(`Осталось заплатить ${amountForPayment.toFixed('2')}`)
-					else alert(`Успешно оплачено!`)
+					const temperatureMonth = parseInt(prompt(`Введите тепрературу ${nomberMonth} месяца`))
+
+					sumTemperatureMonth += temperatureMonth
 				}
-				
+
+				const averageTemperature = sumTemperatureMonth / nomberMonth
+
 			document.write(`<div'>`)
+
+			document.getElementById('resolt').innerHTML = averageTemperature.toFixed('1');
 			</script>
 	</body>
 

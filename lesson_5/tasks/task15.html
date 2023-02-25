@@ -7,28 +7,39 @@
 		<link rel="stylesheet" href="css/fonts.css">
 		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
 		<link rel="stylesheet" href="css/style.css">
-		<title>Task-13</title>
+		<title>Task-15</title>
 	</head>
 	<body>
 		<div class="rootpage">
-			<h1>Задача 13</h1>
-			<h3>Каса. Користувачу повідомляють суму, яку йому треба сплатити. Користувач поступово вводить суму грошей до тих пір, поки суми не буде достатньо для оплати товарів (кожного разу користувачу повідомляють, яку ще суму потрібно ввести).
+			<h1>Задача 15</h1>
+			<h3>Користувач поступово вводить прибуток магазину за кожен день протягом N тижнів. Знайти загальну величину прибутку та вивести величину прибутку протягом кожного окремого тижня.
 			</h3>
+			<div class="resolt">Ответ: Общая сумма прибыли = <span id="resolt"></span></div>
+			<!-- <div class="resolt">Ответ: Общая сумма = <span id="resolt2"></span></div> -->
 		</div>
-		<script>	
-			let amountForPayment = parseFloat(prompt('Введите сумму для оплаты'))
+		<script>
+			const weeksNumber = parseInt(prompt('Введите ноличество недель'))
+			let sumProfit = 0
+
 
 			document.write(`<div class='column'>`)
 
-				while (amountForPayment > 0) {
-					const userPay= parseFloat(prompt('Введите сумму платежа'))
-					amountForPayment -= userPay
+				for (let i = 1; i <= weeksNumber; i++) {
+					let weekProfit = 0
 
-					if (amountForPayment > 0) alert(`Осталось заплатить ${amountForPayment.toFixed('2')}`)
-					else alert(`Успешно оплачено!`)
+					for (let e = 1, j = sumProfit; e <= 7; e++) {
+						const dayProfit = parseFloat(prompt(`Введите прибыль за ${e} день ${i} недели.`))
+						sumProfit += dayProfit
+						weekProfit += dayProfit
+					}	
+
+					document.write(`Прибыль за ${i} неделю = ${weekProfit.toFixed('2')} <br>`)			
 				}
-				
+
 			document.write(`<div'>`)
+
+			document.getElementById('resolt').innerHTML = sumProfit.toFixed('2');
+			
 			</script>
 	</body>
 
@@ -79,7 +90,7 @@
 			margin: 0 auto;
 		}
 		.column{
-			width: 200px;
+			width: 500px;
 			margin: 0 auto;
 			display: flex;
 			gap: 30px;
