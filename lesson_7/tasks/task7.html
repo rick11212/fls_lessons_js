@@ -12,25 +12,21 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 7</h1>
-			<h3> Користувач загадує число. За 3 спроби комп’ютер намагається вгадати число користувача (використати confirm).</h3>
+			<h3>Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються у функцію)</h3>
 
-
+			<div class="resolt">Ответ = </div>
 		</div>
 		<script>
-			const minCompNumber = 1, maxCompNumber = 10
 			
-			alert('Загадайте число от 1 до 10')
-
-			for (let i = 0; i < 3; i++) {
-				const compNumber = minCompNumber + Math.floor(Math.random() * (maxCompNumber - minCompNumber +1))
-				const compTry = confirm(`Загаданное число ${compNumber}?`)
-				if (compTry === true) {
-					alert('Ура! Я угадал =)')
-					break
-				} else if ( i < 2) alert('Попробую еще раз ^_^')
-				else alert('Повезет в следующий раз =)')
+			function getImage() {
+				const randomImage = 1 + Math.floor(Math.random() * 4)
+				const getRandomImage = document.write(`<img src="img/0${randomImage}.jpg" alt="image">`)
+				return getRandomImage
 			}
 
+			document.write(`<div class = 'column'>`)
+			 getImage()
+			document.write(`</div'>`)
 		</script>
 	</body>
 	<style>
@@ -80,7 +76,7 @@
 			margin: 0 auto;
 		}
 		.column{
-			width: 200px;
+			width: 600px;
 			margin: 0 auto;
 			display: flex;
 			flex-direction: column;

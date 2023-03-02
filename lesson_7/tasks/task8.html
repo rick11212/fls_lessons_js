@@ -12,25 +12,25 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 8</h1>
-			<h3> Користувач загадує число. Комп’ютер задає питання поки не вгадає число користувача (використати confirm).</h3>
+			<h3>Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при кліку на зображення (тег img повине знаходитись у середині тега a:</h3>
 
-
+			<div class="resolt">Ответ = </div>
 		</div>
 		<script>	
-			
-			alert('Загадайте число и введите диапозон для его поиска')
-			
-			let minCompNumber = parseInt(prompt('Введите наименьшее значение')), 
-				 maxCompNumber= parseInt(prompt('Введите наибольшоее значение'))
+			function getBaner() {
+				const baner =	document.write(`
+				<a target="_blank" href="https://www.google.com/">
+				<h2>Продам что-то там</h2>
+				<h3>Звонить куда-то туда</h3>
+				<img src="img/05.jpg" alt="baner">
+				</a>
+				`)
+				return baner
+			}
 
-			for (let i = 0; i < Infinity; i++) {
-				const compNumber = minCompNumber + Math.floor(Math.random() * (maxCompNumber - minCompNumber +1))
-				const compTry = confirm(`Загаданное число ${compNumber}?`)
-					if (compTry === true) {
-						alert('Ура! Я угадал =)')
-						break
-					}
-				}
+			document.write(`<div class = 'column'>`)
+			 getBaner()
+			document.write(`</div'>`)
 
 		</script>
 	</body>
@@ -81,14 +81,16 @@
 			margin: 0 auto;
 		}
 		.column{
-			width: 200px;
+			width: 600px;
 			margin: 0 auto;
 			display: flex;
 			flex-direction: column;
 			gap: 10px;
 			color: #c0858f;
 		}
-
+		.column h2, .column h3{
+			text-align: center;
+		}
 		p{
 			font-size: 1.1rem;
 			color: #fff;

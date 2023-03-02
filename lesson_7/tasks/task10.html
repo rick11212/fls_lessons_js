@@ -12,38 +12,31 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 10</h1>
-			<h3>Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами. </h3>
+			<h3>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить знайти середнє значення для додатних показів температури.</h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span></div>
 		</div>
 		<script>	
-					
-			let minIntroducedNumber = parseInt(prompt('Введите наименьшее значение')), 
-				 maxIntroducedNumber = parseInt(prompt('Введите наибольшоее значение'))
+		const enterQuantityTemperaturs = parseInt(prompt('Введите количество температур для показаний'))
 
-			let sumNumbers = 0
 
-			if (minIntroducedNumber > maxIntroducedNumber) {
-				let tempIntroducedNumber
-				tempIntroducedNumber = minIntroducedNumber
-				minIntroducedNumber = maxIntroducedNumber
-				maxIntroducedNumber = tempIntroducedNumber
-			}
-			
-			document.write(`<div class = 'column'>`)
-				
-			for (let i = minIntroducedNumber, e = 0; i <= maxIntroducedNumber && e < 5; i++) {
-					if (i % 2 !== 0) {
-					sumNumbers += i
-					e++
-					document.write(`${i} <br>`)
-					}
+		function getPositiveAvarangeTemperaturs(quantityTemperaturs) {
+			 let sumPositiveTemperaturs = 0
+			 let quantityPositiveTemperaturs = 0
+
+			for (let i = 0; i < quantityTemperaturs; i++) {
+				const enterTemperaturs = parseFloat(prompt('Введите показания температуры'))
+				if (enterTemperaturs > 0) {
+					sumPositiveTemperaturs += enterTemperaturs
+					quantityPositiveTemperaturs ++
 				}
+			}
 
+			return sumPositiveTemperaturs / quantityPositiveTemperaturs
+		}
+		
+		 document.getElementById('resolt').innerHTML = (`${getPositiveAvarangeTemperaturs(enterQuantityTemperaturs).toFixed('2')}`)
 
-			document.getElementById('resolt').innerHTML = sumNumbers;
-
-			document.write(`</div'>`)
 		</script>
 	</body>
 

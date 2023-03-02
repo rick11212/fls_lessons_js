@@ -12,36 +12,27 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 9</h1>
-			<h3>Знайти суму всіх непарних чисел, що знаходяться між заданими користувачем числами. </h3>
+			<h3>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість від’ємних показів температури. </h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span></div>
 		</div>
 		<script>	
+		const enterQuantityTemperaturs = parseInt(prompt('Введите количество температур для показаний'))
+
+
+		function getNegativeTemperaturs(quantityTemperaturs) {
+			let negativeTemperaturs = 0
+
+			for (let i = 0; i < quantityTemperaturs; i++) {
+				const enterTemperaturs = parseFloat(prompt('Введите показания температуры'))
+				if (enterTemperaturs < 0) negativeTemperaturs++
+			}
+
+			return negativeTemperaturs
+		}
+		
+		 document.getElementById('resolt').innerHTML = (`${getNegativeTemperaturs(enterQuantityTemperaturs)}`)
 					
-			let minIntroducedNumber = parseInt(prompt('Введите наименьшее значение')), 
-				 maxIntroducedNumber = parseInt(prompt('Введите наибольшоее значение'))
-
-			let sumNumbers = 0
-
-			if (minIntroducedNumber > maxIntroducedNumber) {
-				let tempIntroducedNumber
-				tempIntroducedNumber = minIntroducedNumber
-				minIntroducedNumber = maxIntroducedNumber
-				maxIntroducedNumber = tempIntroducedNumber
-			}
-			
-			document.write(`<div class = 'column'>`)
-				
-			for (let i = minIntroducedNumber; i <= maxIntroducedNumber; i++) {
-
-				if (i % 2 !== 0) {
-					sumNumbers += i
-				}
-			}
-
-			document.getElementById('resolt').innerHTML = sumNumbers;
-
-			document.write(`</div'>`)
 		</script>
 	</body>
 
