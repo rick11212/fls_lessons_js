@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-9</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 9</h1>
+			<h3>Дано покази температур (довільна кількість). Розробити функцію, яка дозволить підрахувати кількість від’ємних показів температури. </h3>
+
+			<div class="resolt">Ответ = <span id="resolt"></span></div>
+		</div>
+		<script>	
+		const enterQuantityTemperaturs = parseInt(prompt('Введите количество температур для показаний'))
+
+
+		function getNegativeTemperaturs(quantityTemperaturs) {
+			let negativeTemperaturs = 0
+
+			for (let i = 0; i < quantityTemperaturs; i++) {
+				const enterTemperaturs = parseFloat(prompt('Введите показания температуры'))
+				if (enterTemperaturs < 0) negativeTemperaturs++
+			}
+
+			return negativeTemperaturs
+		}
+		
+		 document.getElementById('resolt').innerHTML = (`${getNegativeTemperaturs(enterQuantityTemperaturs)}`)
+					
+		</script>
+	</body>
+
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		ul li {
+			list-style: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		table{
+			width: 200px;
+			text-align: center;
+			margin: 0 auto;
+		}
+		.column{
+			width: 200px;
+			margin: 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: 10px;
+			color: #c0858f;
+		}
+
+		p{
+			font-size: 1.1rem;
+			color: #fff;
+		}
+		.write{
+			width: 500px;
+			margin: 0 auto;
+			color: #c0858f;
+			display: flex;
+			justify-content:center;align-items: center;
+		}
+		.write input{
+			padding:  4px 5px;
+		}
+		table, tr, td{
+			border: 1px solid #000;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>
