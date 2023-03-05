@@ -25,31 +25,21 @@
 
 		</div>
 		<script>
-			let quantityVisiters=[]
-			let weeks = []
-			let visitersDaysMin20 = []
+			let getQuantityVisiters=[]
+			let daysMin20 = []
 			let daysMin = []
 
-			function getQuantityVisiters() {
-				const enterQuantityWeeks = parseInt(prompt('Введите количество недель', '1'))
+			function getDaysMin20() {
+				for (let i = 1; i <= 7; i++) {
+					const enterQuantityWeeks = parseInt(prompt(`Введите количество посетителей ${i} дня`, '1'))
+					getQuantityVisiters.push(enterQuantityWeeks)
 
-				for (let e = 1; e <= enterQuantityWeeks; e++) {
-					weeks.push(e)
-					for (let i = 1; i <= 7; i++) {
-						const enterQuantityWeeks = parseInt(prompt(`Введите количество посетителей за ${e} недель ${i} дня`, '1'))
-						quantityVisiters.push(enterQuantityWeeks)
-					}	
+					if (enterQuantityWeeks < 20) daysMin20.push(i)
 				}
-				return quantityVisiters
+				return getQuantityVisiters
 			}
 
-			function getVisitersDaysMin20(quantityVisiters) {
-				if (enterQuantityWeeks < 20) daysMin20.push(i)
-				return daysMin20
-			}
-
-			
-			getVisitersDaysMin20(getQuantityVisiters())
+			getDaysMin20()
 
 			document.getElementById('resolt-daysMin20').innerHTML = `${daysMin20}`;
 			document.getElementById('resolt-daysMin').innerHTML = `${daysMin}`;
