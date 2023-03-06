@@ -12,7 +12,11 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 1</h1>
-			<h3>Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:<br>1) номери днів, протягом яких кількість відвідувачів була меншою за 20;<br>2) номери днів, коли кількість відвідувачів була мінімальною;<br>3) номери днів, коли кількість відвідувачів була максинімальною; <br> 4)загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних. </h3>
+			<h3>Дано масив, який зберігає кількість відвідувачів магазину протягом тижня. Вивести на екран:<br>
+				1) номери днів, протягом яких кількість відвідувачів була меншою за 20;<br>
+				2) номери днів, коли кількість відвідувачів була мінімальною;<br>
+				3) номери днів, коли кількість відвідувачів була максинімальною;<br>
+				4)загальну кількість клієнтів у робочі дні та окремо загальну кількість днів на вихідних. </h3>
 
 			<h4>Введенные данные:</h4>
 			<div>Введенное количество чисел = <span id="enterMonthNomber"></span></div>
@@ -25,24 +29,38 @@
 
 		</div>
 		<script>
-			let getQuantityVisiters=[]
-			let daysMin20 = []
-			let daysMin = []
-
-			function getDaysMin20() {
+			
+			// вводим количество поситителей
+			function inputVisiters() {
+				const allVisiters = []
 				for (let i = 1; i <= 7; i++) {
 					const enterQuantityWeeks = parseInt(prompt(`Введите количество посетителей ${i} дня`, '1'))
-					getQuantityVisiters.push(enterQuantityWeeks)
-
-					if (enterQuantityWeeks < 20) daysMin20.push(i)
+					allVisiters.push(enterQuantityWeeks)
 				}
-				return getQuantityVisiters
+				return allVisiters
+			}
+			const quantityVisiters = inputVisiters()
+
+			function getDaysVisitersMin20(inputVisiters) {
+				const daysMin20 = []
+				for (let i = 1; i <= 7; i++) {
+					if (inputVisiters[i-1] < 20) daysMin20.push(i)
+				}
+				return daysMin20
 			}
 
-			getDaysMin20()
+			function getDaysVisitersMin(inputVisiters) {
+				//const daysMin = []
+				for (let i = 1; i <= 7; i++) {
+					const daysMin = [0]
+					if (inputVisiters[i-1] < daysMin) daysMin = inputVisiters[i]
+				}
+				return daysMin
+			}
 
-			document.getElementById('resolt-daysMin20').innerHTML = `${daysMin20}`;
-			document.getElementById('resolt-daysMin').innerHTML = `${daysMin}`;
+			document.getElementById('resolt-daysMin20').innerHTML = `${getDaysVisitersMin20(quantityVisiters)}`;
+			document.getElementById('resolt-daysMin').innerHTML = `${getDaysVisitersMin(quantityVisiters)}`;
+			//document.getElementById('resolt-daysMin').innerHTML = `${daysMin}`;
 
 		</script>
 	</body>
