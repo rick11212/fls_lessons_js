@@ -12,27 +12,35 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 2</h1>
-			<h3>Створити функцію, яка за номером дня дозволяє з’ясувати чи є цей день робочим.</h3>
+			<h3>Дано масив імен учнів. З’ясувати скільки разів зустрічається ім’я «Іван».</h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span></div>
 
 		</div>
 		<script>
-			const enterDayOfTheWeek = parseInt(prompt('Введите номер дня недели', '1'))
 
-			function getDayOfTheWeek(dayOfTheWeek) {
-				let resolt
+			function inputArray() {
+				const quantityNames = parseInt(prompt('Введите количество имен', '1'))
 				
-				if (dayOfTheWeek >= 1 && dayOfTheWeek <= 5) {
-					resolt = 'Сегодня рабочий день!'
-				} else if (dayOfTheWeek >= 6 && dayOfTheWeek <= 7) {
-					resolt = 'Сегодня выходной день!'
-				} else resolt = 'Ошибка!'
+				const names = []
 
-				return resolt
+				for (let i = 1; i <= quantityNames; i++) {
+					const name = prompt('Введите имя', 'Иван').toLowerCase()
+					names.push(name)	
+				}
+
+				return names
 			}
 
-			document.getElementById('resolt').innerHTML = `${getDayOfTheWeek(enterDayOfTheWeek)}`;
+			function getQuantityNames(names) {
+				let quantityNameIvan = 0
+				for (let i = 0; i < names.length; i++) {
+					if (names[i] === 'иван') quantityNameIvan++
+				}
+				return quantityNameIvan
+			}
+
+			document.getElementById('resolt').innerHTML = `Количество повторов "Иван": ${etQuantityNames(inputArray())}`
 
 		</script>
 	</body>

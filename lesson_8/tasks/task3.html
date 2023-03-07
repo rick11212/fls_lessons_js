@@ -12,50 +12,116 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 3</h1>
-			<h3>Створити окремі функції, які для 4 чисел знаходять: <br>
-				1)суму;<br>
-				2)добуток; <br>
-				3)середнє арифметичне; <br>
-				4)мінімальне значення.
+			<h3>Дано послідовність номерів автомобілів. Підрахувати кількість номерів, які : <br>
+				1)починаються на букву «А»;<br>
+				2)перша і остання літери співпадають; <br>
+				3)складаються з більше ніш 5 символів;
 			</h3>
 
 			<h4>Введенные данные:</h4>
 			<div>Введенные числа = <span id="enterMonthNomber1"></span>, <span id="enterMonthNomber2"></span>, <span id="enterMonthNomber3"></span>, <span id="enterMonthNomber4"></span></div>
 
 			<div class="resolt">Ответ = <br>
-				1) <span id="resolt-sum"></span><br>
+				1) <span id="resolt-A"></span><br>
 				2) <span id="resolt-multiplication"></span><br>
 				3) <span id="resolt-avarange"></span><br>
-				4) <span id="resolt-min"></span>
 			</div>
 			<script>
-			const enterNumber1 = parseFloat(prompt('Введите первое число'))
-			const enterNumber2 = parseFloat(prompt('Введите второе число'))
-			const enterNumber3 = parseFloat(prompt('Введите третье число'))
-			const enterNumber4 = parseFloat(prompt('Введите четвертое число'))
+				const arrCodeRegion = []
+				const arrNumber = []
+				const arrSeria = []
+				
 
-			function getSum(num1,num2,num3,num4) {
-				return num1 + num2 + num3 + num4
+				const autoNumbers = []
+
+				function inputArray() {
+				const quantityAutoNumber = parseInt(prompt('Введите количество автомобильных номеров', '1'))
+
+				for (let i = 0; i < quantityAutoNumber; i++) {
+					const arrCodeRegionLetters = []
+					const arrNumberLetters = []
+					const arrSeriaLetters = []
+
+					for (let e = 0; e < 2; e++) {
+						const codeRegionLetter = prompt(`Введите код региона регистрации ${i+1} номера ${e+1} буква`, 'A').toLowerCase()
+						arrCodeRegionLetters.push(codeRegionLetter)
+					}
+					for (let j = 0; j < 4; j++) {
+						const numberLetter = parseInt(prompt(`Введите ругистрационный ${i+1} номера ${j+1} цифра`, '1'))
+						arrNumberLetters.push(numberLetter)
+					}
+					for (let k = 0; k < 2; k++) {
+						const codeSeriaLetter = prompt(`Введите серию ${i+1} номера ${k+1} буква`, 'A').toLowerCase()
+						arrSeriaLetters.push(codeSeriaLetter)
+					}
+
+					arrCodeRegion.push(arrCodeRegionLetters)	
+					arrNumber.push(arrNumberLetters)	
+					arrSeria.push(arrSeriaLetters)	
+
+					autoNumbers.push(arrCodeRegion[i] + arrNumber[i] + arrSeria[i])
+					
+				}
+
+				return autoNumbers
 			}
-			function getMultiplication(num1,num2,num3,num4) {
-				return num1 * num2 * num3 * num4
-			}
-			function getAvarange(num1,num2,num3,num4) {
-				return (num1 + num2 + num3 + num4) / 4
-			}
-			function getMin(num1,num2,num3,num4) {
-				return Math.min(num1,num2,num3,num4)
+			function getQuantityStartA(autoNumbers) {
+				let quantityStartA = 0
+				for (let i = 0; i < autoNumbers.length; i++) {
+					if (autoNumbers[i][i] === 'a') quantityStartA++
+				}
+				return quantityStartA
 			}
 
-			document.getElementById('enterMonthNomber1').innerHTML = enterNumber1;
-			document.getElementById('enterMonthNomber2').innerHTML = enterNumber2;
-			document.getElementById('enterMonthNomber3').innerHTML = enterNumber3;
-			document.getElementById('enterMonthNomber4').innerHTML = enterNumber4;
 
-			document.getElementById('resolt-sum').innerHTML = `${getSum(enterNumber1,enterNumber2,enterNumber3,enterNumber4)}`;
-			document.getElementById('resolt-multiplication').innerHTML = `${getMultiplication(enterNumber1,enterNumber2,enterNumber3,enterNumber4)}`;
-			document.getElementById('resolt-avarange').innerHTML = `${getAvarange(enterNumber1,enterNumber2,enterNumber3,enterNumber4)}`;
-			document.getElementById('resolt-min').innerHTML = `${getMin(enterNumber1,enterNumber2,enterNumber3,enterNumber4)}`;
+			document.getElementById('resolt-A').innerHTML = getQuantityStartA(inputArray());
+
+			// 	const arrCodeRegion = []
+			// 	const arrNumber = []
+			// 	const arrSeria = []
+
+			// 	const autoNumbers = []
+
+			// 	function inputArray() {
+			// 	const quantityAutoNumber = parseInt(prompt('Введите количество автомобильных номеров', '1'))
+
+			// 	for (let i = 0; i < quantityAutoNumber; i++) {
+			// 		const codeRegion = prompt(`Введите код региона регистрации ${i+1} номера`, 'AA').toLowerCase()
+			// 		const number = parseInt(prompt(`Введите ругистрационный номер ${i+1} номера`, '1111'))
+			// 		const seria = prompt(`Введите серию ${i+1} номера`, 'AA').toLowerCase()
+			// 		arrCodeRegion.push(codeRegion)	
+			// 		arrNumber.push(number)	
+			// 		arrSeria.push(seria)	
+					
+			// 		autoNumbers.push(arrCodeRegion[i] + arrNumber[i] + arrSeria[i])
+			// 	}
+
+			// 	return autoNumbers
+			// }
+
+			// function getQuantityStartA(autoNumbers) {
+			// 	let quantityStartA = 0
+			// 	for (let i = 0; i < autoNumbers.length; i++) {
+			// 		switch (arrCodeRegion[i]) {
+			// 			case 'aa':
+			// 			case 'ab':
+			// 			case 'ac':
+			// 			case 'ae':
+			// 			case 'ak':
+			// 			case 'am':
+			// 			case 'ah':
+			// 			case 'ao':
+			// 			case 'ap':
+			// 			case 'at':
+			// 			case 'ay':
+			// 			case 'ax': quantityStartA ++
+			// 				break
+			// 		}
+			// 	}
+			// 	return quantityStartA
+			// }
+
+			// document.getElementById('resolt-A').innerHTML = getQuantityStartA(inputArray());
 		</script>
 		</body>
 		<style>
