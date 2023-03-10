@@ -34,15 +34,16 @@
 			}
 
 			const tax = 0.2
-			const randomNumbersArray =  getRandomNumbersArray()
-			let sumTax =  0
+			let randomNumbersArray =  getRandomNumbersArray()
+			//let sumTax =  0
 
 			randomNumbersArray.forEach((element,index,arrRef) => {
 				arrRef[index] *= tax
-				sumTax += arrRef[index]
+				arrRef[index].toFixed(2)
+				//sumTax += arrRef[index]
 			})
 
-			document.getElementById('resolt').innerHTML = sumTax.toFixed('2');
+			document.getElementById('resolt').innerHTML = randomNumbersArray;
 
 		</script>
 	</body>
