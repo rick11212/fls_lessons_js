@@ -1,22 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>FLS_JS</title>
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-0</title>
 	</head>
 	<body>
 		<div class="rootpage">
-			<h1>Выполненные домашние задания:</h1>
-			<ol class="rootpage__list">
-				<li><a target="_blank" href="lesson_2/index.html">Домашнее задание №2</a></li>
-				<li><a target="_blank" href="lesson_3/index.html">Домашнее задание №3 (Алгоритмы с разветвлением)</a></li>
-				<li><a target="_blank" href="lesson_5/index.html">Домашнее задание №5 (Циклы)</a></li>
-				<li><a target="_blank" href="lesson_7/index.html">Домашнее задание №7 (Функции)</a></li>
-				<li><a target="_blank" href="lesson_8/index.html">Домашнее задание №8 (Массивы)</a></li>
-				<li><a target="_blank" href="lesson_9/index.html">Домашнее задание №9 (Массивы)</a></li>
-			</ol>
+			<h1>Задача 0</h1>
+			<h3>Користувач вводить кількість елементів. Створити масив, що складається з вказаної кількості елементів заповнених нулями.</h3>
+
+
+
+			<div class="resolt">Ответ = <span id="resolt"></span>
+			</div>
 		</div>
+		<script>
+
+			function getArray0() {
+				const quantityElements = parseInt(prompt('Введите количество элементов'))
+				let elementsArray= new Array(quantityElements).fill(0)
+				return elementsArray
+			}
+
+			document.getElementById('resolt').innerHTML = getArray0();
+
+		</script>
 	</body>
 	<style>
 		@charset "UTF-8";
@@ -53,11 +66,17 @@
 			a:hover {
 			text-decoration: none;
 		}
-		ul li {
-			list-style: none;
-		}
 		img {
 			vertical-align: top;
+		}
+		li{
+			width: 100px;
+			margin: 0 auto;
+			color: #c0858f;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
 		}
 		.wrapper {
 			width: 100%;
@@ -69,6 +88,12 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
 		}
 		@media (max-width: 767px) {
 			.rootpage{
@@ -88,7 +113,11 @@
 		}
 
 		.rootpage__list{
-			margin: 0px 0px 2.25rem 1.25rem;
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
 		}
 		.rootpage__list li:not(:last-child){
 			margin: 0px 0px 15px 0px;
