@@ -12,52 +12,46 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 4</h1>
-			<h3>Створити функцію, яка для 3 заданих чисел знаходить одночасно декілька результатів:<br>1) кількість парних<br>2) кількість додатних<br>3) кількість більших за 100.</h3>
-
-			<h4>Введенные данные:</h4>
-			<div>Введенные числа = <span id="enterNumber1"></span>, <span id="enterNumber2"></span>, <span id="enterNumber3"></span></div>
+			<h3>Дано послідовність оцінок учня. Підрахувати кількість:<br>
+				1)двійок<br>
+				2)кількість хороших оцінок (добре, відмінно);<br>
+				3)кількість оцінок, які нижче середнього.
+			</h3>
 
 			<div class="resolt">Ответ = <br>
-				1) <span id="resolt-pair"></span><br>
-				2) <span id="resolt-positive"></span><br>
-				3) <span id="resolt-more-100"></span><br>
+				1) <span id="resolt-quantityPoints2"></span><br>
+				2) <span id="resolt-quantityPointsGood"></span><br>
+				3) <span id="resolt-quantityPointsDonwAvarange"></span><br>
 			</div>
 
 		</div>
 		<script>
 			
-			function getResolts() {
-				const enterNumber1 = parseFloat(prompt('Введите первое число'))
-				const enterNumber2 = parseFloat(prompt('Введите второе число'))
-				const enterNumber3 = parseFloat(prompt('Введите третье число'))
+			const quantityStedentPoints = parseInt(prompt('Введите количество оценок ученика','1'))
 
-				let quantityPairs = 0
-				let quantityPositive = 0
-				let quantityMore100 = 0
-
-				if (enterNumber1 % 2 === 0) quantityPairs+=1
-				if (enterNumber1 > 0) quantityPositive+=1
-				if (enterNumber1 > 100) quantityMore100+=1
-
-				if (enterNumber2 % 2 === 0) quantityPairs+=1
-				if (enterNumber2 > 0) quantityPositive+=1
-				if (enterNumber2 > 100) quantityMore100+=1
-
-				if (enterNumber3 % 2 === 0) quantityPairs+=1
-				if (enterNumber3 > 0) quantityPositive+=1
-				if (enterNumber3 > 100) quantityMore100+=1
-
-				document.getElementById('enterNumber1').innerHTML = enterNumber1;
-				document.getElementById('enterNumber2').innerHTML = enterNumber2;
-				document.getElementById('enterNumber3').innerHTML = enterNumber3;
-
-				document.getElementById('resolt-pair').innerHTML = quantityPairs
-				document.getElementById('resolt-positive').innerHTML = quantityPositive
-				document.getElementById('resolt-more-100').innerHTML = quantityMore100
+			function getArrayStudentPoints() {
+				const arrayStudentPoints =[]
+				for (let i = 0; i < quantityStedentPoints; i++) {
+					const quantityStedentPoints = parseInt(prompt(`Введите ${i+1} оценку ученика`,'5'))
+					arrayStudentPoints.push(quantityStedentPoints)
+				}
+				return arrayStudentPoints
 			}
-			
-			getResolts()
 
+			const studentPoints = getArrayStudentPoints()
+
+			function getQuantityPoints(arrayStudentPoints, minP, maxP) {
+				let quantityPoints = 0
+				for (let i = 0; i < arrayStudentPoints.length; i++) {
+					if (arrayStudentPoints[i] <= maxP && arrayStudentPoints[i]>= minP) quantityPoints++
+				}
+
+				return quantityPoints
+			}
+
+			 document.getElementById('resolt-quantityPoints2').innerHTML = getQuantityPoints(studentPoints,2,2);
+			 document.getElementById('resolt-quantityPointsGood').innerHTML = getQuantityPoints(studentPoints,10,12);
+			 document.getElementById('resolt-quantityPointsDonwAvarange').innerHTML = getQuantityPoints(studentPoints,4,6);
 		</script>
 	</body>
 	<style>

@@ -12,35 +12,90 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 6</h1>
-			<h3>Створити функцію, яка створює таблицю з вказаною кількістю рядків і стовпців (таблиця заповнюється заданим фіксованим повідомленням).</h3>
+			<h3>
+				Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:<br>
+				1)за весь рік;<br>
+				2)у першій половині року; <br>
+				3)у другій половині року; <br>
+				4)за літо;<br>
+				5)за ІІ квартал;<br>
+				6)за парні місяці (з парними номерами);<br>
+				7)за місяці, які є початковими у сезоні (весна, літо, осінь, зима).<br>
+			</h3>
 
-			<h4>Введенные данные:</h4>
-			<div>Количество колонок = <span id="enterQuantityColumns"></span>, количество рядков = <span id="enterQuantityRows"></span></div>
-
-			<div class="resolt">Ответ =</div>
+			<div class="resolt">Ответ = <br>
+				1) <span id="resolt-sumYear"></span><br>
+				2) <span id="resolt-firstHalf"></span><br>
+				3) <span id="resolt-secondHalf"></span><br>
+				4) <span id="resolt-summer"></span><br>
+				5) <span id="resolt-secondQuarter"></span><br>
+				6) <span id="resolt-evenMonth"></span><br>
+				7) <span id="resolt-firstMonth"></span><br>
+			</div>
 
 		</div>
 		<script>
-			const enterQuantityColumns = parseInt(prompt('Введите количество колонок'))
-			const enterQuantityRows = parseInt(prompt('Введите количество строк'))
 
-			function getTable(columns, rows) {
-				document.write(`<table>`)
-					for (let i = 0; i < rows; i++) {
-						document.write(`<tr>`)
-							for (let e = 0; e < columns ; e++) {
-								document.write(`<td>Привет</td>`)
-							}
-						document.write(`</tr>`)						
-					}
-				document.write(`</table>`)
+			function getArrayStudentPoints() {
+				const arrayQuantityMoneyMonth =[]
+				for (let i = 0; i < 12; i++) {
+					const quantityMoneyMonth = parseFloat(prompt(`Введите сумму за ${i+1} месяц`,'20'))
+					arrayQuantityMoneyMonth.push(quantityMoneyMonth)
+				}
+				return arrayQuantityMoneyMonth
 			}
 
-			getTable(enterQuantityColumns,enterQuantityRows);
+			const studentPoints = getArrayStudentPoints() 
 
-			document.getElementById('enterQuantityColumns').innerHTML = enterQuantityColumns;
-			document.getElementById('enterQuantityRows').innerHTML = enterQuantityRows;
-		</script>
+			function getSumMoney(studentPoints, minMonth, maxMonth) {
+				let sumMoney = 0
+				for (let i = minMonth; i <= maxMonth; i++) {
+					sumMoney+=studentPoints[i-1]
+				}
+				return sumMoney
+			}
+
+			document.getElementById('resolt-sumYear').innerHTML = getSumMoney(studentPoints,1,12);
+			document.getElementById('resolt-firstHalf').innerHTML = getSumMoney(studentPoints,1,6);
+			document.getElementById('resolt-secondHalf').innerHTML = getSumMoney(studentPoints,7,12);
+			document.getElementById('resolt-summer').innerHTML = getSumMoney(studentPoints,6,8);
+			document.getElementById('resolt-secondQuarter').innerHTML = getSumMoney(studentPoints,4,6);
+
+			function getSumMoneyEvenMonth(studentPoints, minMonth, maxMonth) {
+				let sumMoney = 0
+
+				for (let i = minMonth; i <= maxMonth; i++) {
+					if (i % 2 === 0){
+					sumMoney+=studentPoints[i-1]
+					}
+				}
+
+				return sumMoney
+				
+			}
+		
+			document.getElementById('resolt-evenMonth').innerHTML = getSumMoneyEvenMonth(studentPoints,1,12);
+
+			function getFirstMonth(studentPoints, minMonth, maxMonth) {
+				let sumMoney = 0
+
+				for (let i = minMonth; i <= maxMonth; i++) {
+					switch (i) {
+						case 12:
+						case 3:
+						case 6:
+						case 9:sumMoney+=studentPoints[i-1]
+							break;
+					}
+				}
+
+				return sumMoney
+				
+			}
+
+			document.getElementById('resolt-firstMonth').innerHTML = getFirstMonth(studentPoints,1,12);
+
+			</script>
 	</body>
 	<style>
 		@charset "UTF-8";

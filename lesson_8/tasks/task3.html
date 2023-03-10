@@ -18,63 +18,98 @@
 				3)складаються з більше ніш 5 символів;
 			</h3>
 
-			<h4>Введенные данные:</h4>
-			<div>Введенные числа = <span id="enterMonthNomber1"></span>, <span id="enterMonthNomber2"></span>, <span id="enterMonthNomber3"></span>, <span id="enterMonthNomber4"></span></div>
-
 			<div class="resolt">Ответ = <br>
 				1) <span id="resolt-A"></span><br>
-				2) <span id="resolt-multiplication"></span><br>
-				3) <span id="resolt-avarange"></span><br>
+				2) <span id="resolt-firstAndLast"></span><br>
+				3) <span id="resolt-more5"></span><br>
 			</div>
 			<script>
+				const quantityAutoNumber = parseInt(prompt('Введите количество автомобильных номеров AA-1111-BB', '1'))
+
 				const arrCodeRegion = []
 				const arrNumber = []
 				const arrSeria = []
 				
+				const arrCodeRegionLetters = []
+				const arrNumberLetters = []
+				const arrSeriaLetters = []
 
+				//const autoNumbers = [[arrCodeRegion = [arrCodeRegionLetters = [codeRegionLetter=[a,b]]]]]
 				const autoNumbers = []
 
-				function inputArray() {
-				const quantityAutoNumber = parseInt(prompt('Введите количество автомобильных номеров', '1'))
+			function inputArray() {
 
 				for (let i = 0; i < quantityAutoNumber; i++) {
-					const arrCodeRegionLetters = []
-					const arrNumberLetters = []
-					const arrSeriaLetters = []
 
-					for (let e = 0; e < 2; e++) {
-						const codeRegionLetter = prompt(`Введите код региона регистрации ${i+1} номера ${e+1} буква`, 'A').toLowerCase()
-						arrCodeRegionLetters.push(codeRegionLetter)
-					}
-					for (let j = 0; j < 4; j++) {
-						const numberLetter = parseInt(prompt(`Введите ругистрационный ${i+1} номера ${j+1} цифра`, '1'))
-						arrNumberLetters.push(numberLetter)
-					}
-					for (let k = 0; k < 2; k++) {
-						const codeSeriaLetter = prompt(`Введите серию ${i+1} номера ${k+1} буква`, 'A').toLowerCase()
-						arrSeriaLetters.push(codeSeriaLetter)
+						for (let e = 0; e < 2; e++) {
+								const codeRegionLetter = prompt(`Введите код региона регистрации ${i+1} номера ${e+1} буква (AA-1111-BB)`, 'A').toLowerCase()
+								arrCodeRegionLetters.push(codeRegionLetter)
+						}
+						
+						for (let j = 0; j < 4; j++) {
+							const numberLetter = parseInt(prompt(`Введите ругистрационный номер ${i+1} цифра ${j+1} (AA-1111-BB)`, '1'))
+							arrNumberLetters.push(numberLetter)
+						}
+						for (let k = 0; k < 2; k++) {
+							const codeSeriaLetter = prompt(`Введите серию ${i+1} номера ${k+1} буква (AA-1111-BB)`, 'B').toLowerCase()
+							arrSeriaLetters.push(codeSeriaLetter)
+						}
+
+						arrCodeRegion.push(arrCodeRegionLetters)	
+						arrNumber.push(arrNumberLetters)	
+						arrSeria.push(arrSeriaLetters)	
+						
 					}
 
-					arrCodeRegion.push(arrCodeRegionLetters)	
-					arrNumber.push(arrNumberLetters)	
-					arrSeria.push(arrSeriaLetters)	
-
-					autoNumbers.push(arrCodeRegion[i] + arrNumber[i] + arrSeria[i])
-					
-				}
+				autoNumbers.push(arrCodeRegion)
+				autoNumbers.push(arrNumber) 
+				autoNumbers.push(arrSeria) 
 
 				return autoNumbers
 			}
+			
+			const arrayNumbers = inputArray()
+
 			function getQuantityStartA(autoNumbers) {
 				let quantityStartA = 0
-				for (let i = 0; i < autoNumbers.length; i++) {
-					if (autoNumbers[i][i] === 'a') quantityStartA++
+
+				for (let i = 0; i < quantityAutoNumber; i++) {
+					if (autoNumbers[0][i][0] === 'a') quantityStartA++
 				}
+				 
 				return quantityStartA
+				
+			}
+
+			function getFirstAndLast(autoNumbers) {
+				let firstAndLast = 0
+				
+				for (let i = 0; i < quantityAutoNumber; i++) {
+					if (autoNumbers[0][i][0] === autoNumbers[2][i][1]) firstAndLast++
+				}
+				 
+				return firstAndLast
+			}
+
+			function getMore5() {
+				let more5 = 0
+
+				for (let i = 0; i < quantityAutoNumber; i++) {
+
+					if (arrCodeRegionLetters.length + arrNumberLetters.length + arrSeriaLetters.length > 5) more5++
+				}
+
+				return more5
 			}
 
 
-			document.getElementById('resolt-A').innerHTML = getQuantityStartA(inputArray());
+			document.getElementById('resolt-A').innerHTML = getQuantityStartA(arrayNumbers);
+			document.getElementById('resolt-firstAndLast').innerHTML = getFirstAndLast(arrayNumbers);
+			document.getElementById('resolt-more5').innerHTML = getMore5();
+			console.log(arrayNumbers);
+
+			//========================================================================================================================================================
+			
 
 			// 	const arrCodeRegion = []
 			// 	const arrNumber = []

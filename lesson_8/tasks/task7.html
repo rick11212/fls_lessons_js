@@ -12,24 +12,69 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 7</h1>
-			<h3>Створити функцію, яка випадковим чином виводить на екран одне із 4 зображень (шляхи до зображень передаються у функцію)</h3>
+			<h3>Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити сумарний виграш.</h3>
 
-			<div class="resolt">Ответ = </div>
-		</div>
-		<script>
-			
-			function getImage() {
-				const randomImage = 1 + Math.floor(Math.random() * 4)
-				const getRandomImage = document.write(`<img src="img/0${randomImage}.jpg" alt="image">`)
-				return getRandomImage
+			<div class="resolt">Ваш выигрыш составляет: <span id="resolt-sumWinAmount"></span></div>
+
+			<script>
+			function getWinAmountArray() {
+				const minWinAmount = -500
+				const maxWinAmount = 500
+				const winAmountArray = []
+
+				let inputWinAmount = confirm(`Играем?`)
+				let i = 0
+
+				do {
+					const randomWinAmonut = minWinAmount + Math.floor(Math.random() * (maxWinAmount - minWinAmount + 1))
+					winAmountArray.push(randomWinAmonut)
+					i++
+					inputWinAmount = confirm(`Элементов ${i}. Добавить еще эллемент?`)
+
+				} while (inputWinAmount === true);
+				//console.log(winAmountArray);
+				return winAmountArray
 			}
 
-			document.write(`<div class = 'column'>`)
-			 getImage()
-			document.write(`</div'>`)
+			function getSumWinAmount(winAmountArray) {
+				let sumWinAmount = 0
+
+				for (let i = 0; i < Infinity; i++) {
+					const choosingElement = prompt(`Выберете эллемент от 1 до ${winAmountArray.length}`, '1')
+					sumWinAmount += winAmountArray[i]
+
+					let userСhoice = confirm(`Еще играем?`)
+					if (userСhoice === false)	break
+				}
+				return sumWinAmount
+			}
+
+			document.getElementById('resolt-sumWinAmount').innerHTML = getSumWinAmount(getWinAmountArray());
+
+
+
+			//========================================================================================================================================================
+			
+			// function getWinAmount() {
+			// 	const minWinAmount = -500
+			// 	const maxWinAmount = 500
+			// 	let winAmount = 0
+
+			// 	let inputWinAmount = confirm(`Играем?`)
+
+			// 	do {
+			// 		const randomWinAmonut = minWinAmount + Math.floor(Math.random() * (maxWinAmount - minWinAmount + 1))
+			// 		winAmount+=randomWinAmonut
+			// 		inputWinAmount = confirm(`Ваш выигрыш составляет: ${winAmount}`)
+			// 	} while (inputWinAmount === true);
+
+			// 	return winAmount
+			// }
+
+			// console.log(getWinAmount());
 		</script>
-	</body>
-	<style>
+		</body>
+		<style>
 		@charset "UTF-8";
 		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
 		* ,*::before, *::after {
@@ -147,4 +192,4 @@
 		}
 
 	</style>
-</html>
+	</html>

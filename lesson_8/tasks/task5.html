@@ -12,41 +12,27 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 5</h1>
-			<h3>Створити окремі функції, які переводять:<br>1) Сантиметри у дюйми;<br>2) Кілограми у фунти;<br>3) Кілометри у милі.</h3>
+			<h3>Дано послідовність цін товарів та назв (у окремих масивах). Вивести на екран ті, які може собі дозволити користувач (кількість грошей задається).</h3>
 
-			<h4>Введенные данные:</h4>
-			<div>Введенные числа = <span id="enterNumber1"></span>, <span id="enterNumber2"></span>, <span id="enterNumber3"></span></div>
+			<div class="resolt">Ответ = Вы можете купить себе: <span id="resolt-userCanBuy"></span>
 
-			<div class="resolt">Ответ = <br>
-				1) <span id="resolt-inchs"></span><br>
-				2) <span id="resolt-lbs"></span><br>
-				3) <span id="resolt-miles"></span><br>
 			</div>
 
 		</div>
 		<script>
-			const enterNumber1 = parseFloat(prompt('Введите число для конвертации из сантиметвой в дюймы (cm -> inch'))
-			const enterNumber2 = parseFloat(prompt('Введите число для конвертации из килограмм в фунты (kg -> lb'))
-			const enterNumber3 = parseFloat(prompt('Введите число для конвертации из километров в дюймы (km -> mile'))
+			let productsPrices = [20, 3, 2, 10, 2, 18, 30]
+			let productsTitles = ['cheese', 'juice', 'bread', 'sausage', 'milk', 'candys', 'cake']
 
-			function getConverInchs(cm) {
-				return 0.393701 * cm
+			const quntityManeyUser = parseFloat(prompt('Введите сумму имеющихся денег', '10'))
+				
+			function name() {
+				const userCanBuy = []
+				for (let i = 0; i < productsPrices.length; i++) {
+					if (productsPrices[i] <= quntityManeyUser) userCanBuy.push(productsTitles[i])
+				}
+				return userCanBuy
 			}
-			function getConverLbs(kg) {
-				return 2.20462 * kg
-			}
-			function getConverMiles(km) {
-				return 1.60934 * km
-			}
-
-			document.getElementById('enterNumber1').innerHTML = enterNumber1;
-			document.getElementById('enterNumber2').innerHTML = enterNumber2;
-			document.getElementById('enterNumber3').innerHTML = enterNumber3;
-
-			document.getElementById('resolt-inchs').innerHTML = (`${getConverInchs(enterNumber1)} inch`);
-			document.getElementById('resolt-lbs').innerHTML = (`${getConverLbs(enterNumber2)} lb`);
-			document.getElementById('resolt-miles').innerHTML = (`${getConverMiles(enterNumber3)} ml`);
-
+			document.getElementById('resolt-userCanBuy').innerHTML = name();
 		</script>
 	</body>
 	<style>

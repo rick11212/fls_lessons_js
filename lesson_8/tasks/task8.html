@@ -12,25 +12,57 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 8</h1>
-			<h3>Створити функцію, яка виводить банер (у функцію передаються: зображення, заголовок та посилання, куди переходимо при кліку на зображення (тег img повине знаходитись у середині тега a:</h3>
+			<h3>Морський бій. Користувач вводить кількість клітинок одновимірного масиву та кількість одиночних кораблів. Комп’ютер довільно розміщує ці одиночні кораблі у масиві по один у клітинці (якщо у клітинці 0, то клітинка пуста, якщо 1 – то це означає, що там є корабель. Користувач вводить номер клітинки, куди стріляє. Гра продовжується до тих пір, поки не будуть потоплені усі кораблі.</h3>
 
-			<div class="resolt">Ответ = </div>
+			<div class="resolt">Ответ = <span id="resolt"></span></div>
 		</div>
 		<script>	
-			function getBaner() {
-				const baner =	document.write(`
-				<a target="_blank" href="https://www.google.com/">
-				<h2>Продам что-то там</h2>
-				<h3>Звонить куда-то туда</h3>
-				<img src="img/05.jpg" alt="baner">
-				</a>
-				`)
-				return baner
+			const quantityCells = parseInt(prompt('Введите количество клеточек поля'))
+			let quantityShips = parseInt(prompt('Введите количество одиночных кораблей'))
+			
+
+			function getQuantityCellsArray() {
+				let quantityCellsArray = []
+
+				for (let i = 0; i < quantityCells; i++) {
+					quantityCellsArray.push(0)
+				}
+
+				return quantityCellsArray
 			}
 
-			document.write(`<div class = 'column'>`)
-			 getBaner()
-			document.write(`</div'>`)
+			
+
+			function getPlacementShipsArray(quantityCellsArray) {
+				
+				const minValue = 0
+				const maxValue = quantityShips
+
+				for (let i = 0; i < quantityShips; i++) {
+					const randomValue = minValue + Math.floor(Math.random()*(maxValue-minValue+1))
+					quantityCellsArray[randomValue] = 1					
+					}
+
+				return quantityCellsArray
+			}
+		
+
+			function getUserShots(getPlacementShipsArray) {
+
+		 		while(quantityShips > 0) {
+					const userShot = parseInt(prompt(`Введите номер клеточки поля для выстрела от 1 до ${getPlacementShipsArray.length}`))
+
+					if (getPlacementShipsArray[userShot-1] === 1) {
+						alert('Убил!')
+						quantityShips--
+					}
+					else alert(`Мимо!`)
+
+				}
+				console.log(getPlacementShipsArray);
+			}
+
+			getUserShots(getPlacementShipsArray(getQuantityCellsArray()));
 
 		</script>
 	</body>
