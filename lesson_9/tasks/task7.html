@@ -12,69 +12,19 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 7</h1>
-			<h3>Дано одновимірний масив, у якому зберігається певна виграшна сума (елементи заповнюються випадковим чином значеннями від -500 до 500). Надаючи користувачу можливість вибирати номери елементів (поки він не відмовиться). Знаходити сумарний виграш.</h3>
+			<h3>Дано масив номерів авто. Сформувати новий масив тих, які починаються на «А»</h3>
 
-			<div class="resolt">Ваш выигрыш составляет: <span id="resolt-sumWinAmount"></span></div>
+			<div class="resolt">Ответ: <span id="resolt"></span></div>
+		</div>
+		<script>
+			const numbersAuto = ['DР078ВК','AО371ВР','TХ679ЕР','HР390УА','AУ572ОО','BA927ЕН','MЕ445УТ','MЕ387РС','AР288СА','AХ574СК','TР725ЕК','XУ666ОА','BС322НН','YН139ОТ','EХ019РР','EЕ432СТ','AР637ОУ','IВ625РТ','OЕ919ОА','AУ746СН']
 
-			<script>
-			function getWinAmountArray() {
-				const minWinAmount = -500
-				const maxWinAmount = 500
-				const winAmountArray = []
+			const sortNombersAuto = numbersAuto.filter(startAutoNumber => startAutoNumber[0] =='A')
 
-				let inputWinAmount = confirm(`Играем?`)
-				let i = 0
-
-				do {
-					const randomWinAmonut = minWinAmount + Math.floor(Math.random() * (maxWinAmount - minWinAmount + 1))
-					winAmountArray.push(randomWinAmonut)
-					i++
-					inputWinAmount = confirm(`Элементов ${i}. Добавить еще эллемент?`)
-
-				} while (inputWinAmount === true);
-				//console.log(winAmountArray);
-				return winAmountArray
-			}
-
-			function getSumWinAmount(winAmountArray) {
-				let sumWinAmount = 0
-
-				for (let i = 0; i < Infinity; i++) {
-					const choosingElement = prompt(`Выберете эллемент от 1 до ${winAmountArray.length}`, '1')
-					sumWinAmount += winAmountArray[i]
-
-					let userСhoice = confirm(`Еще играем?`)
-					if (userСhoice === false)	break
-				}
-				return sumWinAmount
-			}
-
-			document.getElementById('resolt-sumWinAmount').innerHTML = getSumWinAmount(getWinAmountArray());
-
-
-
-			//========================================================================================================================================================
-			
-			// function getWinAmount() {
-			// 	const minWinAmount = -500
-			// 	const maxWinAmount = 500
-			// 	let winAmount = 0
-
-			// 	let inputWinAmount = confirm(`Играем?`)
-
-			// 	do {
-			// 		const randomWinAmonut = minWinAmount + Math.floor(Math.random() * (maxWinAmount - minWinAmount + 1))
-			// 		winAmount+=randomWinAmonut
-			// 		inputWinAmount = confirm(`Ваш выигрыш составляет: ${winAmount}`)
-			// 	} while (inputWinAmount === true);
-
-			// 	return winAmount
-			// }
-
-			// console.log(getWinAmount());
+			document.getElementById('resolt').innerHTML = sortNombersAuto;
 		</script>
-		</body>
-		<style>
+	</body>
+	<style>
 		@charset "UTF-8";
 		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
 		* ,*::before, *::after {
@@ -192,4 +142,4 @@
 		}
 
 	</style>
-	</html>
+</html>

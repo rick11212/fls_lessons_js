@@ -13,89 +13,39 @@
 		<div class="rootpage">
 			<h1>Задача 6</h1>
 			<h3>
-				Дано послідовність платіжок протягом року. Знайти сумарну кількість грошей за:<br>
-				1)за весь рік;<br>
-				2)у першій половині року; <br>
-				3)у другій половині року; <br>
-				4)за літо;<br>
-				5)за ІІ квартал;<br>
-				6)за парні місяці (з парними номерами);<br>
-				7)за місяці, які є початковими у сезоні (весна, літо, осінь, зима).<br>
-			</h3>
+				Дано масив цін. Змінити цей масив так, що на ціни товарів, які більші за 1000 грн. дати 30% знижки.<br>
 
-			<div class="resolt">Ответ = <br>
-				1) <span id="resolt-sumYear"></span><br>
-				2) <span id="resolt-firstHalf"></span><br>
-				3) <span id="resolt-secondHalf"></span><br>
-				4) <span id="resolt-summer"></span><br>
-				5) <span id="resolt-secondQuarter"></span><br>
-				6) <span id="resolt-evenMonth"></span><br>
-				7) <span id="resolt-firstMonth"></span><br>
+			</h3>
+			<div> Массив без скидки: <span id="fullArray"></span></div>
+
+			<div class="resolt">Ответ = <span id="resolt"></span>
 			</div>
 
 		</div>
 		<script>
+			function getRandomNumbersArray() {
+				const quantityNumbers = parseInt(prompt('Введите количество элементов'))
+				const minNumber = 500
+				const maxNumber = 2000
+				let randomNumbersArray = []
 
-			function getArrayStudentPoints() {
-				const arrayQuantityMoneyMonth =[]
-				for (let i = 0; i < 12; i++) {
-					const quantityMoneyMonth = parseFloat(prompt(`Введите сумму за ${i+1} месяц`,'20'))
-					arrayQuantityMoneyMonth.push(quantityMoneyMonth)
+				for (let i = 0; i < quantityNumbers ; i++) {
+					const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
+					randomNumbersArray.push(randomNumber)			
 				}
-				return arrayQuantityMoneyMonth
+				document.getElementById('fullArray').innerHTML = randomNumbersArray;
+				return randomNumbersArray
 			}
+			
+			const randomNumbersArray = getRandomNumbersArray()
 
-			const studentPoints = getArrayStudentPoints() 
+			randomNumbersArray.forEach((element,index,arrRef) => {
+				const sale = arrRef[index] * 0.3
+				if (element > 1000) arrRef[index] -= sale
+				document.getElementById('resolt').innerHTML = randomNumbersArray;
+			});
 
-			function getSumMoney(studentPoints, minMonth, maxMonth) {
-				let sumMoney = 0
-				for (let i = minMonth; i <= maxMonth; i++) {
-					sumMoney+=studentPoints[i-1]
-				}
-				return sumMoney
-			}
-
-			document.getElementById('resolt-sumYear').innerHTML = getSumMoney(studentPoints,1,12);
-			document.getElementById('resolt-firstHalf').innerHTML = getSumMoney(studentPoints,1,6);
-			document.getElementById('resolt-secondHalf').innerHTML = getSumMoney(studentPoints,7,12);
-			document.getElementById('resolt-summer').innerHTML = getSumMoney(studentPoints,6,8);
-			document.getElementById('resolt-secondQuarter').innerHTML = getSumMoney(studentPoints,4,6);
-
-			function getSumMoneyEvenMonth(studentPoints, minMonth, maxMonth) {
-				let sumMoney = 0
-
-				for (let i = minMonth; i <= maxMonth; i++) {
-					if (i % 2 === 0){
-					sumMoney+=studentPoints[i-1]
-					}
-				}
-
-				return sumMoney
-				
-			}
-		
-			document.getElementById('resolt-evenMonth').innerHTML = getSumMoneyEvenMonth(studentPoints,1,12);
-
-			function getFirstMonth(studentPoints, minMonth, maxMonth) {
-				let sumMoney = 0
-
-				for (let i = minMonth; i <= maxMonth; i++) {
-					switch (i) {
-						case 12:
-						case 3:
-						case 6:
-						case 9:sumMoney+=studentPoints[i-1]
-							break;
-					}
-				}
-
-				return sumMoney
-				
-			}
-
-			document.getElementById('resolt-firstMonth').innerHTML = getFirstMonth(studentPoints,1,12);
-
-			</script>
+		</script>
 	</body>
 	<style>
 		@charset "UTF-8";
