@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-0</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 0</h1>
+			<h3>Знайти суми елементів у вказаній області :<br> <br>
+				1)<img src="../img/01.png" alt="image">
+				2)<img src="../img/02.png" alt="image"><br><br>
+				3)<img src="../img/03.png" alt="image">
+				4)<img src="../img/04.png" alt="image"><br><br>
+				5)Суму парних рядків <br><br>
+				6)Суму непарних стовпців<br><br>
+				7)У парних рядках – непарні стовпці, у непарних – парні.<br></h3>
+
+			<!-- <div> Полный массив: <span id="fullArray"></span>
+			</div> -->
+
+			<div class="resolt">Ответ = <br>
+				<span id="resolt-1"></span><br>
+				<span id="resolt-2"></span><br>
+				<span id="resolt-3"></span><br>
+				<span id="resolt-4"></span><br>
+				<span id="resolt-5"></span><br>
+				<span id="resolt-6"></span><br>
+				<span id="resolt-7"></span>
+			</div>
+		</div>
+		<script>
+
+			// function getRandomNumbersArray() {
+				
+			// 	const quantityNumbersSecondLavel = parseInt(prompt('Введите количество элементов массива 2го уровня'))
+			// 	const minNumber = 1
+			// 	const maxNumber = 100
+				
+			// 	let randomNumbersSecondLavelArray = []
+
+			// 	for (let e = 1; e <= quantityNumbersSecondLavel; e++) {
+			// 		const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
+			// 		randomNumbersSecondLavelArray.push(randomNumber)	
+
+			// 	}
+
+			// 	return randomNumbersSecondLavelArray
+			// }
+
+			// function getTwoLavelArray() {
+			// 	const quantityNumbersFirstLavel = parseInt(prompt('Введите количество элементов массива 1го уровня'))
+			// 	let randomNumbersArray = []
+
+			// 	for (let i = 0; i < quantityNumbersFirstLavel ; i++) {
+			// 		randomNumbersArray.push(getRandomNumbersArray())		
+			// 	}
+			// 	console.log(randomNumbersArray);
+			// 	return randomNumbersArray
+			// }
+
+			// const twoLavelArray = getTwoLavelArray()
+			const twoLavelArray = [[15,5,15,65],[55,12,35,95],[15,5,15,65],[55,12,35,95]]
+
+		//========================= 5 задача
+		 let sum = 0
+		 
+		 for (const row of twoLavelArray) {
+			for (const column of row) {
+				
+				sum+=column
+			}
+		 }
+	
+		document.getElementById('resolt-1').innerHTML = sum;
+		</script>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		li{
+			width: 100px;
+			margin: 0 auto;
+			color: #c0858f;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>
