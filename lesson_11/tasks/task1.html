@@ -12,41 +12,98 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 1</h1>
-			<h3>Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000):<br>
-				Сформувати новий масив, у якому є номери тільки тих, що більші за 1000 грн.</h3>
+			<h3>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :<br>
+				1) загальний прибуток кожного масиву за тиждень;<br>
+				2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);<br>
+				3) загальний прибуток за робочі дні<br>
+				4) загальний прибуток за вихідні дні<br>
+				5) максимальний прибуток за середу<br>
+				6) сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200<br>
+				7) відсортувати кожен тиждень за зростанням<br>
+				8)відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків<br>
+				9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше)</h3>
 
 			<div> Полный массив: <span id="fullArray"></span>
 			</div>
 
-			<div class="resolt">Ответ = <span id="resolt"></span>
+			<div class="resolt">Ответ = <br>
+				1)<span id="resolt-1"></span><br>
+				2)<span id="resolt-2"></span><br>
+				3)<span id="resolt-3"></span><br>
+				4)<span id="resolt-4"></span><br>
+				5)<span id="resolt-5"></span><br>
+				6)<span id="resolt-6"></span><br>
+				7)<span id="resolt-7"></span><br>
+				8)<span id="resolt-8"></span><br>
+				9)<span id="resolt-9"></span>
 			</div>
 		</div>
 		<script>
+			
 
-			function getRandomNumbersArray() {
-				const quantityNumbers = parseInt(prompt('Введите количество элементов'))
+			function getRandomProfitForWeek() {
 				const minNumber = 1
-				const maxNumber = 10000
-				let randomNumbersArray = []
+				const maxNumber = 2
+				let randomProfitForWeek = []
 
-				for (let i = 0; i < quantityNumbers ; i++) {
+				for (let e = 0; e < 7 ; e++) {
 					const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
-					randomNumbersArray.push(randomNumber)			
+					randomProfitForWeek.push(randomNumber)	
 				}
-				document.getElementById('fullArray').innerHTML = randomNumbersArray;
-				return randomNumbersArray
+
+				return randomProfitForWeek
 			}
 
-			const randomNumbersArray = getRandomNumbersArray()
+			function getQuantityAndProfitMarkets() {
+				const quantityMarkets = parseInt(prompt('Введите количество магазинов'))
+				let quantityAndProfitMarkets = []
 
-			let indexNumbersMore100 = []
+				for (let i = 0; i < quantityMarkets ; i++) {
+					quantityAndProfitMarkets.push(getRandomProfitForWeek())		
+				}
+				console.log(quantityAndProfitMarkets);
+				return quantityAndProfitMarkets
+			}
 
-			randomNumbersArray.map((element, index) =>{
-				if (element > 1000) indexNumbersMore100.push(index)
-		})
+			const quantityAndProfitMarkets = getQuantityAndProfitMarkets()
 
-			document.getElementById('resolt').innerHTML = indexNumbersMore100;
+			//============================ 1 задача
 
+			let sumMarketsForWeek = []
+
+			for (const rowMarket of quantityAndProfitMarkets) {
+				let sumMarketForWeek = 0
+				for (const columnMarket of rowMarket) {
+					sumMarketForWeek+=columnMarket
+				}
+				sumMarketsForWeek.push(sumMarketForWeek)
+			}
+
+			document.getElementById('resolt-1').innerHTML = sumMarketsForWeek;
+
+			//============================ 2 задача
+
+			let sumAllMarketsForDay = []
+
+			function getSumForDay() {
+				for (let i = 1; i <= 7; i++) {
+					let sumMarketsForDay = 0
+
+					for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+						for (let column = 0; column < 1; column++) {
+							sumMarketsForDay+= quantityAndProfitMarkets[row][column]
+						}			
+					}
+					sumAllMarketsForDay.push(sumMarketsForDay)
+				}
+				return sumAllMarketsForDay
+			}
+
+			// for (let i = 1; i <= 7; i++) {
+			// 	sumAllMarketsForDay.push()
+			// }
+
+			document.getElementById('resolt-2').innerHTML = getSumForDay();
 		</script>
 	</body>
 	<style>

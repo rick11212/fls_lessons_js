@@ -24,60 +24,105 @@
 			<!-- <div> Полный массив: <span id="fullArray"></span>
 			</div> -->
 
-			<div class="resolt">Ответ = <br>
-				<span id="resolt-1"></span><br>
-				<span id="resolt-2"></span><br>
-				<span id="resolt-3"></span><br>
-				<span id="resolt-4"></span><br>
-				<span id="resolt-5"></span><br>
-				<span id="resolt-6"></span><br>
-				<span id="resolt-7"></span>
+			<div class="resolt">
+				Ответ = <br>
+				1)<span id="resolt-1"></span><br>
+				2)<span id="resolt-2"></span><br>
+				3)<span id="resolt-3"></span><br>
+				4)<span id="resolt-4"></span><br>
+				5)<span id="resolt-5"></span><br>
+				6)<span id="resolt-6"></span><br>
+				7)<span id="resolt-7"></span>
 			</div>
 		</div>
 		<script>
 
-			// function getRandomNumbersArray() {
-				
-			// 	const quantityNumbersSecondLavel = parseInt(prompt('Введите количество элементов массива 2го уровня'))
-			// 	const minNumber = 1
-			// 	const maxNumber = 100
-				
-			// 	let randomNumbersSecondLavelArray = []
+			const twoLavelArray = [[15,5,15,65],[55,12,35,95],[48,52,3,65],[32,19,37,9]]
+			console.log(twoLavelArray);
 
-			// 	for (let e = 1; e <= quantityNumbersSecondLavel; e++) {
-			// 		const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
-			// 		randomNumbersSecondLavelArray.push(randomNumber)	
+		// ======================= 1 задача
 
-			// 	}
+		let sumElementsFromPiece1 = 0 
 
-			// 	return randomNumbersSecondLavelArray
-			// }
+		for (let piece1Row = 0; piece1Row < 2; piece1Row++) {
+			for (let piece1Column = 0; piece1Column < 2; piece1Column++) {
+				sumElementsFromPiece1+= twoLavelArray[piece1Row][piece1Column]
+			}
+		}
 
-			// function getTwoLavelArray() {
-			// 	const quantityNumbersFirstLavel = parseInt(prompt('Введите количество элементов массива 1го уровня'))
-			// 	let randomNumbersArray = []
+		document.getElementById('resolt-1').innerHTML = sumElementsFromPiece1;
 
-			// 	for (let i = 0; i < quantityNumbersFirstLavel ; i++) {
-			// 		randomNumbersArray.push(getRandomNumbersArray())		
-			// 	}
-			// 	console.log(randomNumbersArray);
-			// 	return randomNumbersArray
-			// }
+		// ======================= 2 задача
 
-			// const twoLavelArray = getTwoLavelArray()
-			const twoLavelArray = [[15,5,15,65],[55,12,35,95],[15,5,15,65],[55,12,35,95]]
+		let sumElementsFromPiece2 = 0 
 
+		for (let piece2Row = 0; piece2Row < 2; piece2Row++) {
+			for (let piece2Column = 2; piece2Column < 4; piece2Column++) {
+				sumElementsFromPiece2+= twoLavelArray[piece2Row][piece2Column]
+			}
+		}
+
+		document.getElementById('resolt-2').innerHTML = sumElementsFromPiece2;
+
+		// ======================= 3 задача
+
+		let sumElementsFromPiece3 = 0 
+
+		for (let piece3Row = 2; piece3Row < 4; piece3Row++) {
+			for (let piece3Column = 0; piece3Column < 2; piece3Column++) {
+				sumElementsFromPiece3+= twoLavelArray[piece3Row][piece3Column]
+			}
+		}
+
+		document.getElementById('resolt-3').innerHTML = sumElementsFromPiece3;
+
+		// ======================= 4 задача
+
+		let sumElementsFromPiece4 = 0 
+
+		for (let piece4Row = 2; piece4Row < 4; piece4Row++) {
+			for (let piece4Column = 2; piece4Column < 4; piece4Column++) {
+				sumElementsFromPiece4+= twoLavelArray[piece4Row][piece4Column]
+			}
+		}
+
+		document.getElementById('resolt-4').innerHTML = sumElementsFromPiece4;
 		//========================= 5 задача
-		 let sum = 0
-		 
-		 for (const row of twoLavelArray) {
-			for (const column of row) {
-				
-				sum+=column
+
+		 let sumElementsEvenRows = 0
+
+		 for (let row = 0; row < twoLavelArray.length; row+=2) {
+			for (let column = 0; column < twoLavelArray[row].length; column++) {
+				sumElementsEvenRows+= twoLavelArray[row][column]
 			}
 		 }
-	
-		document.getElementById('resolt-1').innerHTML = sum;
+		 document.getElementById('resolt-5').innerHTML = sumElementsEvenRows;
+
+		 //============================= 6 задача
+
+		 let sumElementsOddColumns = 0
+		 
+		 for (let row = 0; row < twoLavelArray.length; row++) {
+			for (let column = 1; column < twoLavelArray[row].length; column+=2) {
+				sumElementsOddColumns+= twoLavelArray[row][column]
+			}
+		 }
+		 document.getElementById('resolt-6').innerHTML = sumElementsOddColumns;
+
+		// ============================= 7 задача
+
+		let sumEvenRowsOddColumns = 0
+		let sumOddRowsEvenColumns = 0
+		 
+		 for (let rowEven = 0, rowOdd = 1; rowEven < twoLavelArray.length; rowEven += 2, rowOdd += 2) {
+			for (let columnEven = 0, columnOdd = 1; columnEven < twoLavelArray.length; columnEven += 2, columnOdd += 2) {
+				sumEvenRowsOddColumns += twoLavelArray[rowEven][columnOdd]
+				sumOddRowsEvenColumns += twoLavelArray[rowOdd][columnEven]
+			}
+		 }
+		const totalSum = sumEvenRowsOddColumns + sumOddRowsEvenColumns
+
+		document.getElementById('resolt-7').innerHTML = `${sumEvenRowsOddColumns}, ${sumOddRowsEvenColumns}, общая сумма: ${totalSum}`;
 		</script>
 	</body>
 	<style>
