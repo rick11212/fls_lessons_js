@@ -23,7 +23,7 @@
 				8)відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків<br>
 				9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше)</h3>
 
-			<div> Полный массив: <span id="fullArray"></span>
+			<div> Полный массив в консоли!!!
 			</div>
 
 			<div class="resolt">Ответ = <br>
@@ -43,7 +43,7 @@
 
 			function getRandomProfitForWeek() {
 				const minNumber = 1
-				const maxNumber = 2
+				const maxNumber = 300
 				let randomProfitForWeek = []
 
 				for (let e = 0; e < 7 ; e++) {
@@ -85,25 +85,82 @@
 
 			let sumAllMarketsForDay = []
 
-			function getSumForDay() {
-				for (let i = 1; i <= 7; i++) {
-					let sumMarketsForDay = 0
+			function getSumForDay(dayMin, dayMax) {
 
-					for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
-						for (let column = 0; column < 1; column++) {
-							sumMarketsForDay+= quantityAndProfitMarkets[row][column]
-						}			
-					}
-					sumAllMarketsForDay.push(sumMarketsForDay)
+				let sumMarketsForDay = 0
+
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						sumMarketsForDay+= quantityAndProfitMarkets[row][column]		
+					}		
 				}
+
+				sumAllMarketsForDay.push(sumMarketsForDay)
+				
 				return sumAllMarketsForDay
 			}
 
-			// for (let i = 1; i <= 7; i++) {
-			// 	sumAllMarketsForDay.push()
-			// }
+			for (let i = 0; i < 7; i++) {
+				getSumForDay(i,i+1)
+			}
 
-			document.getElementById('resolt-2').innerHTML = getSumForDay();
+			document.getElementById('resolt-2').innerHTML = sumAllMarketsForDay;
+
+			//======================== 3 задача
+
+			function getSumForWorkDay(dayMin, dayMax) {
+				let totalSumForWorkDays = 0
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						totalSumForWorkDays+= quantityAndProfitMarkets[row][column]		
+					}		
+				}
+				return totalSumForWorkDays
+			}
+
+			document.getElementById('resolt-3').innerHTML = getSumForWorkDay(0,5);
+
+			//======================== 4 задача
+
+			function getSumForFreeDay(dayMin, dayMax) {
+				let totalSumForFreeDays = 0
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						totalSumForFreeDays+= quantityAndProfitMarkets[row][column]		
+					}		
+				}
+				return totalSumForFreeDays
+			}
+
+			document.getElementById('resolt-4').innerHTML = getSumForFreeDay(5,7);
+
+			//======================== 5 задача
+
+			const profitForWednesday = quantityAndProfitMarkets.map(element=> element[2])
+			const maxProfitForWednesday = Math.max(...profitForWednesday)
+
+			document.getElementById('resolt-5').innerHTML = maxProfitForWednesday;
+
+			//======================== 6 задача
+
+			let profitListMore200 = []
+
+			for (const row of quantityAndProfitMarkets) {
+				for (const column of row) {
+					if (column > 200) profitListMore200.push(column)
+				}
+			}
+
+			document.getElementById('resolt-6').innerHTML = profitListMore200;
+
+			//======================== 6 задача
+
+			for (const row of quantityAndProfitMarkets) {
+		
+					quantityAndProfitMarkets[row].sort((el1,el2) => el1 - el2) 
+			}
+
+			document.getElementById('resolt-7').innerHTML = profitListMore200;
 		</script>
 	</body>
 	<style>
