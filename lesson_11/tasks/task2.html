@@ -14,11 +14,11 @@
 			<h1>Задача 2</h1>
 			<h3>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</h3>
 
-			<div> Полный массив: <span id="fullArray"></span>
+			<!-- <div> Полный массив: <span id="fullArray"></span>
 			</div>
 
 			<div class="resolt">Ответ = <span id="resolt"></span>
-			</div>
+			</div> -->
 		</div>
 		<script>
 
@@ -29,7 +29,8 @@
 		// [0,0,0,0,0,0]
 		// [0,0,0,0,0,0]
 
-
+			// Делаем поле для игры
+			
 			function getRandomNumber(minNum, maxNum) {
 				return minNum + Math.floor(Math.random() * (maxNum - minNum +1))
 			}
@@ -41,17 +42,51 @@
 				for (let i = 0; i < 6; i++) {
 					emptyArena.push(emptyColumn)
 				}
-
 				return emptyArena
 			}
 
 			function getBattleArenaWithShips(arr,minNum, maxNum) {
+				let battleArenaWithShips = JSON.parse(JSON.stringify(arr))
 				for (let i = 0; i < 5; i++) {
-					arr[getRandomNumber(minNum, maxNum)][getRandomNumber(minNum, maxNum)] = 1
+					let shipIndexRow
+					let shipIndexColumn
+					do {
+						shipIndexRow = getRandomNumber(minNum, maxNum)
+						shipIndexColumn = getRandomNumber(minNum, maxNum)
+						
+					} while (battleArenaWithShips[shipIndexRow][shipIndexColumn] === 1);
+					
+					battleArenaWithShips[shipIndexRow][shipIndexColumn] = 1
 				}
+				return battleArenaWithShips
 			}
 
-			console.log(getBattleArenaWithShips(getEmptyArena(),0,5));
+			const battleArenaWithShips = getBattleArenaWithShips(getEmptyArena(),0,5)
+			console.log(battleArenaWithShips);
+
+			// ================================= Игра
+
+		
+			const quantityShots = parseInt(prompt('Укажите количество выстрелов'))
+			
+			function game(battleArenaWithShips ,quantityShots) {
+
+				for (let shot = 0, ships = 5; shot < quantityShots && ships > 0; shot++) {
+					const userShotX = parseInt(prompt(`Выстрел #${shot+1} по координате X. Размер поля 6х6`,'1'))
+					const userShotY = parseInt(prompt(`Выстрел #${shot+1} по координате Y. Размер поля 6х6`,'1'))
+
+					if (battleArenaWithShips[userShotX-1][userShotY-1] === 1) {
+						alert('Убил!')
+						battleArenaWithShips[userShotX-1][userShotY-1] = 0
+						ships--
+					}
+					else alert('Мимо! Стреляйте еще.')
+				}
+				
+			}
+
+			game(battleArenaWithShips,quantityShots)
+
 		</script>
 	</body>
 	<style>
