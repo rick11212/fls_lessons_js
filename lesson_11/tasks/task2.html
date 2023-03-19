@@ -12,8 +12,7 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 2</h1>
-			<h3>Дано історію цін на цінні папери за деякий період (згенерувати від 1 до 10000):<br>
-				Сформувати список з тих цін, які більші за попереднє значення</h3>
+			<h3>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</h3>
 
 			<div> Полный массив: <span id="fullArray"></span>
 			</div>
@@ -23,30 +22,36 @@
 		</div>
 		<script>
 
-			function getRandomNumbersArray() {
-				const quantityNumbers = parseInt(prompt('Введите количество элементов'))
-				const minNumber = 1
-				const maxNumber = 10000
-				let randomNumbersArray = []
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
 
-				for (let i = 0; i < quantityNumbers ; i++) {
-					const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
-					randomNumbersArray.push(randomNumber)			
-				}
-				document.getElementById('fullArray').innerHTML = randomNumbersArray;
-				return randomNumbersArray
+
+			function getRandomNumber(minNum, maxNum) {
+				return minNum + Math.floor(Math.random() * (maxNum - minNum +1))
 			}
 
-			const randomNumbersArray = getRandomNumbersArray()
+			function getEmptyArena() {
+				let emptyArena = []
+				let emptyColumn = new Array(6).fill(0)
 
-			let morePrevValue = []
+				for (let i = 0; i < 6; i++) {
+					emptyArena.push(emptyColumn)
+				}
 
-			randomNumbersArray.map(( element, index, arrRef) => {
-				if (element < arrRef[index+1] ) morePrevValue.push(arrRef[index+1])
-			})
+				return emptyArena
+			}
 
-			document.getElementById('resolt').innerHTML = morePrevValue;
+			function getBattleArenaWithShips(arr,minNum, maxNum) {
+				for (let i = 0; i < 5; i++) {
+					arr[getRandomNumber(minNum, maxNum)][getRandomNumber(minNum, maxNum)] = 1
+				}
+			}
 
+			console.log(getBattleArenaWithShips(getEmptyArena(),0,5));
 		</script>
 	</body>
 	<style>
