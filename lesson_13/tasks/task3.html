@@ -26,19 +26,24 @@
 				 let letter = 0;
 
 				function increment() {
-					if (letter > word.lenght){
-						let symbol = word[letter]
-						letter++
-						return symbol
+					if (letter < word.lenght){
+						return word[letter++]
 					}
 				}
 
 				return increment
 			}
 
-			const contr1 = counterLetters('pbyf')
-		document.getElementById('resolt').innerHTML = contr1();
+		const hidenWord = 'Andrew'
+		const cntrLetters = counterLetters(hidenWord)
+		let rightLetter = 0
 
+		for (let i = 1; i <= hidenWord.length; i++) {
+			const userAttempt = prompt(`Загадано имя на английском языке. Введите ${i} букву.`).toLowerCase
+			if(userAttempt === cntrLetters()) rightLetter++
+		}
+
+		document.getElementById('resolt').innerHTML =`Загадано слово ${hidenWord}. <br> Угадано букв ${rightLetter}`;
 
 
 		</script>
