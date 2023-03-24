@@ -12,52 +12,31 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 2</h1>
-			<h3>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями.</h3>
-
-			<div> Полный массив: <span id="fullArray"></span>
-			</div>
+			<h3> З використанням замикань розробити ітератор, тобто функцію, що буде поступово за окремими викликами видавати по одне значення від заданого мінімального до заданого максимального. Якщо значення досягне максимального, то наступним буде мінімальне значення. З використанням цієї функції реалізувати перебір номерів місяців.
+			</h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span>
 			</div>
 		</div>
 		<script>
-				//  ============================= генерация массива из случайных чисел =====================
+			function counterOfMounth(minMounth,maxMounth) {
+				 let mounth = minMounth;
 
-			function getRandomNumber(minNum, maxNum) {
-				return rundomNumber = minNum + Math.floor(Math.random() * (maxNum - minNum +1))
-			}
-
-			function getRandomNumbersArray(quantityNumbers,minNum,maxNum) {
-				let randomNumberArray = []
-				for (let i = 0; i < quantityNumbers; i++) {
-					randomNumberArray.push(getRandomNumber(minNum, maxNum))
+				function increment() {
+					if (mounth > maxMounth) mounth = minMounth
+					return mounth++
 				}
-				document.getElementById('fullArray').innerHTML = randomNumberArray
-				return randomNumberArray
+
+				return increment
 			}
 
-			// ========================================== алгоритм сортировки вставками ====================
+			const contr1 = counterOfMounth(1,12)
 
-			function getSelectionSortArray(arr) {
-				let exchangeElements = 0
-
-				let key, i
-
-				for (let j = 1; j < arr.length; j++) {
-					key = arr[j]
-					i = j - 1
-					while (i >= 0 && arr[i] > key) {
-						arr[i+1] = arr[i]
-						i--
-						exchangeElements++
-					}
-					arr[i+1] = key
-					
-				}
-				return exchangeElements //количество обменов
+		//document.getElementById('resolt').innerHTML = contr1();
+			for (let i = 0; i < 15; i++) {
+				document.write(`<div class = 'resolt'> ${contr1()}<br> </div>`);
 			}
 
-		document.getElementById('resolt').innerHTML = getSelectionSortArray(getRandomNumbersArray(30,1,20));
 		</script>
 	</body>
 	<style>
@@ -123,6 +102,8 @@
 		}
 		.resolt{
 			color: #c0858f;
+			margin: 0 auto;
+			width: 300px;
 		}
 		@media (max-width: 767px) {
 			.rootpage{

@@ -12,51 +12,29 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 4</h1>
-			<h3>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.</h3>
-
-			<div> Отсортированный массив: <span id="fullArray"></span>
-			</div>
+			<h3>Тренажер додавання. Кожні 10 секунд користувачу задають випадковий приклад з додавання двох цифр і робиться перевірка.</h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span>
 			</div>
 		</div>
 		<script>
-			const arrayNames = ['Louis', 'Franklin' ,'George', 'Olga','Charles','Steven','Raymond','Angela','Beverly','Vickie','Mary']
-
-			function getBubbleSort(arr) {
-				const lastIndexElement = arr.length - 1
-
-				for (let i = 0; i < lastIndexElement; i++) {
-					for (let j = 0; j < lastIndexElement - i; j++) {
-						if (arr[j+1]<arr[j]) {
-							const temp = arr[j+1]
-							arr[j+1] = arr[j]
-							arr[j] = temp
-						}
-					}
-				}
-				document.getElementById('fullArray').innerHTML = arr
-				return arr
+			function randomNumber(minNum, maxNum) {
+				return minNum + Math.floor(Math.random() * (maxNum - minNum +1))
 			}
 
-			const bubbleSort = getBubbleSort(arrayNames)
+			let randomExample = setInterval(() => {
+				let firstRundomNumber = randomNumber(1,10)
+				let secondRundomNumber = randomNumber(1,10)
+				let sumRandomNumbers = firstRundomNumber + secondRundomNumber
 
+			  	let userAnswer	= parseInt(prompt(`${firstRundomNumber} + ${secondRundomNumber}`))
 
-			function binarySearch(arr,searchElement) {
-				let start = 0
-				let end = arr.length - 1
+				if (sumRandomNumbers  === userAnswer) alert('Правильно!')
+				else alert('Не правильно!')
+				
+			},10000)
 
-				while (start<=end) {
-					const middleElement = Math.floor((start + end)/2)
-
-					if (arr[middleElement] === searchElement) return middleElement
-					else if (arr[middleElement] < searchElement) start = middleElement + 1
-					else  end = middleElement-1
-				}
-				return -1
-			}
-
-			document.getElementById('resolt').innerHTML = `Имя "Olga" находится под ${binarySearch(bubbleSort,'Olga')} индексом`
+			//document.getElementById('resolt').innerHTML = 
 
 
 		</script>

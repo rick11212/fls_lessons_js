@@ -12,64 +12,49 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 1</h1>
-			<h3> Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням.</h3>
+			<h3> Нехай x_0 = x_1 = 1, x_i = x_i_1+2*x_i_2, де i=2,3,.... . Визначити x_n . Розв’язати з використанням рекурсивних і нерекурсивних алгоритмів</h3>
 
-			<div> Полный массив: <span id="fullArray"></span>
-			</div>
+			<!-- <div> Полный массив: <span id="fullArray"></span>
+			</div> -->
 
 			<div class="resolt">
-				Ответ = <span id="resolt"></span><br>
+				Ответ = <br>
+				<span id="resolt"></span><br>
+				<span id="resolt-rek"></span><br>
 			</div>
 		</div>
 		<script>
-			//  ============================= генерация массива из случайных чисел =====================
+			// x(i) = x(i-1) + 2*x(i-2)
+			// x0 = x1 = 1
+			// x5 = x4 + 2*x3
 
-			function getRandomNumber(minNum, maxNum) {
-				return rundomNumber = minNum + Math.floor(Math.random() * (maxNum - minNum +1))
+			const x_n = parseInt(prompt("Введите число N (желательно до 40, потом долго думает)",'1'))
+			// ================вариант без рекурсии
+
+		function getX_n(x_n) {
+			let x_i_n 
+			let x_i_1 = 1
+			let x_i_2 = 1
+			
+			for (let j = 2; j <= x_n; j++) {
+				x_i_n = x_i_1 + 2 * x_i_2
+				x_i_2 = x_i_1
+				x_i_1 = x_i_n
 			}
 
-			function getRandomNumbersArray(quantityNumbers,minNum,maxNum) {
-				let randomNumberArray = []
-				for (let i = 0; i < quantityNumbers; i++) {
-					randomNumberArray.push(getRandomNumber(minNum, maxNum))
-				}
-				document.getElementById('fullArray').innerHTML = randomNumberArray
-				return randomNumberArray
-			}
+			return x_i_n
+		}
+	
+		// ================вариант c рекурсией
 
-			// ========================================== алгоритм перемешиваемой сортировки ====================
+		function getRekX_n(x) {
+			if (x<2) return 1
+			else 
+			return getRekX_n(x-1) + 2*getRekX_n(x-2)
+		}
 
-			function getCocktailSortArray(arr) {
-				let exchangeElements = 0
-				let firstIndexElement = 0
-				let lastIndexElement = arr.length - 1
-				
-				while (firstIndexElement < lastIndexElement) {
-					for (let i = firstIndexElement; i < lastIndexElement; i++) {
-						if (arr[i+1] < arr[i]) {
-							const temp = arr[i+1]
-							arr[i+1] = arr[i]
-							arr[i] = temp
-							exchangeElements++
-						}
-					}
-					lastIndexElement--
-
-					for (let i = lastIndexElement; i < firstIndexElement; i--) {
-						if (arr[i] < arr[i-1]) {
-							const temp = arr[i+1]
-							arr[j+1] = arr[i]
-							arr[i] = temp
-							exchangeElements++
-						}
-					}
-					firstIndexElement++
-					
-				}
-				return exchangeElements //количество обменов
-			}
-
-		document.getElementById('resolt').innerHTML = getCocktailSortArray(getRandomNumbersArray(30,1,20));
+		document.getElementById('resolt').innerHTML = getX_n(x_n);
+		document.getElementById('resolt-rek').innerHTML = getRekX_n(x_n);
 		</script>
 	</body>
 	<style>

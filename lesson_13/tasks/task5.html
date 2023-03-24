@@ -12,55 +12,17 @@
 	<body>
 		<div class="rootpage">
 			<h1>Задача 5</h1>
-			<h3> Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.</h3>
-
-			<div> Отсортированный массив: <span id="fullArray"></span>
-			</div>
+			<h3> Через 20 секунд перейти на сайт ukr.net. Для цього через 20 секунд після відкриття треба виконати команду</h3>
 
 			<div class="resolt">Ответ = <span id="resolt"></span>
 			</div>
 		</div>
 		<script>
-			const arrayNames = ['Louis', 'Franklin' ,'George', 'Olga','Charles','Steven','Raymond','Angela','Beverly','Vickie','Mary']
-
-			function getSelectionSortArray(arr) {
-				const lastIndexElement = arr.length - 1
-
-				let key, i
-
-				for (let j = 1; j < arr.length; j++) {
-					key = arr[j]
-					i = j - 1
-					while (i >= 0 && arr[i] > key) {
-						arr[i+1] = arr[i]
-						i--
-					}
-					arr[i+1] = key
-					
-				}
-				document.getElementById('fullArray').innerHTML = arr
-				return arr
-			}
-
-			const bubbleSort = getSelectionSortArray(arrayNames)
-
-
-			function getBinarySortElementMore5(arr,searchElement) {
-				let start = 0
-				let end = arr.length -1
-
-				while (start <= end) {
-					const middleElement = Math.floor((start + end) / 2)
-
-					if (arr[middleElement].length === searchElement) return middleElement
-					else if ( arr[middleElement].length < searchElement) start = middleElement + 1
-					else end = middleElement - 1
-				}
-
-				return -1
-			}
-
-			document.getElementById('resolt').innerHTML = `Имя, длинна которого больше 5 символов находится под ${getBinarySortElementMore5(bubbleSort,5)} индексом`
+			
+			let goToSite = setTimeout(() => {
+				window.location.href = 'https://www.ukr.net/'
+			}, 20000);
+			//document.getElementById('resolt').innerHTML = 
 
 
 		</script>
