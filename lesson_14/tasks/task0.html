@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-0</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 0</h1>
+			<h3>Описати масив об’єктів – сайтів розроблених компанією з такими властивостями<br>
+				1) загальну вартість усіх сайтів<br>
+				2) кількість сайтів, що було зроблено між 2000 та 2009 рр.<br>
+				3) кількість сайтів, де сума спонсорських вкладень була більшою за 100000<br>
+				4) створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)<br>
+				5) знайти рік, коли прибуток був найбільшим<br>
+				6) упорядкувати список за спаданням прибутку<br>
+				7) Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000</h3>
+
+			<!-- <div> Полный массив: <span id="fullArray"></span>
+			</div> -->
+
+			<div class="resolt">
+				Ответ = <br>
+				1) <span id="resolt-1"></span><br>
+				2) <span id="resolt-2"></span><br>
+				3) <span id="resolt-3"></span><br>
+				4) <span id="resolt-4"></span><br>
+				5) <span id="resolt-5"></span><br>
+				6) <span id="resolt-6"></span><br>
+				7) <span id="resolt-7"></span>
+			</div>
+		</div>
+		<script>
+
+			let sitesList = [
+				{
+					companyName: 'webDev',
+					companyOwner: 'Nancy Davis',
+					sponsors: [
+						{
+							secondName: 'Smith',
+							firstName: 'Jhon',
+							sum: 10000
+						},
+						{
+							secondName: 'Brooks',
+							firstName: 'Lori',
+							sum: 15000
+						},
+						{
+							secondName: 'Dennis',
+							firstName: 'Ronald',
+							sum: 20000
+						},
+						{
+							secondName: 'Chandler',
+							firstName: 'Thomas',
+							sum: 45000
+						}
+					],
+					releaseYear: 2009,
+					price: 180000
+				},
+				{
+					companyName: 'Wide-Web',
+					companyOwner: 'Andrea Gonzales',
+					sponsors: [
+						{
+							secondName: 'McGee',
+							firstName: 'Roger',
+							sum: 10800
+						},
+						{
+							secondName: 'Johnson',
+							firstName: 'Samuel',
+							sum: 80000
+						},
+						{
+							secondName: 'Wells',
+							firstName: 'Max',
+							sum: 20000
+						},
+						{
+							secondName: 'Brown',
+							firstName: 'Linda',
+							sum: 30000
+						}
+					],
+					releaseYear: 2015,
+					price: 320000
+				},
+				{
+					companyName: 'Your Site',
+					companyOwner: 'Carmen Curtis',
+					sponsors: [
+						{
+							secondName: 'Bennett',
+							firstName: 'Leona',
+							sum: 16000
+						},
+						{
+							secondName: 'Ford',
+							firstName: 'Robert',
+							sum: 150000
+						},
+						{
+							secondName: 'Hart',
+							firstName: 'Michelle',
+							sum: 23000
+						},
+						{
+							secondName: 'Abbott',
+							firstName: 'Stephen',
+							sum: 55000
+						}
+					],
+					releaseYear: 2020,
+					price: 200000
+				},
+				{
+					companyName: 'best Site',
+					companyOwner: 'Jon Gordon',
+					sponsors: [
+						{
+							secondName: 'Cook',
+							firstName: 'Keith',
+							sum: 25000
+						},
+						{
+							secondName: 'White',
+							firstName: 'Diana',
+							sum: 126000
+						},
+						{
+							secondName: 'Tyler',
+							firstName: 'Dorothy',
+							sum: 39000
+						},
+						{
+							secondName: 'Watkins',
+							firstName: 'Lucy',
+							sum: 57000
+						}
+					],
+					releaseYear: 2022,
+					price: 264000
+				},
+			]
+
+		// ======================= 1 задача: загальну вартість усіх сайтів
+
+			const costAllSites = sitesList.reduce( (prevSum,site) => prevSum + site.price ,0)
+
+			document.getElementById('resolt-1').innerHTML = costAllSites
+
+		// // ======================= 2 задача: кількість сайтів, що було зроблено між 2000 та 2009 рр.
+
+			const qountityMadeSites2000_2009 = sitesList.reduce((prevSite, site) => site.releaseYear > 2000 && site.releaseYear <= 2009 ? prevSite+1  : prevSite ,0)
+
+			document.getElementById('resolt-2').innerHTML = qountityMadeSites2000_2009
+
+		// // ======================= 3 задача: кількість сайтів, де сума спонсорських вкладень була більшою за 100000
+
+				const qountitySitesSponsorsSumMore10000 = sitesList.reduce((prevSite, site) => {
+					const sponsorsSum = site.sponsors.reduce((prevSum, sponsor) => prevSum + sponsor.sum,0)
+					return sponsorsSum > 100000 ? prevSite+1 : prevSite
+				} ,0) 
+
+			 document.getElementById('resolt-3').innerHTML = qountitySitesSponsorsSumMore10000
+
+		// // ======================= 4 задача: створити загальний список усіх спонсорів (поки можуть повторюватись, просто зібрати усі у масив)
+
+				const allSitesSponsorsList = []
+				for (const site of sitesList) {
+					for (const sponsor of site.sponsors) {
+						allSitesSponsorsList.push(`<br>${sponsor.secondName} ${sponsor.firstName}: ${sponsor.sum} `)
+					}
+				}
+
+			document.getElementById('resolt-4').innerHTML = allSitesSponsorsList
+
+		// //========================= 5 задача: знайти рік, коли прибуток був найбільшим
+
+			//const maxPriceYear = sitesList.reduce((prevSite, site) => site.price > prevSite.price ? prevSite = site.releaseYear : prevSite)
+				
+				// let prevPrice = sitesList[0].price
+
+				function sdfs() {
+					let maxPriceYear
+					let prevPrice = 0
+
+					for (const site of sitesList) {
+						if (site.price > prevPrice) return maxPriceYear = site.releaseYear
+						else prevPrice = site.price
+					}
+				}
+			
+
+			document.getElementById('resolt-5').innerHTML = sdfs()
+
+		//  //============================= 6 задача: упорядкувати список за спаданням прибутку
+
+		//  document.getElementById('resolt-6').innerHTML = 
+
+		// // ============================= 7 задача: Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+
+		// document.getElementById('resolt-7').innerHTML = 
+
+		</script>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		li{
+			width: 100px;
+			margin: 0 auto;
+			color: #c0858f;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>

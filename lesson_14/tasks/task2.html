@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-2</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 2</h1>
+			<h3>Морський бій. Випадковим чином на двовимірному полі розміром 6*6 розташовується 5 кораблів. Користувач стріляє вказуючи координати. Гра продовжується поки не потоплено усі кораблі або у користувача не закінчаться снаряди.</h3>
+
+			<!-- <div> Полный массив: <span id="fullArray"></span>
+			</div>
+
+			<div class="resolt">Ответ = <span id="resolt"></span>
+			</div> -->
+		</div>
+		<script>
+
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+		// [0,0,0,0,0,0]
+
+			// Делаем поле для игры
+			
+			function getRandomNumber(minNum, maxNum) {
+				return minNum + Math.floor(Math.random() * (maxNum - minNum +1))
+			}
+
+			function getEmptyArena() {
+				let emptyArena = []
+				let emptyColumn = new Array(6).fill(0)
+
+				for (let i = 0; i < 6; i++) {
+					emptyArena.push(emptyColumn)
+				}
+				return emptyArena
+			}
+
+			function getBattleArenaWithShips(arr,minNum, maxNum) {
+				let battleArenaWithShips = JSON.parse(JSON.stringify(arr))
+				for (let i = 0; i < 5; i++) {
+					let shipIndexRow
+					let shipIndexColumn
+					do {
+						shipIndexRow = getRandomNumber(minNum, maxNum)
+						shipIndexColumn = getRandomNumber(minNum, maxNum)
+						
+					} while (battleArenaWithShips[shipIndexRow][shipIndexColumn] === 1);
+					
+					battleArenaWithShips[shipIndexRow][shipIndexColumn] = 1
+				}
+				return battleArenaWithShips
+			}
+
+			const battleArenaWithShips = getBattleArenaWithShips(getEmptyArena(),0,5)
+			console.log(battleArenaWithShips);
+
+			// ================================= Игра
+
+		
+			const quantityShots = parseInt(prompt('Укажите количество выстрелов'))
+			
+			function game(battleArenaWithShips ,quantityShots) {
+
+				for (let shot = 0, ships = 5; shot < quantityShots && ships > 0; shot++) {
+					const userShotX = parseInt(prompt(`Выстрел #${shot+1} по координате X. Размер поля 6х6`,'1'))
+					const userShotY = parseInt(prompt(`Выстрел #${shot+1} по координате Y. Размер поля 6х6`,'1'))
+
+					if (battleArenaWithShips[userShotX-1][userShotY-1] === 1) {
+						alert('Убил!')
+						battleArenaWithShips[userShotX-1][userShotY-1] = 0
+						ships--
+					}
+					else alert('Мимо! Стреляйте еще.')
+				}
+				
+			}
+
+			game(battleArenaWithShips,quantityShots)
+
+		</script>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		li{
+			width: 100px;
+			margin: 0 auto;
+			color: #c0858f;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>

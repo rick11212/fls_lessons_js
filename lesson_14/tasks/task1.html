@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/fonts.css">
+		<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+		<link rel="stylesheet" href="css/style.css">
+		<title>Task-1</title>
+	</head>
+	<body>
+		<div class="rootpage">
+			<h1>Задача 1</h1>
+			<h3>Дано інформацію про прибуток К магазинів протягом тижня. Знайти :<br>
+				1) загальний прибуток кожного масиву за тиждень;<br>
+				2) загальний прибуток усіх магазинів по дням (загальний прибуток усіх магазинів за понеділок, за вівторок, і т.д.);<br>
+				3) загальний прибуток за робочі дні<br>
+				4) загальний прибуток за вихідні дні<br>
+				5) максимальний прибуток за середу<br>
+				6) сформувати загальний список (одновимірний масив) зі значенням, які що більші за 200<br>
+				7) відсортувати кожен тиждень за зростанням<br>
+				8)відсортувати тижні (рядки) за спаданням максимального елементи у цьому тижні (рядку), тобто при порівнянні рядків потрібно порівнювати максимальні елементи у кожному з цих рядків<br>
+				9) упорядкувати тижні (рядки) за спаданням суми елементів у рядку (тобто при порівнянні двох рядків треба знайти суму кожного з рядків і порівнювати ці суми, на основі цих сум буде зрозуміло, який з елементів повинен іти раніше)</h3>
+
+			<div> Полный массив в консоли!!!
+			</div>
+
+			<div class="resolt">Ответ = <br>
+				1)<span id="resolt-1"></span><br>
+				2)<span id="resolt-2"></span><br>
+				3)<span id="resolt-3"></span><br>
+				4)<span id="resolt-4"></span><br>
+				5)<span id="resolt-5"></span><br>
+				6)<span id="resolt-6"></span><br>
+				7)<span id="resolt-7"></span><br>
+				8)<span id="resolt-8"></span><br>
+				9)<span id="resolt-9"></span>
+			</div>
+		</div>
+		<script>
+			
+
+			function getRandomProfitForWeek() {
+				const minNumber = 1
+				const maxNumber = 300
+				let randomProfitForWeek = []
+
+				for (let e = 0; e < 7 ; e++) {
+					const randomNumber = minNumber + Math.floor(Math.random() * (maxNumber - minNumber +1))
+					randomProfitForWeek.push(randomNumber)	
+				}
+
+				return randomProfitForWeek
+			}
+
+			function getQuantityAndProfitMarkets() {
+				const quantityMarkets = parseInt(prompt('Введите количество магазинов'))
+				let quantityAndProfitMarkets = []
+
+				for (let i = 0; i < quantityMarkets ; i++) {
+					quantityAndProfitMarkets.push(getRandomProfitForWeek())		
+				}
+				console.log(quantityAndProfitMarkets);
+				return quantityAndProfitMarkets
+			}
+
+			const quantityAndProfitMarkets = getQuantityAndProfitMarkets()
+
+			//============================ 1 задача
+
+			let sumMarketsForWeek = []
+
+			for (const rowMarket of quantityAndProfitMarkets) {
+				let sumMarketForWeek = 0
+				for (const columnMarket of rowMarket) {
+					sumMarketForWeek+=columnMarket
+				}
+				sumMarketsForWeek.push(sumMarketForWeek)
+			}
+
+			document.getElementById('resolt-1').innerHTML = sumMarketsForWeek;
+
+			//============================ 2 задача
+
+			let sumAllMarketsForDay = []
+
+			function getSumForDay(dayMin, dayMax) {
+
+				let sumMarketsForDay = 0
+
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						sumMarketsForDay+= quantityAndProfitMarkets[row][column]		
+					}		
+				}
+
+				sumAllMarketsForDay.push(sumMarketsForDay)
+				
+				return sumAllMarketsForDay
+			}
+
+			for (let i = 0; i < 7; i++) {
+				getSumForDay(i,i+1)
+			}
+
+			document.getElementById('resolt-2').innerHTML = sumAllMarketsForDay;
+
+			//======================== 3 задача
+
+			function getSumForWorkDay(dayMin, dayMax) {
+				let totalSumForWorkDays = 0
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						totalSumForWorkDays+= quantityAndProfitMarkets[row][column]		
+					}		
+				}
+				return totalSumForWorkDays
+			}
+
+			document.getElementById('resolt-3').innerHTML = getSumForWorkDay(0,5);
+
+			//======================== 4 задача
+
+			function getSumForFreeDay(dayMin, dayMax) {
+				let totalSumForFreeDays = 0
+				for (let row = 0; row < quantityAndProfitMarkets.length; row++) {
+					for (let column = dayMin; column < dayMax; column++) {
+						totalSumForFreeDays+= quantityAndProfitMarkets[row][column]		
+					}		
+				}
+				return totalSumForFreeDays
+			}
+
+			document.getElementById('resolt-4').innerHTML = getSumForFreeDay(5,7);
+
+			//======================== 5 задача
+
+			const profitForWednesday = quantityAndProfitMarkets.map(element=> element[2])
+			const maxProfitForWednesday = Math.max(...profitForWednesday)
+
+			document.getElementById('resolt-5').innerHTML = maxProfitForWednesday;
+
+			//======================== 6 задача
+
+			let profitListMore200 = []
+
+			for (const row of quantityAndProfitMarkets) {
+				for (const column of row) {
+					if (column > 200) profitListMore200.push(column)
+				}
+			}
+
+			document.getElementById('resolt-6').innerHTML = profitListMore200;
+
+			//======================== 7 задача
+
+			const quantityAndProfitMarketsSort1 = JSON.parse(JSON.stringify(quantityAndProfitMarkets))
+
+			for (let r = 0; r < quantityAndProfitMarketsSort1.length; r++) {
+				for (let c = 0; c < 7; c++) {
+					quantityAndProfitMarketsSort1[r].sort((el1,el2) => {
+					if (el1 > el2) return 1
+					else if (el1 < el2) return -1
+					else return 0
+					})
+				}
+			
+			}
+
+			document.getElementById('resolt-7').innerHTML = quantityAndProfitMarketsSort1;
+
+			//======================== 8 задача
+
+			const quantityAndProfitMarketsSort2 = JSON.parse(JSON.stringify(quantityAndProfitMarkets))
+			
+			for (const row of quantityAndProfitMarketsSort2) {
+					row.sort((el1,el2) => {
+						if (el1 > el2) return -1
+						else if (el1 < el2) return 1
+						else return 0
+					})
+			}
+			const fromMaximumToMinimum = quantityAndProfitMarketsSort2.sort((el1,el2) => Math.max(...el2) - Math.max(...el1))
+
+			document.getElementById('resolt-8').innerHTML = fromMaximumToMinimum
+
+			//======================== 9 задача
+
+			const quantityAndProfitMarketsSort3 = JSON.parse(JSON.stringify(quantityAndProfitMarkets))
+
+			const sumFromMaximumToMinimum = quantityAndProfitMarketsSort3.sort((el1, el2) => el2.reduce((prevSum, el) => prevSum + el) - el1.reduce((prevSum, el) => prevSum + el))
+
+			document.getElementById('resolt-9').innerHTML = sumFromMaximumToMinimum
+
+		</script>
+	</body>
+	<style>
+		@charset "UTF-8";
+		@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+		* ,*::before, *::after {
+			padding: 0px;
+			margin: 0px;
+			border: 0px;
+			box-sizing: border-box; 
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			min-width: 320px;
+			width: 100%;
+			color: #fff;
+			background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+		}
+		body {
+			font-family: Montserrat;
+			font-size: 100%;
+			line-height: 1;
+			font-size: 1.7rem;
+		}
+		a {
+			text-decoration: underline;
+			color: #c0858f
+		}
+		a:visited {
+			text-decoration: underline;
+			color: #7a5158;
+		}
+			a:hover {
+			text-decoration: none;
+		}
+		img {
+			vertical-align: top;
+		}
+		li{
+			width: 100px;
+			margin: 0 auto;
+			color: #c0858f;
+		}
+		p{
+			font-size: 1rem;
+			color: black;
+		}
+		.wrapper {
+			width: 100%;
+			min-height: 100%;
+			overflow: hidden;
+		}
+		.rootpage{
+			padding: 30px;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 30px;
+			max-width: 1200px;
+			margin: 0 auto;
+		}
+		.resolt{
+			color: #c0858f;
+		}
+		@media (max-width: 767px) {
+			.rootpage{
+				padding:30px 15px;
+			}
+		}
+		h1 {
+			color: #3b6683;
+			font-size: 2.5rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+		@media (max-width: 767px) {
+			h1 {
+				font-size: 1.85rem;
+				margin: 0px 0px 1.25rem 0px;
+			}
+		}
+
+		.rootpage__list{
+			
+		}
+		.rootpage__list li a:not(:last-child){
+			display: block;
+			margin: 0px 0px 15px 0px;
+		}
+		.rootpage__list li:not(:last-child){
+			margin: 0px 0px 15px 0px;
+		}
+
+	</style>
+</html>
