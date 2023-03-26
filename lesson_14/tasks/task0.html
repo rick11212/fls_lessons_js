@@ -31,8 +31,8 @@
 				3) <span id="resolt-3"></span><br>
 				4) <span id="resolt-4"></span><br>
 				5) <span id="resolt-5"></span><br>
-				6) <span id="resolt-6"></span><br>
-				7) <span id="resolt-7"></span>
+				6) ответ к консоли<span id="resolt-6"></span><br>
+				7) ответ к консоли<span id="resolt-7"></span>
 			</div>
 		</div>
 		<script>
@@ -187,29 +187,35 @@
 		// //========================= 5 задача: знайти рік, коли прибуток був найбільшим
 
 			//const maxPriceYear = sitesList.reduce((prevSite, site) => site.price > prevSite.price ? prevSite = site.releaseYear : prevSite)
-				
-				// let prevPrice = sitesList[0].price
 
-				function sdfs() {
-					let maxPriceYear
+				function getMaxPriceYear() {
+					let maxPriceYear =0
 					let prevPrice = 0
 
-					for (const site of sitesList) {
-						if (site.price > prevPrice) return maxPriceYear = site.releaseYear
-						else prevPrice = site.price
+					for (let i = 0; i < sitesList.length; i++) {
+						if (sitesList[i].price > prevPrice) {
+							maxPriceYear = sitesList[i].releaseYear
+							prevPrice = sitesList[i].price
+						}
 					}
-				}
+					return maxPriceYear
 			
-
-			document.getElementById('resolt-5').innerHTML = sdfs()
+				}
+			document.getElementById('resolt-5').innerHTML = getMaxPriceYear()
 
 		//  //============================= 6 задача: упорядкувати список за спаданням прибутку
+				
+			const sortSites = sitesList.sort((el1,el2) => el2.price - el1.price)
 
-		//  document.getElementById('resolt-6').innerHTML = 
+			 console.log(sortSites); 
 
-		// // ============================= 7 задача: Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 10000 і більше 10000
+		// // ============================= 7 задача: Створити 2 окремих списки з копіями об’єктів, що містять сайти з вартість до 200000 і більше 200000
 
-		// document.getElementById('resolt-7').innerHTML = 
+		const sitesProfitMore1000 = sitesList.filter(site => site.price > 200000)
+		const sitesProfitLess1000 = sitesList.filter(site => site.price < 200000)
+
+		 console.log(sitesProfitMore1000); 
+		 console.log(sitesProfitLess1000); 
 
 		</script>
 	</body>
