@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/fonts.css">
+	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+	<link rel="stylesheet" href="css/style.css">
+	<title>Task-2</title>
+</head>
+
+<body>
+	<div class="rootpage">
+		<h1>Задача 2</h1>
+		<h3>Створити об’єкт «Авто».</h3>
+		<div class="resolt"> Ответ = <span id="resolt"></span><br>
+		</div>
+	</div>
+	<script>
+		const auto = {
+			model: 'audi',
+			tankSize: 60,
+			quontityLitesrNow: 25,
+			quontityPlaces: 5,
+			quontityPassengers: 2,
+
+			refueling: function () {
+				const addLiters = parseInt(prompt('Укажите количество литров, которое необходимо заправить.', '5'))
+				if (addLiters > 0 && addLiters <= this.tankSize - this.quontityLitesrNow) return alert(`Текущее количество литров в баке ${this.quontityLitesrNow += addLiters}`)
+				else if (addLiters > this.tankSize - this.quontityLitesrNow) return alert('Такое количество литров не влезет в Ваш бак.')
+				else return alert('Введено не верное значение.')
+			},
+
+			inferencePassenders: function () {
+				alert(`Текущее количество пассажиров в автомобиле ${this.quontityPassengers}`)
+			},
+
+			addPassenrers: function () {
+				const inputPassenrers = parseInt(prompt('Укажите количество посажиров, которых хотите посадить', '1'))
+				if (inputPassenrers > 0 && inputPassenrers <= this.quontityPlaces - this.quontityPassengers) return alert(`Текущее количество пассажиров в автомобиле после посадки ${this.quontityPassengers += inputPassenrers}`)
+				else if (inputPassenrers > this.quontityPlaces - this.quontityPassengers) return alert('Такое количество пасажиров не влезет в Ваш автомобиль.')
+				else return alert('Введено не верное значение.')
+			},
+
+			lessPassenrers: function () {
+				const inputLessPassenrers = parseInt(prompt('Укажите количество посажиров, которых хотите высадить', '1'))
+				if (inputLessPassenrers > 0 && inputLessPassenrers < this.quontityPassengers) return alert(`Текущее количество пассажиров в автомобиле после высадки ${this.quontityPassengers -= inputLessPassenrers}`)
+				else if (inputLessPassenrers > this.quontityPassengers) return alert('Такое количество пасажиров нет в Вашем автомобиле.')
+				else return alert('Введено не верное значение.')
+			},
+			toString: function () {
+				document.getElementById('resolt').innerHTML = `<br>Марка автомобиля: ${this.model}<br>Размер топливного бака: ${this.tankSize}<br> Текущее количество литров в баке: ${this.quontityLitesrNow}<br>Количество поссажирских мест: ${this.quontityPlaces}<br> Количество пассажиров в автомобиле: ${this.quontityPassengers}`
+			}
+		}
+
+		auto.refueling()
+		auto.inferencePassenders()
+		auto.addPassenrers()
+		auto.lessPassenrers()
+		auto.toString()
+
+
+	</script>
+</body>
+<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-width: 320px;
+		width: 100%;
+		color: #fff;
+		background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+	}
+
+	body {
+		font-family: Montserrat;
+		font-size: 100%;
+		line-height: 1;
+		font-size: 1.7rem;
+	}
+
+	a {
+		text-decoration: underline;
+		color: #c0858f
+	}
+
+	a:visited {
+		text-decoration: underline;
+		color: #7a5158;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	li {
+		width: 100px;
+		margin: 0 auto;
+		color: #c0858f;
+	}
+
+	p {
+		font-size: 1rem;
+		color: black;
+	}
+
+	.wrapper {
+		width: 100%;
+		min-height: 100%;
+		overflow: hidden;
+	}
+
+	.rootpage {
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.resolt {
+		color: #c0858f;
+	}
+
+	@media (max-width: 767px) {
+		.rootpage {
+			padding: 30px 15px;
+		}
+	}
+
+	h1 {
+		color: #3b6683;
+		font-size: 2.5rem;
+		margin: 0px 0px 1.25rem 0px;
+	}
+
+	@media (max-width: 767px) {
+		h1 {
+			font-size: 1.85rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+	}
+
+	.rootpage__list {}
+
+	.rootpage__list li a:not(:last-child) {
+		display: block;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.rootpage__list li:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+</style>
+
+</html>
