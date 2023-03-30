@@ -8,57 +8,46 @@
 	<link rel="stylesheet" href="css/fonts.css">
 	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
 	<link rel="stylesheet" href="css/style.css">
-	<title>Task-3</title>
+	<title>Task-5</title>
 </head>
 
 <body>
 	<div class="rootpage">
-		<h1>Задача 3</h1>
+		<h1>Задача 5</h1>
 		<h3>Розробити клас MultChecker для перевірки таблиці множення</h3>
-		<div class="resolt"> Ответ = <span id="resolt"></span><br>
+		<div class="resolt"> Ответ = <br> 1) Рандомный мальчик: <span id="resolt-1"></span><br> 2) Рандомная девочка: <span id="resolt-2"></span><br> 3) Пара для танцев: <span id="resolt-3"></span><br> 4) Новая пара кажные 5с: <span id="resolt-4"></span>
 		</div>
 	</div>
 	<script>
-
-		class MultChecker {
-			constructor(checkedNumber) {
-				this.checkedNumber = checkedNumber
-				this.goodQuontity = 0
-				this.lessQuontity = 0
-				this.randomNumber = 1 + Math.floor(Math.random() * 10)
+		class DanceLeader {
+			constructor() {
+				this.men = ['Michael Richardson', 'Thomas Turner', 'Clarence Garcia', 'Eric Johnson', 'Tim Scott', 'Dennis Baker']
+				this.women = ['Sandra Olson', 'Annie Long', 'Christina Hill', 'Ana Flores', 'Alice Smith', 'Deborah Ferguson', 'Rosa Stewart', 'Susan Rose', 'Jacqueline Wilson']
 			}
 
-			generationExample() {
-				const firstNumber = 1
-				return this.checkedNumber * this.randomNumber
+			randomMan() {
+				const randomNumber = Math.floor(Math.random() * this.men.length)
+				return this.men[randomNumber]
 			}
-
-			checkExample() {
-				const readyExample = this.generationExample()
-				const userAnsver = parseInt(prompt(`Введите ответ на пример: ${this.checkedNumber} * ${this.randomNumber} = ?`, 0))
-
-				if (readyExample === userAnsver) {
-					alert('Правильно!')
-					return this.goodQuontity += 1
-				}
-				else {
-					alert('Не правильно!')
-					return this.lessQuontity += 1
-				}
-
+			randomWoman() {
+				const randomNumber = Math.floor(Math.random() * this.women.length)
+				return this.women[randomNumber]
 			}
-
-			render() {
-				document.getElementById('resolt').innerHTML = `<br>Количество правильных ответов: ${this.goodQuontity}<br> Количество не правильных ответов: ${this.lessQuontity}`
+			pair() {
+				return `${this.randomMan()} and ${this.randomWoman()}`
 			}
-
+			run() {
+				return setInterval(() => {
+					document.getElementById('resolt-4').innerHTML = this.pair()
+				}, 5000);
+			}
 		}
 
-		const mc = new MultChecker(7)
-		mc.checkExample(); 2
-		mc.render();
-		// console.log(mc.checkExample());
-		// <br>Пример: ${this.checkedNumber} * ${this.generationExample.randomNumber} = ${this.generationExample()}<br> 
+		let print = new DanceLeader()
+		document.getElementById('resolt-1').innerHTML = print.randomMan()
+		document.getElementById('resolt-2').innerHTML = print.randomWoman()
+		document.getElementById('resolt-3').innerHTML = print.pair()
+		print.run()
 	</script>
 </body>
 <style>

@@ -8,57 +8,61 @@
 	<link rel="stylesheet" href="css/fonts.css">
 	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
 	<link rel="stylesheet" href="css/style.css">
-	<title>Task-3</title>
+	<title>Task-4</title>
 </head>
 
 <body>
 	<div class="rootpage">
-		<h1>Задача 3</h1>
-		<h3>Розробити клас MultChecker для перевірки таблиці множення</h3>
-		<div class="resolt"> Ответ = <span id="resolt"></span><br>
+		<h1>Задача 4</h1>
+		<h3>Розробити клас Baner</h3>
+		<div class="resolt"> <span id="resolt"></span><br>
 		</div>
+		<!--  -->
 	</div>
 	<script>
-
-		class MultChecker {
-			constructor(checkedNumber) {
-				this.checkedNumber = checkedNumber
-				this.goodQuontity = 0
-				this.lessQuontity = 0
-				this.randomNumber = 1 + Math.floor(Math.random() * 10)
+		class Baner {
+			constructor() {
+				this.brandArray = [
+					{
+						name: 'Apple',
+						logo: `<img src="img/apple.png" alt="logo">`,
+						link: `<a href="https://www.apple.com/">https://www.apple.com/</a>`
+					},
+					{
+						name: 'Sony',
+						logo: `<img src="img/sony.png" alt="logo">`,
+						link: `<a href="https://www.sony.com/en/">https://www.sony.com/en/</a>`
+					},
+					{
+						name: 'Xiaomi',
+						logo: `<img src="img/xiaomi.png" alt="logo">`,
+						link: `<a href="https://www.mi.com/global">https://www.mi.com/global</a>`
+					},
+					{
+						name: 'Huawei',
+						logo: `<img src="img/Huawei.png" alt="logo">`,
+						link: `<a href="https://www.huawei.com">https://www.huawei.com</a>`
+					},
+					{
+						name: 'Samsung',
+						logo: `<img src="img/samsung.png" alt="logo">`,
+						link: `<a href="https://www.samsung.com/us/">https://www.samsung.com/us/</a>`
+					}
+				]
 			}
 
-			generationExample() {
-				const firstNumber = 1
-				return this.checkedNumber * this.randomNumber
+			choiceRandomBrand() {
+				return Math.floor(Math.random() * this.brandArray.length)
 			}
-
-			checkExample() {
-				const readyExample = this.generationExample()
-				const userAnsver = parseInt(prompt(`Введите ответ на пример: ${this.checkedNumber} * ${this.randomNumber} = ?`, 0))
-
-				if (readyExample === userAnsver) {
-					alert('Правильно!')
-					return this.goodQuontity += 1
-				}
-				else {
-					alert('Не правильно!')
-					return this.lessQuontity += 1
-				}
-
+			printBrand() {
+				let choiceBrand = this.brandArray[this.choiceRandomBrand()]
+				document.getElementById('resolt').innerHTML = `<br>${choiceBrand.logo}<br><br>${choiceBrand.link}`
 			}
-
-			render() {
-				document.getElementById('resolt').innerHTML = `<br>Количество правильных ответов: ${this.goodQuontity}<br> Количество не правильных ответов: ${this.lessQuontity}`
-			}
-
 		}
 
-		const mc = new MultChecker(7)
-		mc.checkExample(); 2
-		mc.render();
-		// console.log(mc.checkExample());
-		// <br>Пример: ${this.checkedNumber} * ${this.generationExample.randomNumber} = ${this.generationExample()}<br> 
+		let print = new Baner()
+		print.printBrand()
+
 	</script>
 </body>
 <style>
