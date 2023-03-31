@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/fonts.css">
+	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+	<link rel="stylesheet" href="css/style.css">
+	<title>Task-0</title>
+</head>
+
+<body>
+	<div class="rootpage">
+		<h1>Задача 0</h1>
+		<h3>Створити клас TDate для роботи із датами у форматі “день.місяць.рік”. Дата представляється структурою із трьома полями. Реалізувати методи збільшення/зменшення дати на певну кількість днів, місяців чи років. Введення та виведення дати реалізувати за допомогою методу toString.</h3>
+		<div class="resolt"> Ответ = <br>Текущая дата: <span id="resolt"></span> <br><br> Увеличение даты: <span id="resolt-1"></span><br><br> Уменьшение даты: <span id="resolt-2"></span>
+		</div>
+	</div>
+	<script>
+		class TDate {
+			constructor(day, month, year) {
+				this.day = day
+				this.month = month
+				this.year = year
+			}
+
+			increaseDate(day, month, year) {
+				// (cor - min + shifted)%(max - min +1)+min
+				const newDay = ((this.day - 1 + day) % 30) + 1
+				const newMonth = ((this.month - 1 + month) % 12) + 1
+				const newYear = this.year + year
+				return `<br>day: ${newDay} <br> month: ${newMonth} <br> year: ${newYear}`
+			}
+
+			decreaseDate(day, month, year) {
+				this.day - day
+				if (this.day < 0) {
+					this.day = this.day + (-this.day * 2)
+					this.day %= 30
+				}
+				this.month - month
+				if (this.month <= 0) {
+					this.month = this.month + (-this.month * 2)
+					this.month %= 12
+				}
+
+				this.year - year
+				return `<br>day: ${this.year} <br> month: ${this.year} <br> year: ${this.year}`
+			}
+
+			toString() {
+				this.increaseDate(25, 15, 20)
+				return `<br>day: ${this.day} <br> month: ${this.month} <br> year: ${this.year}`
+			}
+
+		}
+
+		const tDate = new TDate(5, 5, 2000)
+		document.getElementById('resolt').innerHTML = tDate
+		// document.getElementById('resolt-1').innerHTML = tDate.increaseDate(25, 15, 20)
+		// document.getElementById('resolt-2').innerHTML = tDate.decreaseDate(25, 15, 20)
+
+	</script>
+</body>
+<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-width: 320px;
+		width: 100%;
+		color: #fff;
+		background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+	}
+
+	body {
+		font-family: Montserrat;
+		font-size: 100%;
+		line-height: 1;
+		font-size: 1.7rem;
+	}
+
+	a {
+		text-decoration: underline;
+		color: #c0858f
+	}
+
+	a:visited {
+		text-decoration: underline;
+		color: #7a5158;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	li {
+		width: 100px;
+		margin: 0 auto;
+		color: #c0858f;
+	}
+
+	p {
+		font-size: 1rem;
+		color: black;
+	}
+
+	.wrapper {
+		width: 100%;
+		min-height: 100%;
+		overflow: hidden;
+	}
+
+	.rootpage {
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.resolt {
+		color: #c0858f;
+	}
+
+	@media (max-width: 767px) {
+		.rootpage {
+			padding: 30px 15px;
+		}
+	}
+
+	h1 {
+		color: #3b6683;
+		font-size: 2.5rem;
+		margin: 0px 0px 1.25rem 0px;
+	}
+
+	@media (max-width: 767px) {
+		h1 {
+			font-size: 1.85rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+	}
+
+	.rootpage__list {}
+
+	.rootpage__list li a:not(:last-child) {
+		display: block;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.rootpage__list li:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+</style>
+
+</html>
