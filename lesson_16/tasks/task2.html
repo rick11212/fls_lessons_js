@@ -14,53 +14,159 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 2</h1>
-		<h3>Створити об’єкт «Авто».</h3>
-		<div class="resolt"> Ответ = <span id="resolt"></span><br>
+		<h3>Об’єкт “Фірма” (використати члени-класи)</h3>
+		<div class="resolt"> Ответ = в консоли<span id="resolt"></span><br>
 		</div>
 	</div>
 	<script>
-		const auto = {
-			model: 'audi',
-			tankSize: 60,
-			quontityLitesrNow: 25,
-			quontityPlaces: 5,
-			quontityPassengers: 2,
-
-			refueling: function () {
-				const addLiters = parseInt(prompt('Укажите количество литров, которое необходимо заправить.', '5'))
-				if (addLiters > 0 && addLiters <= this.tankSize - this.quontityLitesrNow) return alert(`Текущее количество литров в баке ${this.quontityLitesrNow += addLiters}`)
-				else if (addLiters > this.tankSize - this.quontityLitesrNow) return alert('Такое количество литров не влезет в Ваш бак.')
-				else return alert('Введено не верное значение.')
+		const firmaAsporten = {
+			name: 'Asporten',
+			dateFounding: {
+				month: 5,
+				year: 2005
 			},
+			services: [
+				{
+					name: 'Development',
+					price: 5000,
+					periodOfExecution: '5 month'
+				},
 
-			inferencePassenders: function () {
-				alert(`Текущее количество пассажиров в автомобиле ${this.quontityPassengers}`)
-			},
+				{
+					name: 'Testing',
+					price: 3000,
+					periodOfExecution: '1 month'
+				},
 
-			addPassenrers: function () {
-				const inputPassenrers = parseInt(prompt('Укажите количество посажиров, которых хотите посадить', '1'))
-				if (inputPassenrers > 0 && inputPassenrers <= this.quontityPlaces - this.quontityPassengers) return alert(`Текущее количество пассажиров в автомобиле после посадки ${this.quontityPassengers += inputPassenrers}`)
-				else if (inputPassenrers > this.quontityPlaces - this.quontityPassengers) return alert('Такое количество пасажиров не влезет в Ваш автомобиль.')
-				else return alert('Введено не верное значение.')
+				{
+					name: 'Implementation',
+					price: 10000,
+					periodOfExecution: '2 month'
+				}
+			]
+			,
+			branches: [
+				{
+					country: 'Ukraine',
+					city: 'Kiev',
+					street: 'I.Franko',
+					nomberHouse: 5
+				},
+				{
+					country: 'Belarus',
+					city: 'Minsk',
+					street: 'Pobedi',
+					nomberHouse: 63
+				},
+				{
+					country: 'Ukraine',
+					city: 'Lviv',
+					street: 'Shevchenko',
+					nomberHouse: 21
+				},
+				{
+					country: 'Belarus',
+					city: 'Brest',
+					street: 'Gogolia',
+					nomberHouse: 15
+				}
+			]
+		}
+		const firmaTrencorp = {
+			name: 'Trencorp',
+			dateFounding: {
+				month: 5,
+				year: 2015
 			},
+			services: [
+				{
+					name: 'Development',
+					price: 8000,
+					periodOfExecution: '2 month'
+				},
 
-			lessPassenrers: function () {
-				const inputLessPassenrers = parseInt(prompt('Укажите количество посажиров, которых хотите высадить', '1'))
-				if (inputLessPassenrers > 0 && inputLessPassenrers < this.quontityPassengers) return alert(`Текущее количество пассажиров в автомобиле после высадки ${this.quontityPassengers -= inputLessPassenrers}`)
-				else if (inputLessPassenrers > this.quontityPassengers) return alert('Такое количество пасажиров нет в Вашем автомобиле.')
-				else return alert('Введено не верное значение.')
-			},
-			toString: function () {
-				document.getElementById('resolt').innerHTML = `<br>Марка автомобиля: ${this.model}<br>Размер топливного бака: ${this.tankSize}<br> Текущее количество литров в баке: ${this.quontityLitesrNow}<br>Количество поссажирских мест: ${this.quontityPlaces}<br> Количество пассажиров в автомобиле: ${this.quontityPassengers}`
+				{
+					name: 'Testing',
+					price: 2000,
+					periodOfExecution: '3 month'
+				},
+
+				{
+					name: 'Implementation',
+					price: 11000,
+					periodOfExecution: '3 month'
+				}
+			]
+			,
+			branches: [
+				{
+					country: 'Ukraine',
+					city: 'Kiev',
+					street: 'Sofievska',
+					nomberHouse: 29
+				},
+				{
+					country: 'Belarus',
+					city: 'Minsk',
+					street: 'Kupali',
+					nomberHouse: 63
+				},
+				{
+					country: 'Ukraine',
+					city: 'Lviv',
+					street: 'Pekarska',
+					nomberHouse: 3
+				},
+				{
+					country: 'Belarus',
+					city: 'Brest',
+					street: 'Lenina',
+					nomberHouse: 9
+				}
+			]
+		}
+
+		class Firma {
+			constructor(firmObj) {
+				this.firmObj = firmObj
+			}
+			numberExistence() {
+				let year = new Date().getFullYear()
+				return year - this.firmObj.dateFounding.year
+			}
+
+			allBranchesInCountry(country) {
+				return this.firmObj.branches.filter(branch => branch.country === country)
+			}
+
+			suitableServices(quontityMoney, quontityMonth) {
+				return this.firmObj.services.filter(service => service.price <= quontityMoney && service.periodOfExecution[0] <= quontityMonth)
+			}
+
+			toString() {
+				return this.firmObj.name
 			}
 		}
 
-		auto.refueling()
-		auto.inferencePassenders()
-		auto.addPassenrers()
-		auto.lessPassenrers()
-		auto.toString()
+		let asportenInfo = new Firma(firmaAsporten)
+		console.log(`${asportenInfo.numberExistence()} лет существует организация ${asportenInfo.toString()}`);
+		console.log('-----------------');
+		console.log(`Все филиалы организации ${asportenInfo.toString()} в Украине`);
+		console.log(asportenInfo.allBranchesInCountry('Ukraine'));
+		console.log('-----------------');
+		console.log('Доступные услуги');
+		console.log(asportenInfo.suitableServices(5000, 10));
 
+		console.log('======================================================================================================================');
+
+		let trencorpInfo = new Firma(firmaTrencorp)
+		console.log(`${trencorpInfo.numberExistence()} лет существует организация ${trencorpInfo.toString()}`);
+		console.log('-----------------');
+		console.log(`Все филиалы организации ${trencorpInfo.toString()} в Беларуси`);
+		console.log(trencorpInfo.allBranchesInCountry('Belarus'));
+		console.log('-----------------');
+		console.log('Доступные услуги');
+		console.log(trencorpInfo.suitableServices(15000, 5));
 
 	</script>
 </body>

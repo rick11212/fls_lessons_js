@@ -35,19 +35,19 @@
 			}
 
 			decreaseDate(day, month, year) {
-				this.day - day
-				if (this.day < 0) {
-					this.day = this.day + (-this.day * 2)
-					this.day %= 30
+				let newDay = this.day - day
+				if (newDay < 0) {
+					newDay = newDay + (-newDay * 2)
+					newDay %= 30
 				}
-				this.month - month
-				if (this.month <= 0) {
-					this.month = this.month + (-this.month * 2)
-					this.month %= 12
+				let newMonth = this.month - month
+				if (newMonth <= 0) {
+					newMonth = newMonth + (-newMonth * 2)
+					newMonth %= 12
 				}
 
-				this.year - year
-				return `<br>day: ${this.year} <br> month: ${this.year} <br> year: ${this.year}`
+				const newYear = this.year - year
+				return `<br>day: ${newDay} <br> month: ${newMonth} <br> year: ${newYear}`
 			}
 
 			toString() {
@@ -59,8 +59,8 @@
 
 		const tDate = new TDate(5, 5, 2000)
 		document.getElementById('resolt').innerHTML = tDate
-		// document.getElementById('resolt-1').innerHTML = tDate.increaseDate(25, 15, 20)
-		// document.getElementById('resolt-2').innerHTML = tDate.decreaseDate(25, 15, 20)
+		document.getElementById('resolt-1').innerHTML = tDate.increaseDate(25, 15, 20)
+		document.getElementById('resolt-2').innerHTML = tDate.decreaseDate(20, 10, 50)
 
 	</script>
 </body>

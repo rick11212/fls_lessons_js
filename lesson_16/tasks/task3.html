@@ -14,51 +14,58 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 3</h1>
-		<h3>Розробити клас MultChecker для перевірки таблиці множення</h3>
-		<div class="resolt"> Ответ = <span id="resolt"></span><br>
+		<h3>Створити клас TBankomat, який моделює роботу банкомата. Клас повинен містити поля для зберігання кількості купюр кожного із номіналів від 5 до 200 гривень. Реалізувати методи знаходження максимальної та мінімальної сум, які може видати банкомат, та метод зняття деякої суми.</h3>
+		<div class="resolt"> Ответ = в консоли<span id="resolt"></span><br>
 		</div>
 	</div>
 	<script>
 
-		class MultChecker {
-			constructor(checkedNumber) {
-				this.checkedNumber = checkedNumber
-				this.goodQuontity = 0
-				this.lessQuontity = 0
-				this.randomNumber = 1 + Math.floor(Math.random() * 10)
+		// очень не уверен с данном решении, но все задания выполнены
+
+		class TBankomat {
+			#bill5 = 5
+			#bill10 = 10
+			#bill20 = 20
+			#bill50 = 50
+			#bill100 = 100
+			#bill200 = 200
+			constructor(quontity5, quontity10, quontity20, quontity50, quontity100, quontity200) {
+				this.quontityBill5 = quontity5
+				this.quontityBill10 = quontity10
+				this.quontityBill20 = quontity20
+				this.quontityBill50 = quontity50
+				this.quontityBill100 = quontity100
+				this.quontityBill200 = quontity200
 			}
 
-			generationExample() {
-				const firstNumber = 1
-				return this.checkedNumber * this.randomNumber
+			maxSum() {
+				return this.#bill5 * this.quontityBill5 + this.#bill10 * this.quontityBill10 + this.#bill20 * this.quontityBill20 + this.#bill50 * this.quontityBill50 + this.#bill100 * this.quontityBill100 + this.#bill200 * this.quontityBill200
+			}
+			minSum() {
+				if (this.quontityBill5 > 0) return this.#bill5
+				else if (this.quontityBill10 > 0) return this.#bill10
+				else if (this.quontityBill20 > 0) return this.#bill20
+				else if (this.quontityBill50 > 0) return this.#bill50
+				else if (this.quontityBill100 > 0) return this.#bill100
+				else if (this.quontityBill200 > 0) return this.#bill200
+				else return alert('В банкомате нет денег!')
 			}
 
-			checkExample() {
-				const readyExample = this.generationExample()
-				const userAnsver = parseInt(prompt(`Введите ответ на пример: ${this.checkedNumber} * ${this.randomNumber} = ?`, 0))
-
-				if (readyExample === userAnsver) {
-					alert('Правильно!')
-					return this.goodQuontity += 1
-				}
-				else {
-					alert('Не правильно!')
-					return this.lessQuontity += 1
-				}
-
+			minusSomeSum(value) {
+				if (value < this.maxSum()) return this.maxSum() - value
 			}
 
-			render() {
-				document.getElementById('resolt').innerHTML = `<br>Количество правильных ответов: ${this.goodQuontity}<br> Количество не правильных ответов: ${this.lessQuontity}`
+			get toString() {
+				return console.log(`В наличии ${this.maxSum()} гр. Минимальная сумма снятия ${this.minSum()} гр.`);
 			}
-
 		}
 
-		const mc = new MultChecker(7)
-		mc.checkExample(); 2
-		mc.render();
-		// console.log(mc.checkExample());
-		// <br>Пример: ${this.checkedNumber} * ${this.generationExample.randomNumber} = ${this.generationExample()}<br> 
+		const tBankomat = new TBankomat(1, 2, 3, 4, 5, 6)
+		tBankomat.toString
+
+		let sum = 1000
+		console.log(`Вы сняли ${sum} гр. В наличии ${tBankomat.minusSomeSum(sum)} гр.`);
+
 	</script>
 </body>
 <style>

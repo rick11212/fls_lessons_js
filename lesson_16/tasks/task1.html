@@ -14,35 +14,57 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 1</h1>
-		<h3>Створити об’єкт «Тир». У масиві зберігаються 1, якщо у цьому квадраті є заєць і 0 в іншому випадку.</h3>
-		<div class="resolt">Ответ = <span id="resolt"></span>
+		<h3>Створити клас TMoney для роботи з грошовими сумами. Сума повинна зберігатися у вигляді доларового еквіваленту. Реалізувати методи додавання/вилучення грошової маси, вказуючи необхідну суму у гривнях, та визначення курсу долара, при якому сума у гривнях збільшиться на 100. Курс долара зберігати в окремому полі.</h3>
+		<div class="resolt">Ответ =<br> <span id="resolt"></span><br><br> <span id="resolt-1"></span> <br><br> <span id="resolt-2"></span><br><br> <span id="resolt-3"></span>
 		</div>
 	</div>
 	<script>
+		class TMoney {
+			#rate
+			constructor(balance, rate) {
+				this.balance = balance
+				this.Rate = rate
+			}
 
-		const tyr = {
-			field: [0, 0, 1, 0, 1, 1, 0, 0, 1, 0],
+			get Rate() {
+				return this.#rate
+			}
 
-			shot: function () {
-				do {
-					const userShot = parseInt(prompt(`Введите номер поля от 0 до ${this.field.length}`, 2))
-					if (this.field[userShot] === 1) {
-						alert('Попал!')
-						this.field[userShot] = 0
-					}
-					else alert('Мимо!')
-				} while (confirm('Ещё играем?'));
-			},
-
-			shiftedField: function () {
-				document.getElementById('resolt').innerHTML = this.field
+			set Rate(newValue) {
+				if (newValue < 20) {
+					throw new Error('Не правильная сумма!')
+				}
+				else this.#rate = newValue
+			}
+			increaseMoney(addedVal) {
+				return this.balance += addedVal / this.Rate
+			}
+			decreaseMoney(lessVal) {
+				const convertMoney = lessVal / this.Rate
+				if (convertMoney <= this.balance) return this.balance -= convertMoney
+				else alert('Не достаточно средств!')
+			}
+			get toString() {
+				return document.getElementById('resolt').innerHTML = `Стартовые значения: <br>Остаток на счету: ${this.balance}$<br>Курс USD: ${this.Rate}гр.`
 			}
 		}
+		// =================================
+		const tMoney = new TMoney(200, 50)
+		tMoney.toString
 
-		tyr.shot()
-		tyr.shiftedField()
+		tMoney.balance = 300
+		tMoney.Rate = 100
+		document.getElementById('resolt-1').innerHTML = `Измененные значения:<br>Остаток на счету: ${tMoney.balance}$<br> Курс USD: ${tMoney.Rate}гр.`
 
-		//document.getElementById('resolt').innerHTML = getRandomDate()
+		let changeBalanceByAmount = 1000
+
+		tMoney.increaseMoney(changeBalanceByAmount);
+		document.getElementById('resolt-2').innerHTML = `<br>Пополнение счета на ${changeBalanceByAmount}гр. Остаток на счету: ${tMoney.balance}$`
+
+		changeBalanceByAmount = 3000
+
+		tMoney.decreaseMoney(changeBalanceByAmount);
+		document.getElementById('resolt-3').innerHTML = `<br>Списание со счета ${changeBalanceByAmount}гр. Остаток на счету: ${tMoney.balance}$`
 	</script>
 </body>
 <style>
