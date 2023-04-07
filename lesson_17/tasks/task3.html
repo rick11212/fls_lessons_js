@@ -25,7 +25,7 @@
 
 		// Склад.База хранящихся на складе товаров: 
 		// название товара, единица измерения, количество, фирма производитель(название, регистрационный номер).
-		const skladArray = [
+		let warehouseArray = [
 			{
 				name: 'apple',
 				unit: 'kg',
@@ -82,58 +82,83 @@
 			}
 		]
 		// Организовать регистрацию / отгрузку товаров, фильтрацию по названию товара, фильтрацию по названию фирмы
-
-		class Sklad {
-			constructor(skladArray) {
-				this.skladArray = skladArray
+		class Product {
+			constructor(nameProduct, unitProduct, quantityProduct, countryProduct, registrationNumberProduct) {
+				this.name = nameProduct
+				this.unit = unitProduct
+				this.quantity = quantityProduct
+				this.country = countryProduct
+				this.registrationNumber = registrationNumberProduct
 			}
-			addProduct(nameProduct, unitProduct, quantityProduct, countryProduct, registrationNumberProduct) {
+			newProduct() {
 				let newProduct = {
-					name: nameProduct,
-					unit: unitProduct,
-					quantity: quantityProduct,
+					name: this.name,
+					unit: this.unit,
+					quantity: this.quantity,
 					manufacture: {
-						country: countryProduct,
-						registrationNumber: registrationNumberProduct
+						country: this.country,
+						registrationNumber: this.registrationNumber
 					}
 				}
-				return this.skladArray.push(newProduct)
+				return newProduct
 			}
+		}
+		class Warehouse {
+			constructor(warehouseArray) {
+				this.warehouseArray = warehouseArray
+			}
+			addProduct(newProduct) {
+				return this.warehouseArray.push(newProduct)
+			}
+			// addProduct(nameProduct, unitProduct, quantityProduct, countryProduct, registrationNumberProduct) {
+			// 	let newProduct = {
+			// 		name: nameProduct,
+			// 		unit: unitProduct,
+			// 		quantity: quantityProduct,
+			// 		manufacture: {
+			// 			country: countryProduct,
+			// 			registrationNumber: registrationNumberProduct
+			// 		}
+			// 	}
+			// 	return this.warehouseArray.push(newProduct)
+			// }
 
 			deleteProduct(nameProduct) {
-				let newArray = this.skladArray.filter(product => product.name !== nameProduct)
+				let newArray = this.warehouseArray.filter(product => product.name !== nameProduct)
 				return newArray
 			}
 
 			findProduct(nameProduct) {
-				let newArray = this.skladArray.filter(product => product.name === nameProduct)
+				let newArray = this.warehouseArray.filter(product => product.name === nameProduct)
 				return newArray
 			}
 			findManufacturer(nameManufacturer) {
-				let newArray = this.skladArray.filter(el => el.manufacture.country === nameManufacturer)
+				let newArray = this.warehouseArray.filter(el => el.manufacture.country === nameManufacturer)
 				return newArray
 			}
 
 		}
 
-		const sklad = new Sklad(skladArray)
-		console.log('Стартовый массив');
-		console.log(skladArray);
+		const warehouse = new Warehouse(warehouseArray)
 
 		console.log('Регистрация нового продукта');
-		sklad.addProduct('strawbary', 'kg', 20, 'Ukraine', 789);
-		sklad.addProduct('bluebary', 'kg', 5, 'Belarus', 8910);
-		console.log(skladArray);
+		// warehouse.addProduct('strawbary', 'kg', 20, 'Ukraine', 789);
+		// warehouse.addProduct('bluebary', 'kg', 5, 'Belarus', 8910);
+		let productStrawbary = new Product('strawbary', 'kg', 20, 'Ukraine', 789)
+		let productBluebary = new Product('bluebary', 'kg', 20, 'Ukraine', 789)
+		warehouse.addProduct(productStrawbary.newProduct())
+		warehouse.addProduct(productBluebary.newProduct())
+		console.log(warehouseArray);
 
 		console.log('Отгрузка продукта');
-		console.log(sklad.deleteProduct('bluebary'))
+		console.log(warehouse.deleteProduct('bluebary'))
 
 
 		console.log('Фильтр по названию продукта');
-		console.log(sklad.findProduct('banana'))
+		console.log(warehouse.findProduct('banana'))
 
 		console.log('Фильтр по стране');
-		console.log(sklad.findManufacturer('Mexika'))
+		console.log(warehouse.findManufacturer('Mexika'))
 
 	</script>
 </body>

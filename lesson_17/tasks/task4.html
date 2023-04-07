@@ -17,10 +17,76 @@
 		<h3>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.</h3>
 		<div class="resolt"> <span id="resolt"></span><br>
 		</div>
-		<!--  -->
 	</div>
 	<script>
+		// Личная библиотека.
+		// Картотека домашней библиотеки: данные книги(авторы(пиб, год рождения, краткое описание), название книги, жанр, издательство(название, регистрационный номер, год задвижения)).
+		let personalLibrary = []
 
+		class Book {
+			constructor(name, genre) {
+				this.name = name
+				this.genre = genre
+			}
+			toString() {
+				return `Name book - ${this.name}. Genre - ${this.genre} <br>`
+			}
+		}
+
+		class Autor {
+			constructor(fullName, yearOfBirth, description) {
+				this.fullName = fullName
+				this.yearOfBirth = yearOfBirth
+				this.description = description
+			}
+			toString() {
+				return `Full name of the autor - ${this.fullName}. Author's date of birth - ${this.yearOfBirth}. Description - ${this.description}<br>`
+			}
+		}
+
+		class Publisher {
+			constructor(name, registerNumber, yearOfFoundation) {
+				this.name = name
+				this.registerNumber = registerNumber
+				this.yearOfFoundation = yearOfFoundation
+			}
+			toString() {
+				return `Publisher name - ${this.name}. Register number  - ${this.registerNumber}. Year of foundation - ${this.yearOfFoundation}`
+			}
+		}
+
+		class FullBook {
+			constructor(book, autor, publisher) {
+				this.book = book
+				this.autor = autor
+				this.publisher = publisher
+			}
+
+			addBookInPersonalLibrary() {
+				let collectBook = this.book + this.autor + this.publisher
+				return personalLibrary.push(collectBook)
+				//return `Книга: ${this.book} <br><br> Автор: ${this.autor}<br><br> Издательство: ${this.publisher}`
+			}
+		}
+
+		const bookTheGirlWithTheDragonTattoo = new Book('The Girl With the Dragon Tattoo', 'Thriller')
+		const autorStiegLarsson = new Autor('Stieg Larsson', 1954, 'Swedish writer, journalist, and activist')
+		const publisherNorstedtsFörlag = new Publisher('Norstedts förlag', 1, 1823)
+		const fullBookTheGirlWithTheDragonTattoo = new FullBook(bookTheGirlWithTheDragonTattoo, autorStiegLarsson, publisherNorstedtsFörlag)
+
+		fullBookTheGirlWithTheDragonTattoo.addBookInPersonalLibrary()
+
+		const bookHarryPotterAndTheGobletOfFire = new Book('Harry Potter and the Goblet of Fire', 'Fantasy')
+		const autorJKRowling = new Autor('JK Rowling', 1965, 'British author and philanthropist')
+		const publisherBloomsburyPublishing = new Publisher('Bloomsbury Publishing', 2, 1986)
+		const fullBookHarryPotterAndTheGobletOfFire = new FullBook(bookHarryPotterAndTheGobletOfFire, autorJKRowling, publisherBloomsburyPublishing)
+
+		fullBookHarryPotterAndTheGobletOfFire.addBookInPersonalLibrary()
+
+		document.getElementById('resolt').innerHTML = personalLibrary
+		console.log(personalLibrary);
+
+		// Реализовать разделы библиотеки(специальная литература, хобби, домашнее хозяйство и т.д.), происхождение книги и наличие в настоящее время.Организовать добавление / извлечение книг и выбор книг под названием, по ФИО автора, по издательству.
 	</script>
 </body>
 <style>
