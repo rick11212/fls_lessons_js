@@ -14,54 +14,12 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 4</h1>
-		<h3>Розробити клас Baner</h3>
+		<h3>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.</h3>
 		<div class="resolt"> <span id="resolt"></span><br>
 		</div>
 		<!--  -->
 	</div>
 	<script>
-		class Baner {
-			constructor() {
-				this.brandArray = [
-					{
-						name: 'Apple',
-						logo: `<img src="img/apple.png" alt="logo">`,
-						link: `<a href="https://www.apple.com/">https://www.apple.com/</a>`
-					},
-					{
-						name: 'Sony',
-						logo: `<img src="img/sony.png" alt="logo">`,
-						link: `<a href="https://www.sony.com/en/">https://www.sony.com/en/</a>`
-					},
-					{
-						name: 'Xiaomi',
-						logo: `<img src="img/xiaomi.png" alt="logo">`,
-						link: `<a href="https://www.mi.com/global">https://www.mi.com/global</a>`
-					},
-					{
-						name: 'Huawei',
-						logo: `<img src="img/Huawei.png" alt="logo">`,
-						link: `<a href="https://www.huawei.com">https://www.huawei.com</a>`
-					},
-					{
-						name: 'Samsung',
-						logo: `<img src="img/samsung.png" alt="logo">`,
-						link: `<a href="https://www.samsung.com/us/">https://www.samsung.com/us/</a>`
-					}
-				]
-			}
-
-			choiceRandomBrand() {
-				return Math.floor(Math.random() * this.brandArray.length)
-			}
-			printBrand() {
-				let choiceBrand = this.brandArray[this.choiceRandomBrand()]
-				document.getElementById('resolt').innerHTML = `<br>${choiceBrand.logo}<br><br>${choiceBrand.link}`
-			}
-		}
-
-		let print = new Baner()
-		print.printBrand()
 
 	</script>
 </body>

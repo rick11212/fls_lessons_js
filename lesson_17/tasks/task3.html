@@ -15,10 +15,125 @@
 	<div class="rootpage">
 		<h1>Задача 3</h1>
 		<h3>Склад. База товарів, які зберігаються на складі: назва товару, одиниця виміру, кількість, фірма виробник (назва, реєстраційний номер). Організувати реєстрацію/відвантаження товарів, фільтрація за назвою товару, фільтрація за назвою фірми</h3>
-		<div class="resolt"> Ответ = в консоли<span id="resolt"></span><br>
+		<div class="resolt"> Ответ = в консоли <span id="resolt"></span><br>
 		</div>
 	</div>
 	<script>
+
+		// не уверен, что правильно понял "Организовать регистрацию / отгрузку товаров" и нужно было вывести на страницу?... , но как есть .... 
+
+
+		// Склад.База хранящихся на складе товаров: 
+		// название товара, единица измерения, количество, фирма производитель(название, регистрационный номер).
+		const skladArray = [
+			{
+				name: 'apple',
+				unit: 'kg',
+				quantity: 15,
+				manufacture: {
+					country: 'Georgia',
+					registrationNumber: 123
+				}
+			},
+			{
+				name: 'banana',
+				unit: 'kg',
+				quantity: 10,
+				manufacture: {
+					country: 'Mexika',
+					registrationNumber: 234
+				}
+			},
+			{
+				name: 'orange',
+				unit: 'kg',
+				quantity: 12,
+				manufacture: {
+					country: 'Brasil',
+					registrationNumber: 345
+				}
+			},
+			{
+				name: 'melon',
+				unit: 'kg',
+				quantity: 50,
+				manufacture: {
+					country: 'China',
+					registrationNumber: 456
+				}
+			},
+			{
+				name: 'lemon',
+				unit: 'kg',
+				quantity: 5,
+				manufacture: {
+					country: 'Mexika',
+					registrationNumber: 567
+				}
+			},
+			{
+				name: 'pear',
+				unit: 'kg',
+				quantity: 14,
+				manufacture: {
+					country: 'Argentina',
+					registrationNumber: 678
+				}
+			}
+		]
+		// Организовать регистрацию / отгрузку товаров, фильтрацию по названию товара, фильтрацию по названию фирмы
+
+		class Sklad {
+			constructor(skladArray) {
+				this.skladArray = skladArray
+			}
+			addProduct(nameProduct, unitProduct, quantityProduct, countryProduct, registrationNumberProduct) {
+				let newProduct = {
+					name: nameProduct,
+					unit: unitProduct,
+					quantity: quantityProduct,
+					manufacture: {
+						country: countryProduct,
+						registrationNumber: registrationNumberProduct
+					}
+				}
+				return this.skladArray.push(newProduct)
+			}
+
+			deleteProduct(nameProduct) {
+				let newArray = this.skladArray.filter(product => product.name !== nameProduct)
+				return newArray
+			}
+
+			findProduct(nameProduct) {
+				let newArray = this.skladArray.filter(product => product.name === nameProduct)
+				return newArray
+			}
+			findManufacturer(nameManufacturer) {
+				let newArray = this.skladArray.filter(el => el.manufacture.country === nameManufacturer)
+				return newArray
+			}
+
+		}
+
+		const sklad = new Sklad(skladArray)
+		console.log('Стартовый массив');
+		console.log(skladArray);
+
+		console.log('Регистрация нового продукта');
+		sklad.addProduct('strawbary', 'kg', 20, 'Ukraine', 789);
+		sklad.addProduct('bluebary', 'kg', 5, 'Belarus', 8910);
+		console.log(skladArray);
+
+		console.log('Отгрузка продукта');
+		console.log(sklad.deleteProduct('bluebary'))
+
+
+		console.log('Фильтр по названию продукта');
+		console.log(sklad.findProduct('banana'))
+
+		console.log('Фильтр по стране');
+		console.log(sklad.findManufacturer('Mexika'))
 
 	</script>
 </body>
