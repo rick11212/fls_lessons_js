@@ -15,76 +15,111 @@
 	<div class="rootpage">
 		<h1>Задача 4</h1>
 		<h3>Особиста бібліотека. Картотека домашньої бібліотеки: дані книги (автори (піб, рік народження, короткий опис), назва книги, жанр, видавництво (назва, реєстраційний номер, рік засування)). Реалізувати розділи бібліотеки (спеціальна література, хобі, домашнє господарство і т.д.), походження книги і наявність на даний час. Організувати додавання/вилучення книг та вибір книг за назвою, за ПІБ автора, за видавництвом.</h3>
-		<div class="resolt"> <span id="resolt"></span><br>
+		<div class="resolt"> Ответ: в консоли<span id="resolt"></span><br>
 		</div>
 	</div>
 	<script>
 		// Личная библиотека.
 		// Картотека домашней библиотеки: данные книги(авторы(пиб, год рождения, краткое описание), название книги, жанр, издательство(название, регистрационный номер, год задвижения)).
-		let personalLibrary = []
+		let personalLibrary = [] //[[{},{},{}],[{}, {}, {}]]
+
+		let books = []
+		let autors = []
+		let publishers = []
 
 		class Book {
-			constructor(name, genre) {
-				this.name = name
-				this.genre = genre
-			}
-			toString() {
-				return `Name book - ${this.name}. Genre - ${this.genre} <br>`
+			constructor() { }
+			static pushObjInBooksArray(name, genre) {
+				return books.push({ nameBook: name, genreBook: genre })
 			}
 		}
 
 		class Autor {
-			constructor(fullName, yearOfBirth, description) {
-				this.fullName = fullName
-				this.yearOfBirth = yearOfBirth
-				this.description = description
-			}
-			toString() {
-				return `Full name of the autor - ${this.fullName}. Author's date of birth - ${this.yearOfBirth}. Description - ${this.description}<br>`
+			constructor() { }
+			static pushObjInAutorsArray(fullName, yearOfBirth, description) {
+				return autors.push({ fullNameAutor: fullName, yearOfBirthAutor: yearOfBirth, descriptionAutor: description })
 			}
 		}
 
 		class Publisher {
-			constructor(name, registerNumber, yearOfFoundation) {
-				this.name = name
-				this.registerNumber = registerNumber
-				this.yearOfFoundation = yearOfFoundation
+			constructor() { }
+			static pushObjInPublishersArray(name, registerNumber, yearOfFoundation) {
+				return publishers.push({ namePublisher: name, registerNumberPublisher: registerNumber, yearOfFoundationPublisher: yearOfFoundation })
 			}
-			toString() {
-				return `Publisher name - ${this.name}. Register number  - ${this.registerNumber}. Year of foundation - ${this.yearOfFoundation}`
-			}
+			// constructor(name, registerNumber, yearOfFoundation) {
+			// 	this.name = name
+			// 	this.registerNumber = registerNumber
+			// 	this.yearOfFoundation = yearOfFoundation
+			// }
+			// pushObjInPublishersArray() {
+			// 	return publishers.push({ namePublisher: this.name, registerNumberPublisher: this.registerNumber, yearOfFoundationPublisher: this.yearOfFoundation })
+			// }
 		}
 
 		class FullBook {
-			constructor(book, autor, publisher) {
-				this.book = book
-				this.autor = autor
-				this.publisher = publisher
-			}
+			constructor() { }
 
-			addBookInPersonalLibrary() {
-				let collectBook = this.book + this.autor + this.publisher
-				return personalLibrary.push(collectBook)
-				//return `Книга: ${this.book} <br><br> Автор: ${this.autor}<br><br> Издательство: ${this.publisher}`
+			static addBooskInPersonalLibrary(booksArr, autorsArr, publishersArr) {
+				// если автор или издательство повторяется, то можно добавить параметры и указывать вручную номер их в массиве тогда не пришлось бы  их дублировать, но решил оставить так .... 
+				for (let i = 0; i < books.length; i++) {
+					personalLibrary.push([booksArr[i], autorsArr[i], publishersArr[i]])
+				}
+			}
+			static deleteBook(nameBook) {
+				let delBook = personalLibrary.filter(book => book[0].nameBook !== nameBook)
+				return delBook
+			}
+			static choiceBookOnName(nameBook) {
+				let choiceBook = personalLibrary.filter(book => book[0].nameBook === nameBook)
+				return choiceBook
+			}
+			static choiceBookOnAutorName(nameAutor) {
+				let choiceBookOnAutorName = personalLibrary.filter(book => book[1].fullNameAutor === nameAutor)
+				return choiceBookOnAutorName
+			}
+			static choiceBookOnPublisher(namePublisher) {
+				let choiceBookOnPublisher = personalLibrary.filter(book => book[2].namePublisher === namePublisher)
+				return choiceBookOnPublisher
 			}
 		}
 
-		const bookTheGirlWithTheDragonTattoo = new Book('The Girl With the Dragon Tattoo', 'Thriller')
-		const autorStiegLarsson = new Autor('Stieg Larsson', 1954, 'Swedish writer, journalist, and activist')
-		const publisherNorstedtsFörlag = new Publisher('Norstedts förlag', 1, 1823)
-		const fullBookTheGirlWithTheDragonTattoo = new FullBook(bookTheGirlWithTheDragonTattoo, autorStiegLarsson, publisherNorstedtsFörlag)
 
-		fullBookTheGirlWithTheDragonTattoo.addBookInPersonalLibrary()
+		Book.pushObjInBooksArray('The Girl With the Dragon Tattoo', 'Thriller')
+		Book.pushObjInBooksArray('Harry Potter and the Goblet of Fire', 'Fantasy')
+		Book.pushObjInBooksArray('A Little Life', 'Novel')
+		Book.pushObjInBooksArray('Harry Potter and the Philosopher\'s Stone ', 'Fantasy')
+		//console.log(books);
 
-		const bookHarryPotterAndTheGobletOfFire = new Book('Harry Potter and the Goblet of Fire', 'Fantasy')
-		const autorJKRowling = new Autor('JK Rowling', 1965, 'British author and philanthropist')
-		const publisherBloomsburyPublishing = new Publisher('Bloomsbury Publishing', 2, 1986)
-		const fullBookHarryPotterAndTheGobletOfFire = new FullBook(bookHarryPotterAndTheGobletOfFire, autorJKRowling, publisherBloomsburyPublishing)
+		Autor.pushObjInAutorsArray('Stieg Larsson', 1954, 'Swedish writer, journalist, and activist')
+		Autor.pushObjInAutorsArray('JK Rowling', 1965, 'British author and philanthropist')
+		Autor.pushObjInAutorsArray('Hanya Yanagihara', 1974, ' American novelist, editor, and travel writer')
+		Autor.pushObjInAutorsArray('JK Rowling', 1965, 'British author and philanthropist')
+		// console.log(autors);
 
-		fullBookHarryPotterAndTheGobletOfFire.addBookInPersonalLibrary()
+		Publisher.pushObjInPublishersArray('Norstedts förlag', 1, 1823)
+		Publisher.pushObjInPublishersArray('Bloomsbury Publishing', 2, 1986)
+		Publisher.pushObjInPublishersArray('Doubleday', 3, 1897)
+		Publisher.pushObjInPublishersArray('Bloomsbury Publishing', 2, 1986)
+		// console.log(publishers);
 
-		document.getElementById('resolt').innerHTML = personalLibrary
+		// const publisherNorstedtsFörlag = new Publisher('Norstedts förlag', 1, 1823)
+		// publisherNorstedtsFörlag.pushObjInPublishersArray()
+		// const publisherBloomsburyPublishing = new Publisher('Bloomsbury Publishing', 2, 1986)
+		// publisherBloomsburyPublishing.pushObjInPublishersArray()
+		// console.log(publishers);
+
+		FullBook.addBooskInPersonalLibrary(books, autors, publishers);
+
 		console.log(personalLibrary);
+		console.log('удаление книги');
+		console.log(FullBook.deleteBook('The Girl With the Dragon Tattoo'));
+		console.log('Выбор книги по названию');
+		console.log(FullBook.choiceBookOnName('A Little Life'));
+		console.log('Выбор книги по автору');
+		console.log(FullBook.choiceBookOnAutorName('JK Rowling'));
+		console.log('Выбор книги по издательству');
+		console.log(FullBook.choiceBookOnPublisher('Norstedts förlag'));
+
 
 		// Реализовать разделы библиотеки(специальная литература, хобби, домашнее хозяйство и т.д.), происхождение книги и наличие в настоящее время.Организовать добавление / извлечение книг и выбор книг под названием, по ФИО автора, по издательству.
 	</script>

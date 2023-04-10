@@ -14,40 +14,110 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 5</h1>
-		<h3>Розробити клас «Керівник танців»</h3>
-		<div class="resolt"> Ответ = <br> 1) Рандомный мальчик: <span id="resolt-1"></span><br> 2) Рандомная девочка: <span id="resolt-2"></span><br> 3) Пара для танцев: <span id="resolt-3"></span><br> 4) Новая пара кажные 5с: <span id="resolt-4"></span>
+		<h3>Дано два класи MultChecker (клас для перевірки таблиці множення - рандомно генеруються числа, які треба перемножати), AddChecker (клас для перевірки додавання - рандомно генеруються числа у заданому діапазоні, які треба додавати). Обидва класи надсилають результати тестування об'єкту класу Hystory, який зберігає історію тестування у масиві у вигляді об'єктів Приклад. testsList= [ {firstNum:1, secondNum:5,opration:’*’, userAnswer:7, correctAnswer:5}, {firstNum:3, secondNum:4,opration:’+’, userAnswer:7, correctAnswer:7}, ] Можна створити окремий клас TestData, який описує один такий тест і у якому будуть ці поля. Розробити клас TestManager, який використовуючи ці класи за допомогою таймера періодично генерує якісь N задач (рандомно вибираємо, що опитувати: додавання чи множення) і проводить опитування. Результати тестування додаються в об’єкт History. Зробити так, щоб об'єкт такого класу можна було створити тільки один. Коли зроблено ці N задач вивести усю історію на екран.</h3>
+		<div class="resolt"> Ответ = <div id="resolt"></div><br>
 		</div>
 	</div>
 	<script>
-		class DanceLeader {
-			constructor() {
-				this.men = ['Michael Richardson', 'Thomas Turner', 'Clarence Garcia', 'Eric Johnson', 'Tim Scott', 'Dennis Baker']
-				this.women = ['Sandra Olson', 'Annie Long', 'Christina Hill', 'Ana Flores', 'Alice Smith', 'Deborah Ferguson', 'Rosa Stewart', 'Susan Rose', 'Jacqueline Wilson']
+		let testsList = []
+		// 		Даны два класса MultChecker(класс для проверки таблицы умножения – рандомно генерируемые числа, которые нужно перемножать), 
+		class RandomNumber {
+			constructor(minNum, maxNum) {
+				this.minNum = minNum
+				this.maxNum = maxNum
 			}
-
-			randomMan() {
-				const randomNumber = Math.floor(Math.random() * this.men.length)
-				return this.men[randomNumber]
-			}
-			randomWoman() {
-				const randomNumber = Math.floor(Math.random() * this.women.length)
-				return this.women[randomNumber]
-			}
-			pair() {
-				return `${this.randomMan()} and ${this.randomWoman()}`
-			}
-			run() {
-				return setInterval(() => {
-					document.getElementById('resolt-4').innerHTML = this.pair()
-				}, 5000);
+			getRandomNumber() {
+				return this.minNum + Math.floor(Math.random() * (this.maxNum - this.minNum + 1))
 			}
 		}
+		const randomNumber = new RandomNumber(1, 10)
+		//randomNumber.getRandomNumber();
 
-		let print = new DanceLeader()
-		document.getElementById('resolt-1').innerHTML = print.randomMan()
-		document.getElementById('resolt-2').innerHTML = print.randomWoman()
-		document.getElementById('resolt-3').innerHTML = print.pair()
-		print.run()
+
+		class MultChecker {
+			constructor(num1, num2) {
+				this.num1 = num1
+				this.num2 = num2
+			}
+			getResolt() {
+				return this.num1 * this.num2
+			}
+			getUserResolt() {
+				const userResolt = parseInt(prompt(`${this.num1} * ${this.num2} = ?`, 0))
+				return userResolt
+			}
+			pushInTestList() {
+				testsList.push({ firstNum: this.num1, secondNum: this.num2, opration: '*', userAnswer: this.getUserResolt(), correctAnswer: this.getResolt() })
+			}
+		}
+		const multChecker = new MultChecker(randomNumber.getRandomNumber(), randomNumber.getRandomNumber())
+		//multChecker.pushInTestList()
+		//console.log(multChecker.getResolt());
+
+		// 		AddChecker(класс для проверки добавления – рандомно генерируемые числа в заданном диапазоне, которые нужно добавлять).
+		class AddChecker {
+			constructor(num1, num2) {
+				this.num1 = num1
+				this.num2 = num2
+			}
+			getResolt() {
+				return this.num1 + this.num2
+			}
+			getUserResolt() {
+				const userResolt = parseInt(prompt(`${this.num1} + ${this.num2} = ?`, 0))
+				return userResolt
+			}
+			pushInTestList() {
+				testsList.push({ firstNum: this.num1, secondNum: this.num2, opration: '+', userAnswer: this.getUserResolt(), correctAnswer: this.getResolt() })
+			}
+		}
+		const addChecker = new AddChecker(randomNumber.getRandomNumber(), randomNumber.getRandomNumber())
+		//addChecker.pushInTestList()
+		//console.log(addChecker.getResolt());
+
+
+		// 		Оба класса посылают результаты тестирования объекта класса Hystory, который сохраняет историю тестирования в массиве в виде объектов
+		// 			Пример.
+		// 				testsList = [
+		// 					{ firstNum: 1, secondNum: 5, opration:’*’, userAnswer: 7, correctAnswer: 5},
+		// 					{ firstNum: 3, secondNum: 4, opration:’+’, userAnswer: 7, correctAnswer: 7},
+		// 				]
+		// Можно создать отдельный класс TestData, описывающий один такой тест и включающий эти поля.
+		// Результаты тестирования добавляются в History.Сделать так, чтоб объект такового класса можно было сделать только один.
+
+		class History {
+			static historyObj
+			constructor() {
+				if (History.historyObj)
+					return History.historyObj
+				// this.historyArr = TestManager.getTaskNTime(val)
+				History.historyObj = this
+			}
+		}
+		console.log(testsList);
+
+		const hystory = new History()
+
+
+		// Разработать класс TestManager, который используя эти классы с помощью таймера периодически генерирует какие - то N задач(рандомно выбираем, что опрашивать: сложение или умножение) и проводит опрос.
+		class TestManager {
+			constructor(multChr, addChr) {
+				this.multChr = multChr
+				this.addChr = addChr
+			}
+			generatorExample() {
+				const quantityExamples = parseInt(prompt('Введите количество примеров', 1))
+
+				for (let i = 0; i < quantityExamples; i++) {
+					setTimeout(() => {
+						this.multChr
+					}, 3000);
+				}
+			}
+
+		}
+		const testManager = new TestManager(multChecker.pushInTestList(), addChecker.pushInTestList())
+		testManager.generatorExample()
 	</script>
 </body>
 <style>
