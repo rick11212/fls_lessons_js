@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/fonts.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>Homework-17</title>
+</head>
+
+<body>
+	<div class="rootpage">
+		<a href="../index.html">Назад</a>
+		<h1>Выполненные задания:</h1>
+		<ol class="rootpage__list">
+			<li>
+				<a target="_blank" href="tasks/task0.html">Задание №0</a>
+				<p>Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task1.html">Задание №1</a>
+				<p>Зробити конвертер валют (курси валют – константи у скрипті)</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task2.html">Задание №2</a>
+				<p>Користувач задає рік народження. Визначити кількість років користувача.</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task3.html">Задание №3</a>
+				<p>Наперед задано у скрипті масив зі списком бажань. Після завантаження сторінки випадковим чином вибираються 3 і відображаються у окремих div (їх треба створити і додати на сторінку)</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task4.html">Задание №4</a>
+				<p>Відобразити таблицю 3*4 з випадковими числами (її треба динамічно створити і вставити на сторінку)</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task5.html">Задание №5</a>
+				<p>Користувач задає кількість оцінок і натискає на кнопку «get table». В результаті формується таблиця з input, куди користувач вводить оцінки. Після цього натискає на кнопку “get sum” і знаходить середнє значення.</p>
+			</li>
+			<li>
+				<a target="_blank" href="tasks/task6.html">Задание №6</a>
+				<p>Подорож складається з 3 етапів. На кожному етапі користувач може вибрати один з видів транспорту (авто, автобус, літак - випадаючий список), харчування (сніданок, обід, вечеря – checkbоx) та одного з 3-х гідів(використати - radio buttons). Ціни визначте самі. Підрахувати загальну вартість.</p>
+			</li>
+	</div>
+</body>
+<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-width: 320px;
+		width: 100%;
+		color: #fff;
+		background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+	}
+
+	body {
+		font-family: Montserrat;
+		font-size: 100%;
+		line-height: 1;
+		font-size: 1.7rem;
+	}
+
+	a {
+		text-decoration: underline;
+		color: #c0858f
+	}
+
+	a:visited {
+		text-decoration: underline;
+		color: #7a5158;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	ul li {
+		list-style: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	p {
+		font-size: 1rem;
+		color: black;
+	}
+
+	.wrapper {
+		width: 100%;
+		min-height: 100%;
+		overflow: hidden;
+	}
+
+	.rootpage {
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		width: 1000px;
+		margin: 0 auto;
+	}
+
+	@media (max-width: 767px) {
+		.rootpage {
+			padding: 30px 15px;
+		}
+	}
+
+	h1 {
+		color: #3b6683;
+		font-size: 2.5rem;
+		margin: 0px 0px 1.25rem 0px;
+	}
+
+	@media (max-width: 767px) {
+		h1 {
+			font-size: 1.85rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+	}
+
+	.rootpage__list {}
+
+	.rootpage__list li a:not(:last-child) {
+		display: block;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.rootpage__list li:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+</style>
+</body>
+
+</html>
