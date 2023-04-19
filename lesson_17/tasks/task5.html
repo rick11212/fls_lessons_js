@@ -19,38 +19,40 @@
 		</div>
 	</div>
 	<script>
-		let testsList = []
+
 		// 		Даны два класса MultChecker(класс для проверки таблицы умножения – рандомно генерируемые числа, которые нужно перемножать), 
 		class RandomNumber {
+			static minNum = 1
+			static maxNum = 10
 			constructor(minNum, maxNum) {
-				this.minNum = minNum
-				this.maxNum = maxNum
+				// this.minNum = minNum
+				// this.maxNum = maxNum
 			}
-			getRandomNumber() {
-				return this.minNum + Math.floor(Math.random() * (this.maxNum - this.minNum + 1))
+			static getRandomNumber() {
+				return RandomNumber.minNum + Math.floor(Math.random() * (RandomNumber.maxNum - RandomNumber.minNum + 1))
 			}
 		}
-		const randomNumber = new RandomNumber(1, 10)
+		//const randomNumber = new RandomNumber(1, 10)
 		//randomNumber.getRandomNumber();
 
 
 		class MultChecker {
-			constructor(num1, num2) {
-				this.num1 = num1
-				this.num2 = num2
+			static num1 = RandomNumber.getRandomNumber()
+			static num2 = RandomNumber.getRandomNumber()
+			constructor() {
 			}
-			getResolt() {
-				return this.num1 * this.num2
+			static getResolt() {
+				return MultChecker.num1 * MultChecker.num2
 			}
-			getUserResolt() {
-				const userResolt = parseInt(prompt(`${this.num1} * ${this.num2} = ?`, 0))
+			static getUserResolt() {
+				const userResolt = parseInt(prompt(`${MultChecker.num1} * ${MultChecker.num2} = ?`, 0))
 				return userResolt
 			}
-			pushInTestList() {
-				testsList.push({ firstNum: this.num1, secondNum: this.num2, opration: '*', userAnswer: this.getUserResolt(), correctAnswer: this.getResolt() })
+			static pushInTestList() {
+				History.testsList.push({ firstNum: MultChecker.num1, secondNum: MultChecker.num2, opration: '*', userAnswer: MultChecker.getUserResolt(), correctAnswer: MultChecker.getResolt() })
 			}
 		}
-		const multChecker = new MultChecker(randomNumber.getRandomNumber(), randomNumber.getRandomNumber())
+		//const multChecker = new MultChecker()
 		//multChecker.pushInTestList()
 		//console.log(multChecker.getResolt());
 
@@ -68,10 +70,10 @@
 				return userResolt
 			}
 			pushInTestList() {
-				testsList.push({ firstNum: this.num1, secondNum: this.num2, opration: '+', userAnswer: this.getUserResolt(), correctAnswer: this.getResolt() })
+				History.testsList.push({ firstNum: this.num1, secondNum: this.num2, opration: '+', userAnswer: this.getUserResolt(), correctAnswer: this.getResolt() })
 			}
 		}
-		const addChecker = new AddChecker(randomNumber.getRandomNumber(), randomNumber.getRandomNumber())
+		const addChecker = new AddChecker(RandomNumber.getRandomNumber(), RandomNumber.getRandomNumber())
 		//addChecker.pushInTestList()
 		//console.log(addChecker.getResolt());
 
@@ -87,36 +89,45 @@
 
 		class History {
 			static historyObj
+			static testsList = []
 			constructor() {
-				if (History.historyObj)
-					return History.historyObj
-				// this.historyArr = TestManager.getTaskNTime(val)
+				if (History.historyObj) return History.historyObj
+
 				History.historyObj = this
 			}
 		}
-		console.log(testsList);
+		console.log(History.testsList);
 
 		const hystory = new History()
 
 
 		// Разработать класс TestManager, который используя эти классы с помощью таймера периодически генерирует какие - то N задач(рандомно выбираем, что опрашивать: сложение или умножение) и проводит опрос.
 		class TestManager {
-			constructor(multChr, addChr) {
-				this.multChr = multChr
-				this.addChr = addChr
+			constructor() {
+			}
+			getRandomExample() {
+				return 1 + Math.floor(Math.random() * 2)
 			}
 			generatorExample() {
-				const quantityExamples = parseInt(prompt('Введите количество примеров', 1))
+				const quantityExamples = parseInt(prompt('Введите количество примеров', '1'))
 
 				for (let i = 0; i < quantityExamples; i++) {
-					setTimeout(() => {
-						this.multChr
-					}, 3000);
+					if (this.getRandomExample() === 1) {
+						setTimeout(() => {
+							MultChecker.pushInTestList()
+						}, 3000);
+					} else {
+						setTimeout(() => {
+							addChecker.pushInTestList()
+						}, 3000);
+					}
 				}
+
 			}
+			//}
 
 		}
-		const testManager = new TestManager(multChecker.pushInTestList(), addChecker.pushInTestList())
+		const testManager = new TestManager()
 		testManager.generatorExample()
 	</script>
 </body>
