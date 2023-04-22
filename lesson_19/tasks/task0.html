@@ -15,12 +15,138 @@
 	<div class="rootpage">
 		<h1>Задача 0</h1>
 		<h3>Відображаємо картки товарів, які користувач може вибирати. Вибраний товар має зелену рамку</h3>
-		<div class="resolt"> Ответ = <br></div>
+		<div id="result"></div>
 	</div>
 	<script>
+		const dataProductsArray = [
+			{
+				id: 1,
+				topic: 'топ продаж',
+				img: 'img/01.jpg',
+				title: 'Ноутбук 1',
+				price: '1000 $'
+			},
+			{
+				id: 2,
+				topic: 'топ продаж',
+				img: 'img/02.jpg',
+				title: 'Ноутбук 2',
+				price: '1500 $'
+			},
+			{
+				id: 3,
+				topic: 'Акция',
+				img: 'img/03.jpg',
+				title: 'Ноутбук 3',
+				price: '800 $'
+			},
+			{
+				id: 4,
+				topic: 'топ продаж',
+				img: 'img/04.jpg',
+				title: 'Ноутбук 4',
+				price: '2000 $'
+			},
+		]
+		class ProductCard {
+			constructor({ topic, img, title, price }) {
+				this.topic = topic.toLowerCase()
+				this.img = img
+				this.title = title
+				this.price = price
+			}
+			render(containerId) {
+				const container = document.createElement('div')
+				container.className = 'container-card'
+				container.onclick = function () { container.classList.toggle('container-card-green') }
+
+				const topic = document.createElement('div')
+				topic.className = 'topic-card'
+				topic.innerHTML = this.topic.toUpperCase()
+				if (this.topic === 'акция') topic.classList.add('topic-card-sale')
+
+				container.append(topic)
+
+				const img = document.createElement('img')
+				img.className = 'img-card'
+				img.src = this.img
+				container.append(img)
+
+				const title = document.createElement('h3')
+				title.className = 'title-card'
+				title.innerHTML = this.title
+				container.append(title)
+
+				const price = document.createElement('div')
+				price.className = 'price-card'
+				price.innerHTML = this.price
+				container.append(price)
+
+				const targetContainer = document.getElementById(containerId)
+				targetContainer.append(container)
+			}
+
+		}
+
+		window.onload = function () {
+			for (const obj of dataProductsArray) {
+				const pc = new ProductCard(obj)
+				pc.render('result')
+			}
+
+		}
+
 
 	</script>
 </body>
+<style>
+	#result {
+		display: flex;
+	}
+
+	.container-card {
+		outline: 1px solid gray;
+		margin: 0 20px 0 0;
+		cursor: pointer;
+	}
+
+	.container-card-green {
+		outline: 5px solid green;
+	}
+
+	.topic-card {
+		border-radius: 20px;
+		width: 150px;
+		font-size: 18px;
+		text-align: center;
+		margin: 10px;
+		padding: 5px;
+		background-color: orange;
+		font-weight: 600;
+	}
+
+	.topic-card-sale {
+		background-color: red;
+	}
+
+	.img-card {
+		width: 300px;
+		height: 180px;
+		margin-bottom: 20px;
+	}
+
+	.title-card {
+		color: gray;
+		margin-bottom: 10px;
+	}
+
+	.price-card {
+		color: red;
+		font-size: 40px;
+		font-weight: 500;
+		margin-bottom: 10px;
+	}
+</style>
 <style>
 	@charset "UTF-8";
 	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");

@@ -12,23 +12,66 @@
 </head>
 
 <body>
+	<div class="result"></div>
 	<div class="rootpage">
 		<h1>Задача 2</h1>
-		<h3>Користувач задає рік народження. Визначити кількість років користувача.</h3>
-		<div class="resolt"> Ответ = <br>
-		</div>
-		<span>Введите Ваш год рождения</span>
-		<input type="number" placeholder="" class="input" value="2023" onchange="getAge()">
-		<span id="result"></span>
-	</div>
-	<script>
-		function getAge() {
-			const userValue = parseInt(document.querySelector('.input').value)
-			return document.getElementById('result').innerHTML = 2023 - userValue
-		}
+		<h3>Відобразити падаючий сніг. Сніжинка з’являється у верхній частині екрану і з випадковою швидкістю рухається вниз. Як тільки сніжинка досягає нижньої частини екрану вона знову повинна з’явитись у верхній частині екрану.</h3>
+		<script>
+			//snowflake
+			class Snowfall {
+				constructor(quantity = 20, minSize = 50, maxSize = 150) {
+					this.quantity = quantity
+					this.minSize = minSize
+					this.maxSize = maxSize
+				}
+				getRandomSize() {
+					return this.minSize + Math.floor(Math.random() * (this.maxSize - this.minSize + 1))
+				}
+				render(containerSelector) {
+					for (let i = 0; i < this.quantity; i++) {
+						const img = document.createElement('img')
+						img.src = 'img/snow.png'
 
-	</script>
+						img.style.left = this.getRandomSize() + 'px'
+						img.style.width = this.getRandomSize() + 'px'
+
+						setInterval(() => {
+							img.style.left = this.getRandomSize() + 'px'
+							let startTop = 0
+							img.style.top = startTop + 'px'
+							startTop += 50
+						}, 500);
+
+						const targetContainer = document.querySelector('.result')
+						targetContainer.append(img)
+					}
+				}
+
+				snowflakeFall() {
+					// setInterval(() => {
+					// 	this.img.style.left = this.getRandomSize() + 'px'
+					// 	this.img.style.top = this.getRandomSize() + 'px'
+					// }, 500);
+				}
+			}
+			window.onload = function () {
+				const snowfall = new Snowfall()
+				snowfall.render()
+			}
+		</script>
+	</div>
 </body>
+<style>
+	.result {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	img {
+		position: relative;
+	}
+</style>
 <style>
 	@charset "UTF-8";
 	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");

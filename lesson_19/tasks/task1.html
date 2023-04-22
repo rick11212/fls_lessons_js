@@ -14,23 +14,134 @@
 <body>
 	<div class="rootpage">
 		<h1>Задача 1</h1>
-		<h3>Зробити конвертер валют (курси валют – константи у скрипті)</h3>
-		<div class="resolt">Ответ =<br> </div>
-		<label> Сумма в гривнах <input type="number" placeholder="" class="input" value="0">
-		</label>
-		<button id="convert" onclick="convert()">Конвертировать</button>
-		<div>Сумма в евро: <span id="sumEuro"></span></div>
-		<div>Сумма в долларах: <span id="sumDol"></span></div>
+		<h3>Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний список.</h3>
+		<div class="result"> </div>
 	</div>
 	<script>
-		function convert() {
-			const inpGrn = parseFloat(document.querySelector('.input').value)
+		let athletesNameArray = [
+			{
+				id: 1,
+				name: 'Jeffrey Reyes'
+			},
+			{
+				id: 2,
+				name: 'Nancy Williams'
+			},
+			{
+				id: 3,
+				name: 'Gary Nunez'
+			},
+			{
+				id: 4,
+				name: 'Monica Davis'
+			},
+			{
+				id: 5,
+				name: 'Juan Johnson'
+			},
+			{
+				id: 6,
+				name: 'Nicole Lane'
+			},
+			{
+				id: 7,
+				name: 'Allen Murphy'
+			},
+			{
+				id: 8,
+				name: 'Edna Willis'
+			},
+			{
+				id: 9,
+				name: 'Denise Sanders'
+			},
+			{
+				id: 10,
+				name: 'Francis Nelson'
+			}
+		]
 
-			const courseEuro = 41
-			const courseDol = 38
+		class TeamSelection {
+			constructor(athletesNameArray) {
+				this.athletesNameArray = athletesNameArray
+				// this.name = name
+				// this.id = id
+			}
+			render(containerSelector) {
+				const container = document.createElement('div')
 
-			document.getElementById('sumEuro').innerHTML = (inpGrn / courseEuro).toFixed(2)
-			document.getElementById('sumDol').innerHTML = (inpGrn / courseDol).toFixed(2)
+
+				// создание общего списка
+				const totalContainer = document.createElement('div')
+				totalContainer.className = 'container-total'
+
+				const totalTitle = document.createElement('span')
+				totalTitle.innerText = 'Общий список'
+				totalContainer.append(totalTitle)
+
+				const containerList = document.createElement('div')
+				containerList.className = 'container-list'
+
+				for (let i = 0; i < this.athletesNameArray.length; i++) {
+
+					const athletContaiter = document.createElement('div')
+					athletContaiter.className = 'athlet-container'
+
+					const athletName = document.createElement('span')
+					athletName.className = 'athlet-name'
+					athletName.innerText = this.athletesNameArray[i].name
+
+					athletContaiter.append(athletName)
+
+					containerList.append(athletContaiter)
+
+					const greenArrow = document.createElement('img')
+					greenArrow.src = 'img/arrow-green.png'
+
+					athletContaiter.append(greenArrow)
+				}
+
+				totalContainer.append(containerList)
+				container.append(totalContainer)
+
+
+				// создание списка возврата
+				const backContainer = document.createElement('div')
+				backContainer.className = 'container-back'
+
+				const backTitle = document.createElement('span')
+				backTitle.innerText = 'Обратный список'
+				backContainer.append(backTitle)
+
+				const containerListBack = document.createElement('div')
+				containerListBack.className = 'container-list-back'
+
+
+				container.append(backContainer)
+				backContainer.append(containerListBack)
+
+				const targetContainer = document.querySelector('.result')
+				targetContainer.append(container)
+			}
+
+			movingAlthlet() {
+				const findContainerAthlet = document.querySelectorAll('.athlet-container')
+				console.log(findContainerAthlet);
+				for (const el of findContainerAthlet) {
+					if (el.onclick) {
+						console.log(123);
+					}
+				}
+			}
+		}
+
+		window.onload = function () {
+
+			const ts = new TeamSelection(athletesNameArray)
+			ts.render('.result')
+			ts.movingAlthlet()
+
+
 		}
 	</script>
 </body>
