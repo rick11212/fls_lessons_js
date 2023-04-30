@@ -15,51 +15,52 @@
 	<div class="rootpage">
 		<h1>Задача 1</h1>
 		<h3>Дано список спортсменів. Потрібно сформувати список тих, які будуть брати участь у змаганні. При цьому є два стовпці. В одному відображені всі спортсмени, в іншому – список тих, хто був вибраний. При натисканні на зелену стрілку спортсмен переміщається у список для змагань. При натисканні на червону стрілку спортсмен переміщається у загальний список.</h3>
-		<div class="result"> </div>
+		<div id="result"> </div>
 	</div>
 	<script>
-		let athletesNameArray = [
-			{
-				id: 1,
-				name: 'Jeffrey Reyes'
-			},
-			{
-				id: 2,
-				name: 'Nancy Williams'
-			},
-			{
-				id: 3,
-				name: 'Gary Nunez'
-			},
-			{
-				id: 4,
-				name: 'Monica Davis'
-			},
-			{
-				id: 5,
-				name: 'Juan Johnson'
-			},
-			{
-				id: 6,
-				name: 'Nicole Lane'
-			},
-			{
-				id: 7,
-				name: 'Allen Murphy'
-			},
-			{
-				id: 8,
-				name: 'Edna Willis'
-			},
-			{
-				id: 9,
-				name: 'Denise Sanders'
-			},
-			{
-				id: 10,
-				name: 'Francis Nelson'
-			}
-		]
+		// let athletesNameArray = [
+		// 	{
+		// 		id: 1,
+		// 		name: 'Jeffrey Reyes'
+		// 	},
+		// 	{
+		// 		id: 2,
+		// 		name: 'Nancy Williams'
+		// 	},
+		// 	{
+		// 		id: 3,
+		// 		name: 'Gary Nunez'
+		// 	},
+		// 	{
+		// 		id: 4,
+		// 		name: 'Monica Davis'
+		// 	},
+		// 	{
+		// 		id: 5,
+		// 		name: 'Juan Johnson'
+		// 	},
+		// 	{
+		// 		id: 6,
+		// 		name: 'Nicole Lane'
+		// 	},
+		// 	{
+		// 		id: 7,
+		// 		name: 'Allen Murphy'
+		// 	},
+		// 	{
+		// 		id: 8,
+		// 		name: 'Edna Willis'
+		// 	},
+		// 	{
+		// 		id: 9,
+		// 		name: 'Denise Sanders'
+		// 	},
+		// 	{
+		// 		id: 10,
+		// 		name: 'Francis Nelson'
+		// 	}
+		// ]
+		let athletesNameArray = ['Matthew Green', 'Mary Brown', 'Barbara Adams', 'Michael Watson', 'John Estrada', 'Edward Smith', 'Anna Griffin', 'Curtis Hayes', 'Robert Carter', 'Norman Phillips']
 
 		class TeamSelection {
 			constructor(athletesNameArray) {
@@ -67,81 +68,43 @@
 				// this.name = name
 				// this.id = id
 			}
-			render(containerSelector) {
+			createTatalList() {
 				const container = document.createElement('div')
+				container.className = 'container'
 
-
-				// создание общего списка
-				const totalContainer = document.createElement('div')
-				totalContainer.className = 'container-total'
-
-				const totalTitle = document.createElement('span')
-				totalTitle.innerText = 'Общий список'
-				totalContainer.append(totalTitle)
-
-				const containerList = document.createElement('div')
-				containerList.className = 'container-list'
+				const title = document.createElement('h3')
+				title.className = 'title'
+				title.innerText = 'Основной списк'
+				container.append(title)
 
 				for (let i = 0; i < this.athletesNameArray.length; i++) {
-
-					const athletContaiter = document.createElement('div')
-					athletContaiter.className = 'athlet-container'
+					const containerAthlet = document.createElement('div')
+					containerAthlet.className = 'container-athlet'
 
 					const athletName = document.createElement('span')
 					athletName.className = 'athlet-name'
-					athletName.innerText = this.athletesNameArray[i].name
-
-					athletContaiter.append(athletName)
-
-					containerList.append(athletContaiter)
+					athletName.innerText = this.athletesNameArray[i]
+					containerAthlet.append(athletName)
 
 					const greenArrow = document.createElement('img')
 					greenArrow.src = 'img/arrow-green.png'
-
-					athletContaiter.append(greenArrow)
+					containerAthlet.append(greenArrow)
+					container.append(containerAthlet)
 				}
 
-				totalContainer.append(containerList)
-				container.append(totalContainer)
-
-
-				// создание списка возврата
-				const backContainer = document.createElement('div')
-				backContainer.className = 'container-back'
-
-				const backTitle = document.createElement('span')
-				backTitle.innerText = 'Обратный список'
-				backContainer.append(backTitle)
-
-				const containerListBack = document.createElement('div')
-				containerListBack.className = 'container-list-back'
-
-
-				container.append(backContainer)
-				backContainer.append(containerListBack)
-
-				const targetContainer = document.querySelector('.result')
-				targetContainer.append(container)
+				return container
 			}
 
-			movingAlthlet() {
-				const findContainerAthlet = document.querySelectorAll('.athlet-container')
-				console.log(findContainerAthlet);
-				for (const el of findContainerAthlet) {
-					if (el.onclick) {
-						console.log(123);
-					}
-				}
+			render(ContainerId) {
+				const createTatalList = this.createTatalList()
+
+				const targetContainer = document.getElementById(ContainerId)
+				targetContainer.append(createTatalList)
 			}
 		}
-
 		window.onload = function () {
-
-			const ts = new TeamSelection(athletesNameArray)
-			ts.render('.result')
-			ts.movingAlthlet()
-
-
+			const teamSelection = new TeamSelection(athletesNameArray)
+			teamSelection.render('result')
 		}
 	</script>
 </body>

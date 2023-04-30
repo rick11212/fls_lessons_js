@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/fonts.css">
+	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+	<link rel="stylesheet" href="css/style.css">
+	<title>Task-1</title>
+</head>
+
+<body>
+	<div class="rootpage">
+		<h1>Задача 1</h1>
+		<h3>Дано 5 елементів input. При введенні значення у якийсь із них необхідно автоматично заповнювати інші (усі попередні у спадному порядку(кожен попередній має значення на 1 менше за наступний), усі наступні на 1 більше (кожен наступне на 1 більше за попереднього) </h3>
+		<div id="result"> </div>
+	</div>
+	<script>
+		for (let i = 0; i < 5; i++) {
+			const container = document.createElement('div')
+
+			const label = document.createElement('label')
+			label.innerHTML = `Value ${i + 1}`
+
+			const inp = document.createElement('input')
+			inp.type = 'number'
+			label.append(inp)
+
+			container.append(label)
+
+			document.getElementById('result').append(container)
+		}
+
+		function valueInp() {
+			let inpValue = this.value
+			let inp = this.closest('div')
+
+			while (inp.nextElementSibling) {
+				inp = inp.nextElementSibling
+				inpValue = parseInt(inpValue) + 1
+				inp.firstElementChild.firstElementChild.value = inpValue
+
+			}
+			while (inp.previousElementSibling) {
+				inp = inp.previousElementSibling
+				inpValue = parseInt(inpValue) - 1
+				inp.firstElementChild.firstElementChild.value = inpValue
+
+			}
+		}
+		const allInp = document.querySelectorAll('input')
+		for (const el of allInp) {
+			el.addEventListener('change', valueInp)
+		}
+	</script>
+</body>
+<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		box-sizing: border-box;
+	}
+
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-width: 320px;
+		width: 100%;
+		color: #fff;
+		background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+	}
+
+	body {
+		font-family: Montserrat;
+		font-size: 100%;
+		line-height: 1;
+		font-size: 1.7rem;
+	}
+
+	a {
+		text-decoration: underline;
+		color: #c0858f
+	}
+
+	a:visited {
+		text-decoration: underline;
+		color: #7a5158;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	li {
+		width: 100px;
+		margin: 0 auto;
+		color: #c0858f;
+	}
+
+	p {
+		font-size: 1rem;
+		color: black;
+	}
+
+	button {
+		width: 200px;
+		height: 30px;
+		font-size: 20px;
+	}
+
+	input {
+		height: 30px;
+		padding: 0 10px;
+	}
+
+	.wrapper {
+		width: 100%;
+		min-height: 100%;
+		overflow: hidden;
+	}
+
+	.rootpage {
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.resolt {
+		color: #c0858f;
+	}
+
+	@media (max-width: 767px) {
+		.rootpage {
+			padding: 30px 15px;
+		}
+	}
+
+	h1 {
+		color: #3b6683;
+		font-size: 2.5rem;
+		margin: 0px 0px 1.25rem 0px;
+	}
+
+	@media (max-width: 767px) {
+		h1 {
+			font-size: 1.85rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+	}
+
+	.rootpage__list {}
+
+	.rootpage__list li a:not(:last-child) {
+		display: block;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.rootpage__list li:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+</style>
+
+</html>
