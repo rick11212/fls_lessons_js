@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/fonts.css">
+	<!-- <link rel="stylesheet" href="css/nullstyle.css"> -->
+	<link rel="stylesheet" href="css/style.css">
+	<title>Task-4</title>
+</head>
+
+<body>
+	<div class="rootpage">
+		<h1>Задача 4</h1>
+		<h3>На формі вводять 7 числових значень (вік, зріст, вага, заробітна плата, стаж, номер відділу, порядковий номер). Додати подію обробки події click на форму і якщо клік на input, то автоматично замінювати значення його на 0.</h3>
+		<div id="result">
+			<form>
+				<label> возраст: <input type="text" value="30">
+				</label>
+				<label> рост: <input type="text" value="180">
+				</label>
+				<label> вес: <input type="text" value="80">
+				</label>
+				<label> заработная плата: <input type="text" value="3000">
+				</label>
+				<label> стаж: <input type="text" value="8">
+				</label>
+				<label> номер отдела: <input type="text" value="15">
+				</label>
+				<label> порядковый номер: <input type="text" value="1853">
+				</label>
+			</form>
+		</div>
+	</div>
+	<script>
+		const allInp = document.querySelectorAll('input')
+
+
+		for (const inp of allInp) {
+			inp.addEventListener('click', clearInp)
+		}
+
+		function clearInp(event) {
+			if (event.target.tagName === 'INPUT')
+				event.target.value = '0'
+		}
+		// class Form {
+		// 	constructor() { }
+
+		// 	createForm(title1, title2, title3, title4, title5, title6, title7) {
+		// 		const container = document.createElement('div')
+		// 		container.className = 'container'
+
+
+
+		// 		return container
+		// 	}
+
+		// 	render(targetId) {
+		// 		document.getElementById(targetId).append()
+		// 	}
+		// }
+		// window.onload = function () {
+		// 	const form = new Form()
+		// 	form.render('result')
+		// }
+
+	</script>
+</body>
+<style>
+	@charset "UTF-8";
+	@import url("https://fonts.googleapis.com/css?family=Montserrat:regular,700&display=swap");
+
+	*,
+	*::before,
+	*::after {
+		padding: 0px;
+		margin: 0px;
+		border: 0px;
+		box-sizing: border-box;
+	}
+
+	/* ---------------------------- */
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+	}
+
+	label {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	/* ---------------------------- */
+	html,
+	body {
+		height: 100%;
+		margin: 0;
+		padding: 0;
+		min-width: 320px;
+		width: 100%;
+		color: #fff;
+		background: linear-gradient(90deg, #69b7eb, #b3dbd3, #f4d6db);
+	}
+
+	body {
+		font-family: Montserrat;
+		font-size: 100%;
+		line-height: 1;
+		font-size: 1.7rem;
+	}
+
+	a {
+		text-decoration: underline;
+		color: #c0858f
+	}
+
+	a:visited {
+		text-decoration: underline;
+		color: #7a5158;
+	}
+
+	a:hover {
+		text-decoration: none;
+	}
+
+	img {
+		vertical-align: top;
+	}
+
+	li {
+		width: 100px;
+		margin: 0 auto;
+		color: #c0858f;
+	}
+
+	p {
+		font-size: 1rem;
+		color: black;
+	}
+
+	.wrapper {
+		width: 100%;
+		min-height: 100%;
+		overflow: hidden;
+	}
+
+	table {
+		border: 1px solid #000;
+	}
+
+	tr {
+		border: 1px solid #000;
+	}
+
+	td {
+		border: 1px solid #000;
+	}
+
+	.rootpage {
+		padding: 30px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 30px;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+
+	.resolt {
+		color: #c0858f;
+	}
+
+	@media (max-width: 767px) {
+		.rootpage {
+			padding: 30px 15px;
+		}
+	}
+
+	h1 {
+		color: #3b6683;
+		font-size: 2.5rem;
+		margin: 0px 0px 1.25rem 0px;
+	}
+
+	@media (max-width: 767px) {
+		h1 {
+			font-size: 1.85rem;
+			margin: 0px 0px 1.25rem 0px;
+		}
+	}
+
+	.rootpage__list {}
+
+	.rootpage__list li a:not(:last-child) {
+		display: block;
+		margin: 0px 0px 15px 0px;
+	}
+
+	.rootpage__list li:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+</style>
+
+</html>
